@@ -2,6 +2,8 @@ package ru.nsu.shelestov;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class HeapsortTest {
 
@@ -117,5 +119,9 @@ public class HeapsortTest {
         int[] expected = {Integer.MIN_VALUE, -1, 0, Integer.MAX_VALUE};
         heapsort.sort(input);
         assertArrayEquals(expected, input);
+    }
+    @Test
+    public void testPrintArray() {
+        Heapsort.printArray(new int[]{1, 2, 3});
     }
 }

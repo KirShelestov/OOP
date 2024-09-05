@@ -37,21 +37,27 @@ public class Heapsort {
         }
     }
 
-    public static void main(String[] args) {
+    static void printArray(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n; ++i) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String args[]) {
         int n;
         Scanner scan = new Scanner(System.in);
         System.out.print("Size of array:");
         n = scan.nextInt();
         int[] arrayTest = new int[n];
         System.out.println("Elements of the array: ");
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++) {
             arrayTest[i] = scan.nextInt();
         }
         Heapsort ob = new Heapsort();
         ob.sort(arrayTest);
-        for (int j : arrayTest) {
-            System.out.print(j + " ");
-        }
-        System.out.println();
+        printArray(arrayTest);
     }
+
 }
