@@ -36,12 +36,6 @@ public class Heapsort {
             heapify(arr, n, largest);
         }
     }
-    static void printArray(int[] arr) {
-        for (int j : arr) {
-            System.out.print(j + " ");
-        }
-        System.out.println();
-    }
 
     public static void main(String[] args) {
         int n;
@@ -55,6 +49,9 @@ public class Heapsort {
         }
         Heapsort ob = new Heapsort();
         ob.sort(arrayTest);
-        printArray(arrayTest);
+        for (int j : arrayTest) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
     }
 }
