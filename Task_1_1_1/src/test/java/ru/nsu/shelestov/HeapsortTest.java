@@ -14,6 +14,14 @@ public class HeapsortTest {
         sorter.sort(input);
         assertArrayEquals(expected, input);
     }
+    @Test
+    public void testSortWithDuplicateElements() {
+        Heapsort heapsort = new Heapsort();
+        int[] input = {3, 1, 2, 3, 1};
+        int[] expected = {1, 1, 2, 3, 3};
+        heapsort.sort(input);
+        assertArrayEquals(expected, input);
+    }
 
     @Test
     public void testSortEmptyArray() {
@@ -85,5 +93,29 @@ public class HeapsortTest {
         assertArrayEquals(new int[]{3, 1, 2}, input);
         heapsort.heapify(input, input.length, 2);
         assertArrayEquals(new int[]{3, 1, 2}, input);
+    }
+
+    @Test
+    public void testHeapifyWithDifferentIndices() {
+        Heapsort heapsort = new Heapsort();
+        int[] input = {4, 10, 3, 5, 1};
+
+        heapsort.heapify(input, input.length, 0);
+        assertArrayEquals(new int[]{10, 5, 3, 4, 1}, input);
+
+        heapsort.heapify(input, input.length, 1);
+        assertArrayEquals(new int[]{10, 5, 3, 4, 1}, input);
+
+        heapsort.heapify(input, input.length, 2);
+        assertArrayEquals(new int[]{10, 5, 3, 4, 1}, input);
+    }
+
+    @Test
+    public void testSortWithLargeNumbers() {
+        Heapsort heapsort = new Heapsort();
+        int[] input = {Integer.MAX_VALUE, Integer.MIN_VALUE, -1, 0};
+        int[] expected = {Integer.MIN_VALUE, -1, 0, Integer.MAX_VALUE};
+        heapsort.sort(input);
+        assertArrayEquals(expected, input);
     }
 }
