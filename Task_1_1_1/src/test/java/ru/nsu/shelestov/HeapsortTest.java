@@ -75,5 +75,15 @@ public class HeapsortTest {
         sorter.sort(input);
         assertArrayEquals(expected, input);
     }
-
+    @Test
+    public void testHeapify() {
+        Heapsort heapsort = new Heapsort();
+        int[] input = {3, 1, 2};
+        heapsort.heapify(input, input.length, 0);
+        assertArrayEquals(new int[]{3, 1, 2}, input);
+        heapsort.heapify(input, input.length, 1);
+        assertArrayEquals(new int[]{3, 1, 2}, input);
+        heapsort.heapify(input, input.length, 2);
+        assertArrayEquals(new int[]{3, 1, 2}, input);
+    }
 }
