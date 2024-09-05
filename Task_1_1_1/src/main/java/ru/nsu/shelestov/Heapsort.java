@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Heapsort {
 
     /**
-     * Сортировка массива
+     * Сортировка массива.
      *
      * @param arr массив, который нужно отсортировать
      */
@@ -23,7 +23,7 @@ public class Heapsort {
     }
 
     /**
-     * Приводит поддерево с корнем в узле i к свойству кучи
+     * Приводит поддерево с корнем в узле i к свойству кучи.
      *
      * @param arr наша куча
      * @param n размер кучи
@@ -50,9 +50,9 @@ public class Heapsort {
     }
 
     /**
-     * Вывод массива
+     * Вывод массива.
      *
-     * @param arr
+     * @param arr наш массив
      */
     static void printArray(int[] arr) {
         for (int j : arr) {
@@ -62,7 +62,7 @@ public class Heapsort {
     }
 
     /**
-     * Просто мейн
+     * Просто мейн.
      *
      * @param args не используется
      */
