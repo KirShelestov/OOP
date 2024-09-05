@@ -1,7 +1,6 @@
 package ru.nsu.shelestov;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 
@@ -62,6 +61,18 @@ public class HeapsortTest {
         int[] input = {2, -3, 1, 0, -1};
         int[] expected = {-3, -1, 0, 1, 2};
 
+        sorter.sort(input);
+        assertArrayEquals(expected, input);
+    }
+    @Test
+    public void testRandomArray() {
+        Heapsort sorter = new Heapsort();
+        int[] input = new int[10000];
+        for (int i = 0; i < input.length; i++) {
+            input[i] = (int) (Math.random() * 100000);
+        }
+        int[] expected = input.clone();
+        java.util.Arrays.sort(expected);
         sorter.sort(input);
         assertArrayEquals(expected, input);
     }
