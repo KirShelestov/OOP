@@ -37,7 +37,7 @@ public class Heapsort {
         }
     }
 
-    static void printArray(int arr[]) {
+    static void printArray(int[] arr) {
         int n = arr.length;
         for (int i = 0; i < n; ++i) {
             System.out.print(arr[i] + " ");
@@ -45,7 +45,7 @@ public class Heapsort {
         System.out.println();
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int n;
         Scanner scan = new Scanner(System.in);
         System.out.print("Size of array:");

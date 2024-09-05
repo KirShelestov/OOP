@@ -122,8 +122,5 @@ public class HeapsortTest {
     public void testPrintArray() {
         Heapsort.printArray(new int[]{1, 2, 3});
     }
-    @Test
-    public void testPrintNegativeArray() {
-        Heapsort.printArray(new int[]{-1, 2, -3, 0});
-    }
+
 }
