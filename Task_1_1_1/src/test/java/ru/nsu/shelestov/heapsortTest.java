@@ -56,7 +56,7 @@ public class heapsortTest {
     @Test
     public void testSortArrayWithNegativeValues() {
         heapsort sorter = new heapsort();
-        int[] input = {2,-3,1,0,-1};
+        int[] input = {2, -3, 1, 0, -1};
         int[] expected = {-3, -1, 0, 1, 2};
 
         sorter.sort(input);
