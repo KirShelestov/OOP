@@ -51,7 +51,7 @@ public class heapsort {
         n = scan.nextInt();
         int[] arrayTest = new int[n];
         System.out.println("Elements of the array: ");
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             arrayTest[i]=scan.nextInt();
         }
         heapsort ob = new heapsort();
