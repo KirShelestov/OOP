@@ -38,9 +38,8 @@ public class Heapsort {
     }
 
     static void printArray(int[] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i) {
-            System.out.print(arr[i] + " ");
+        for (int j : arr) {
+            System.out.print(j + " ");
         }
         System.out.println();
     }
@@ -52,7 +51,7 @@ public class Heapsort {
         n = scan.nextInt();
         int[] arrayTest = new int[n];
         System.out.println("Elements of the array: ");
-        for(int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             arrayTest[i] = scan.nextInt();
         }
         Heapsort ob = new Heapsort();
