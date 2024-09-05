@@ -1,5 +1,5 @@
 #!/bin/bash
-javac src/main/java/ru/nsu/shelestov/heapsort.java
-javadoc src/main/java/ru/nsu/shelestov/heapsort.java
-java -cp src/main/java ru.nsu.shelestov.heapsort
+javac src/main/java/ru/nsu/shelestov/Heapsort.java
+javadoc src/main/java/ru/nsu/shelestov/Heapsort.java
+java -cp src/main/java ru.nsu.shelestov.Heapsort
 

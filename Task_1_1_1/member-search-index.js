@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"ru.nsu.shelestov","c":"heapsort","l":"heapsort()","url":"%3Cinit%3E()"},{"p":"ru.nsu.shelestov","c":"heapsort","l":"main(String[])","url":"main(java.lang.String[])"},{"p":"ru.nsu.shelestov","c":"heapsort","l":"sort(int[])"}]
+memberSearchIndex = [{"p":"ru.nsu.shelestov","c":"Heapsort","l":"Heapsort()","url":"%3Cinit%3E()"},{"p":"ru.nsu.shelestov","c":"Heapsort","l":"main(String[])","url":"main(java.lang.String[])"},{"p":"ru.nsu.shelestov","c":"Heapsort","l":"sort(int[])"}]

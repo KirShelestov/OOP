@@ -2,7 +2,7 @@ package ru.nsu.shelestov;
 
 import java.util.Scanner;
 
-public class heapsort {
+public class Heapsort {
 
 
     public void sort(int[] arr) {
@@ -37,9 +37,8 @@ public class heapsort {
         }
     }
     static void printArray(int[] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i) {
-            System.out.print(arr[i] + " ");
+        for (int j : arr) {
+            System.out.print(j + " ");
         }
         System.out.println();
     }
@@ -54,7 +53,7 @@ public class heapsort {
         for (int i = 0; i < n; i++) {
             arrayTest[i] = scan.nextInt();
         }
-        heapsort ob = new heapsort();
+        Heapsort ob = new Heapsort();
         ob.sort(arrayTest);
         printArray(arrayTest);
     }
