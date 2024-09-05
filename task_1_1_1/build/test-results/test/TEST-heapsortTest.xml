@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="heapsortTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-09-04T16:30:05" hostname="kirill-MaiBook-M" time="0.04">
+  <properties/>
+  <testcase name="testSortReversedArray()" classname="heapsortTest" time="0.029"/>
+  <testcase name="testSortEmptyArray()" classname="heapsortTest" time="0.001"/>
+  <testcase name="testSort()" classname="heapsortTest" time="0.001"/>
+  <testcase name="testSortArrayWithNegativeValues()" classname="heapsortTest" time="0.001"/>
+  <testcase name="testSortSingleElement()" classname="heapsortTest" time="0.001"/>
+  <testcase name="testSortAlreadySortedArray()" classname="heapsortTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
