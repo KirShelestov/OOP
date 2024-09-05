@@ -2,8 +2,6 @@ package ru.nsu.shelestov;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 public class HeapsortTest {
 
@@ -123,5 +121,9 @@ public class HeapsortTest {
     @Test
     public void testPrintArray() {
         Heapsort.printArray(new int[]{1, 2, 3});
+    }
+    @Test
+    public void testPrintNegativeArray() {
+        Heapsort.printArray(new int[]{-1, 2, -3, 0});
     }
 }
