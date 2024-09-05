@@ -1,4 +1,7 @@
+import java.util.Scanner;
+
 public class heapsort {
+
     public void sort(int arr[]) {
         int n = arr.length;
         for (int i = n / 2 - 1; i >= 0; i--) {
@@ -39,11 +42,17 @@ public class heapsort {
     }
 
     public static void main(String args[]) {
-        int arr[] = {1001, 33};
-        int n = arr.length;
-
+        int n;
+        Scanner scan=new Scanner(System.in);
+        System.out.print("Size of array:");
+        n=scan.nextInt();
+        int[] arrayTest = new int[n];
+        System.out.println("Elements of the array: ");
+        for(int i=0; i<n; i++) {
+            arrayTest[i]=scan.nextInt();
+        }
         heapsort ob = new heapsort();
-        ob.sort(arr);
-        printArray(arr);
+        ob.sort(arrayTest);
+        printArray(arrayTest);
     }
 }
