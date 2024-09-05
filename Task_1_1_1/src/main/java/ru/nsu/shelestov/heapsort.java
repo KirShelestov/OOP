@@ -46,13 +46,13 @@ public class heapsort {
 
     public static void main(String[] args) {
         int n;
-        Scanner scan=new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         System.out.print("Size of array:");
         n = scan.nextInt();
         int[] arrayTest = new int[n];
         System.out.println("Elements of the array: ");
         for (int i = 0; i < n; i++) {
-            arrayTest[i]=scan.nextInt();
+            arrayTest[i] = scan.nextInt();
         }
         heapsort ob = new heapsort();
         ob.sort(arrayTest);

@@ -1,7 +1,9 @@
 package ru.nsu.shelestov;
 
+//import org.junit.jupiter.api.Test;
+//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals; // Static import
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 public class heapsortTest {
 
     @Test
