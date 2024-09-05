@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 public class Heapsort {
 
-
+    /**
+     * Сортировка массива
+     *
+     * @param arr массив, который нужно отсортировать
+     */
     public void sort(int[] arr) {
         int n = arr.length;
         for (int i = n / 2 - 1; i >= 0; i--) {
@@ -17,6 +21,14 @@ public class Heapsort {
             heapify(arr, i, 0);
         }
     }
+
+    /**
+     * Приводит поддерево с корнем в узле i к свойству кучи
+     *
+     * @param arr наша куча
+     * @param n размер кучи
+     * @param i индекс корня поддерева, которое нужно привести к свойству кучи
+     */
     void heapify(int[] arr, int n, int i) {
         int largest = i;
         int l = 2 * i + 1;
@@ -37,6 +49,11 @@ public class Heapsort {
         }
     }
 
+    /**
+     * Вывод массива
+     *
+     * @param arr
+     */
     static void printArray(int[] arr) {
         for (int j : arr) {
             System.out.print(j + " ");
@@ -44,6 +61,11 @@ public class Heapsort {
         System.out.println();
     }
 
+    /**
+     * Просто мейн
+     *
+     * @param args не используется
+     */
     public static void main(String[] args) {
         int n;
         Scanner scan = new Scanner(System.in);
