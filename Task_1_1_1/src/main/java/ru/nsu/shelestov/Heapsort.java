@@ -2,6 +2,9 @@ package ru.nsu.shelestov;
 
 import java.util.Scanner;
 
+/**
+ * реализация сортировки кучей
+ */
 public class Heapsort {
 
     /**

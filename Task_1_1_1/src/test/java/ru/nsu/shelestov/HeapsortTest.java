@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тесты для хипсорта
+ */
 public class HeapsortTest {
 
     /**
@@ -150,7 +153,8 @@ public class HeapsortTest {
     }
 
     /**
-     * Тест на вывод отсортированного массива, не можем фактически проверить правильность метода, поэтому просто вызываем его.
+     * Тест на вывод отсортированного массива.
+     * не можем фактически проверить правильность метода, поэтому просто вызываем его.
      *
      */
     @Test
