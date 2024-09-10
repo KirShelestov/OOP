@@ -69,7 +69,7 @@ public class Game {
         }
 
         playerTurn();
-        if (player.getHand().ValueOnHand() > 21) {
+        if (player.getHand().getValueOnHand() > 21) {
             updateScore(false);
             return;
         }
@@ -145,7 +145,7 @@ public class Game {
                 player.hit(deck, discarded);
                 player.revealHand();
                 dealer.printAtStart();
-                if (player.getHand().ValueOnHand() > 21) {
+                if (player.getHand().getValueOnHand() > 21) {
                     System.out.println("Вы превысили 21! Вы проиграли.");
                     break;
                 }
@@ -153,7 +153,7 @@ public class Game {
                 player.hit(deck, discarded);
                 player.revealHand();
                 dealer.printHand();
-                if (player.getHand().ValueOnHand() > 21) {
+                if (player.getHand().getValueOnHand() > 21) {
                     System.out.println("Вы превысили 21! Вы проиграли.");
                     break;
                 }
@@ -179,7 +179,7 @@ public class Game {
 
         dealer.revealHand(player);
 
-        while (dealer.getHand().ValueOnHand() < 17) {
+        while (dealer.getHand().getValueOnHand() < 17) {
             dealer.hit(deck, discarded);
             dealer.revealHand(player);
         }
@@ -192,8 +192,8 @@ public class Game {
      * Затем выводится результат в консоль
      */
     private void determineOutcome() {
-        int dealerValue = dealer.getHand().ValueOnHand();
-        int playerValue = player.getHand().ValueOnHand();
+        int dealerValue = dealer.getHand().getValueOnHand();
+        int playerValue = player.getHand().getValueOnHand();
 
         if (dealerValue > 21) {
             wins++;

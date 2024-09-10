@@ -30,7 +30,7 @@ public class Hand {
      *
      * @return значение на руке
      */
-    public int ValueOnHand() {
+    public int getValueOnHand() {
         int value = 0;
         int acesInNumber = 0;
 

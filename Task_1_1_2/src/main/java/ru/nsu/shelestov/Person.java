@@ -56,7 +56,7 @@ public abstract class Person {
         } else {
             System.out.print("Ваши карты: ");
         }
-        System.out.println(this.hand + " => " + this.hand.ValueOnHand());
+        System.out.println(this.hand + " => " + this.hand.getValueOnHand());
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class Person {
      * @return True если есть блэкджек
      */
     public boolean winBlackjack() {
-        if (this.getHand().ValueOnHand() == 21) {
+        if (this.getHand().getValueOnHand() == 21) {
             return true;
         } else {
             return false;

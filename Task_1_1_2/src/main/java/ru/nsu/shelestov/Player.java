@@ -46,7 +46,7 @@ public class Player extends Person {
         }
         if (decision == 1) {
             this.hit(deck, discard);
-            if (this.getHand().ValueOnHand() > 20) {
+            if (this.getHand().getValueOnHand() > 20) {
                 return;
             } else {
                 this.makeDecision(deck, discard);

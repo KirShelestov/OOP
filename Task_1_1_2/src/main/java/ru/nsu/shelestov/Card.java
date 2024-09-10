@@ -1,31 +1,65 @@
 package ru.nsu.shelestov;
 
+/**
+ * класс представляет карту в колоде.
+ */
 public class Card {
     Suit suit;
     CardInfo cardInfo;
 
+    /**
+     * конструктор карты.
+     *
+     * @param suit     масть карты
+     * @param cardInfo достоинство карты
+     */
     public Card(Suit suit, CardInfo cardInfo) {
         this.suit = suit;
         this.cardInfo = cardInfo;
     }
 
+    /**
+     * возваращает значение карты.
+     *
+     * @return значение карты
+     */
     public int getValue() {
         return cardInfo.cardValue;
     }
 
+    /**
+     * возвращает масть карты.
+     *
+     * @return масть карты
+     */
     public Suit getSuit() {
         return suit;
     }
 
+    /**
+     * Возвращает информацию о карте.
+     *
+     * @return информацию о карте
+     */
     public CardInfo getCardInfo() {
         return cardInfo;
     }
 
+    /**
+     * Создает новую карту как копию выбранной.
+     *
+     * @param card карту, которую нужно скопировать
+     */
     public Card(Card card) {
         this.suit = card.getSuit();
         this.cardInfo = card.getCardInfo();
     }
 
+    /**
+     * Возвращает строку с правильеым выводом карт в консоль.
+     *
+     * @return строка, описывающая карту
+     */
     public String toString() {
         if (cardInfo == cardInfo.QUEEN) {
             if (suit == suit.CLUB) {
