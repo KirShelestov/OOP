@@ -2,7 +2,6 @@ package ru.nsu.shelestov;
 
 /**
  * Класс для мастей карт.
- *
  */
 public enum Suit {
     CLUB("Трефы"),

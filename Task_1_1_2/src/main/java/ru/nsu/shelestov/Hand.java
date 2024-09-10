@@ -1,16 +1,15 @@
 package ru.nsu.shelestov;
+
 import java.util.ArrayList;
 
 /**
  * класс представляет "руку".
- *
  */
 public class Hand {
     ArrayList<Card> hand;
 
     /**
      * конструктор пустой руки.
-     *
      */
     public Hand() {
         hand = new ArrayList<Card>();

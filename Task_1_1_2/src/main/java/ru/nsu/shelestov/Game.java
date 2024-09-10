@@ -1,9 +1,9 @@
 package ru.nsu.shelestov;
+
 import java.util.Scanner;
 
 /**
- *  класс представляет логику игры.
- *
+ * класс представляет логику игры.
  */
 public class Game {
     private Deck deck, discarded;
@@ -14,10 +14,9 @@ public class Game {
 
     /**
      * конструктор для инициализации игры.
-     *
      */
     public Game() {
-    	start = 0;
+        start = 0;
         wins = 0;
         losses = 0;
         draws = 0;
@@ -25,10 +24,10 @@ public class Game {
 
         deck = new Deck(true);
         discarded = new Deck();
-        
+
         dealer = new Dealer();
         player = new Player();
-        
+
         deck.shuffle();
         System.out.println("Добро пожаловать в Блэкджек!");
         startRound();
@@ -36,7 +35,7 @@ public class Game {
 
     /**
      * Запускает новый раунд игры в блэкджек.
-     *
+     * <p>
      * Сброс карт дилера и игрока в колоду, если это не первый раунд
      * Проверка количества оставшихся карт в колоде и перетасовка колоды из сброшенных карт, если необходимо
      * Раздача карт игроку и дилеру
@@ -51,17 +50,17 @@ public class Game {
         if (round > 1) {
             System.out.println("\nРаунд " + round);
         }
-        
+
         dealer.getHand().discardHandToDeck(discarded);
         player.getHand().discardHandToDeck(discarded);
-        
+
         if (deck.cardsLeft() < 4) {
             deck.reloadDeckFromDiscard(discarded);
         }
-        
+
         System.out.println("Дилер раздал карты");
         dealInitialCards();
-        
+
         player.printHand();
         dealer.printAtStart();
 
@@ -77,14 +76,14 @@ public class Game {
 
         dealerTurn();
         determineOutcome();
-        
+
         round++;
         System.out.println("Хотите сыграть еще один раунд? (да/нет)");
         Scanner scanner = new Scanner(System.in);
         String response = scanner.nextLine().trim().toLowerCase();
 
         if (response.equals("да")) {
-            startRound(); 
+            startRound();
         } else {
             System.out.println("Спасибо за игру! Ваш счет: " + wins + " побед, " + losses + " поражений, " + draws + " ничьих.");
         }
@@ -127,7 +126,7 @@ public class Game {
 
     /**
      * Обрабатывает ход игрока в игре блэкджек.
-     *
+     * <p>
      * Выводит сообщение о текущем ходе и предлагает игроку ввести выбор
      * Если игрок выбирает взять карту (вводит "1")
      * Если это первый ход (start == 0), игрок получает карту и показывает свою руку
@@ -151,16 +150,15 @@ public class Game {
                     break;
                 }
             } else if ((choice == 1) && (start == 1)) {
-            	player.hit(deck, discarded);
+                player.hit(deck, discarded);
                 player.revealHand();
                 dealer.printHand();
                 if (player.getHand().ValueOnHand() > 21) {
                     System.out.println("Вы превысили 21! Вы проиграли.");
                     break;
                 }
-            }
-            else if (choice == 0) {
-            	start = 1;
+            } else if (choice == 0) {
+                start = 1;
                 break;
             } else {
                 System.out.println("Неверный ввод. Попробуйте снова.");
@@ -170,7 +168,7 @@ public class Game {
 
     /**
      * Описывает логику хода Дилера.
-     *
+     * <p>
      * Дилер раскрывает скрытую карту
      * Берет затем карты пока значение на руках меньше 17
      */
@@ -178,9 +176,9 @@ public class Game {
         System.out.println("Ход дилера\n-------");
         dealer.printAtStart();
         start = 1;
-        
+
         dealer.revealHand(player);
-        
+
         while (dealer.getHand().ValueOnHand() < 17) {
             dealer.hit(deck, discarded);
             dealer.revealHand(player);
@@ -189,7 +187,7 @@ public class Game {
 
     /**
      * определяется исход раунда на основе значений на руках у игрока и дилера.
-     *
+     * <p>
      * Также обновляется правильно счет игры
      * Затем выводится результат в консоль
      */

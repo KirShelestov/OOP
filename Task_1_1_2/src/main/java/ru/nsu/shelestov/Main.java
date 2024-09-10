@@ -1,7 +1,7 @@
 package ru.nsu.shelestov;
 
 /**
- *  просто мейн.
+ * просто мейн.
  */
 public class Main {
     /**

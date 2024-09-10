@@ -2,7 +2,6 @@ package ru.nsu.shelestov;
 
 /**
  * класс, реализующий карты от двойки до туза.
- *
  */
 public enum CardInfo {
     ACE("Туз", 11),
@@ -18,17 +17,17 @@ public enum CardInfo {
     JACK("Валет", 10),
     QUEEN("Дама", 10),
     KING("Король", 10);
-    
-	String cardName;
+
+    String cardName;
     int cardValue;
 
     /**
      * конструктор для создания "лица" карты.
      *
-     * @param cardName название карты
+     * @param cardName  название карты
      * @param cardValue достоинство карты
      */
-    CardInfo(String cardName, int cardValue){
+    CardInfo(String cardName, int cardValue) {
         this.cardName = cardName;
         this.cardValue = cardValue;
     }
