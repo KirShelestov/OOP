@@ -25,8 +25,8 @@ public class Player extends Person {
      * Попутно отлавливаем случай, когда пользователь вводит отличное от "0"/"1"
      * В таком кейсе снова будет предложено ввести выбор
      *
-     * @param deck
-     * @param discard
+     * @param deck колода
+     * @param discard колода отброса
      */
     public void makeDecision(Deck deck, Deck discard) {
         int decision = 0;
@@ -57,10 +57,11 @@ public class Player extends Person {
     }
 
     /**
-     * функция для вывода взятой карты
+     * функция для вывода взятой карты.
      */
     public void revealHand() {
-        System.out.println("Вы открыли карту " + super.getHand().getCard(super.getHand().getSize() - 1));
+        System.out.println("Вы открыли карту "
+                + super.getHand().getCard(super.getHand().getSize() - 1));
         super.printHand();
     }
 
