@@ -35,7 +35,7 @@ public class Player extends Person {
 			try {
 				System.out.println("Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
 				decision = input.nextInt();
-				if (decision == 1 || decision == 0) {
+				if ((decision == 1) || (decision == 0)) {
                     getNum = false; 
                 } 
 			}
@@ -46,7 +46,7 @@ public class Player extends Person {
 		}
 		if (decision == 1) {
 			this.hit(deck, discard);
-			if (this.getHand().ValueOnHand()>20) {
+			if (this.getHand().ValueOnHand() > 20) {
 				return;
 			}
 			else {

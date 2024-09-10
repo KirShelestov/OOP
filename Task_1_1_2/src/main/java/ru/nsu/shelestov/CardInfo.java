@@ -38,7 +38,7 @@ public enum CardInfo {
      *
      * @return имя карты
      */
-    public String toString(){
+    public String toString() {
         return cardName;
     }
 }

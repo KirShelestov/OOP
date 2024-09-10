@@ -1,5 +1,7 @@
 package ru.nsu.shelestov;
 
+import java.util.Objects;
+
 /**
  * класс для определения общих характеристик как Дилера, так и Игрока.
  */
@@ -21,7 +23,7 @@ public abstract class Person {
 	 *
 	 * @return возвращаем имя персона
 	 */
-	public String getName(){
+	public String getName() {
 	    return this.name;
 	}
 
@@ -30,7 +32,7 @@ public abstract class Person {
 	 *
 	 * @param name устанавливаем имя персона
 	 */
-	public void setName(String name){
+	public void setName(String name) {
 	    this.name = name;
 
 	}
@@ -40,16 +42,16 @@ public abstract class Person {
 	 *
 	 * @return карты на руке
 	 */
-	public Hand getHand(){
+	public Hand getHand() {
 	    return this.hand;
 	}
 
-	public void setHand(Hand hand){
+	public void setHand(Hand hand) {
 	    this.hand = hand;
 	}
 	
 	public void printHand() {
-		if (this.name == "Дилер") {
+		if (Objects.equals(this.name, "Дилер")) {
 			System.out.print("Карты дилера: ");
 		}
 		else {

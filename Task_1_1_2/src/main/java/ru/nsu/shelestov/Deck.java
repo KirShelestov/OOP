@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 /**
  *класс представляет колоду игральных карт.
+ *
  */
 public class Deck {
 	ArrayList<Card> deck;
@@ -69,7 +70,7 @@ public class Deck {
 	 */
 	public void shuffle(){
 	    ArrayList<Card> shuffled = new ArrayList<Card>();
-	    while(deck.size() > 0){
+	    while(!deck.isEmpty()){
 	        int cardToPull = (int)(Math.random()*(deck.size()-1));
 	        shuffled.add(deck.get(cardToPull));
 	        deck.remove(cardToPull);
@@ -94,13 +95,13 @@ public class Deck {
 	 * @return True если есть карты, иначе False
 	 */
 	public boolean hasCards() {
-		return (deck.size() > 0);
+		return (!deck.isEmpty());
 	}
 
 	/**
 	 * удаляет карты из колоды.
 	 */
-	public void emptyDeck(){
+	public void emptyDeck() {
 	    deck.clear();
 	}
 
@@ -109,7 +110,7 @@ public class Deck {
 	 *
 	 * @param cards ArrayList карты, которые нужно добавить в колоду
 	 */
-	public void addCards(ArrayList<Card> cards){
+	public void addCards(ArrayList<Card> cards) {
 	    deck.addAll(cards);
 	}
 
@@ -131,7 +132,7 @@ public class Deck {
 	 *
 	 * @return количество карт в колоде
 	 */
-	public int cardsLeft(){
+	public int cardsLeft() {
         return deck.size();
     }
 }

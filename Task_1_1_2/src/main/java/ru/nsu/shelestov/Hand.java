@@ -3,12 +3,14 @@ import java.util.ArrayList;
 
 /**
  * класс представляет "руку".
+ *
  */
 public class Hand {
     ArrayList<Card> hand;
 
     /**
      * конструктор пустой руки.
+     *
      */
     public Hand() {
         hand = new ArrayList<Card>();
@@ -41,7 +43,7 @@ public class Hand {
         }
         if ((value > 21) && (acesInNumber > 0)) {
             while ((acesInNumber > 0) && (value > 21)) {
-                acesInNumber--;
+                acesInNumber -= 1;
                 value -= 10;
             }
         }
