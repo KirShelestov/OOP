@@ -46,10 +46,18 @@ public abstract class Person {
         return this.hand;
     }
 
+    /**
+     * сеттер руки.
+     *
+     * @param hand рука, которой устанавливают значение
+     */
     public void setHand(Hand hand) {
         this.hand = hand;
     }
 
+    /**
+     * печатает карты на руке у персона.
+     */
     public void printHand() {
         if (Objects.equals(this.name, "Дилер")) {
             System.out.print("Карты дилера: ");

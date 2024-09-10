@@ -28,7 +28,8 @@ public class Dealer extends Person {
      * @param rival используется для того, чтобы выводить карты противника
      */
     public void revealHand(Person rival) {
-        System.out.println("Дилер открывает карту " + super.getHand().getCard(super.getHand().getSize() - 1));
+        System.out.println("Дилер открывает карту "
+                + super.getHand().getCard(super.getHand().getSize() - 1));
         rival.printHand();
         super.printHand();
     }
