@@ -40,13 +40,13 @@ public class Deck {
 	 */
 	public String toString() {
 		String output = "";
+
+         for (Card card : deck) {
+			 output += card;
+			 output += "\n";
+		 }
 		
-		for (Card card : deck) {
-			output += card;
-			output += "\n";
-		}
-		
-		return output;
+		 return output;
 	}
 
 	/**

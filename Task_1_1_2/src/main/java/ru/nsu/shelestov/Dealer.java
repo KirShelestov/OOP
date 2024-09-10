@@ -26,13 +26,12 @@ public class Dealer extends Person {
 
     /**
      * метод сначала выводит какую карту взял дилер.
-     *
-     * затем выводит последовательно карты на руках у игрока и дилера
+     *затем выводит последовательно карты на руках у игрока и дилера
      *
      * @param rival используется для того, чтобы выводить карты противника
      */
     public void revealHand(Person rival) {
-        System.out.println("Дилер открывает карту " + super.getHand().getCard(super.getHand().getSize()-1));
+        System.out.println("Дилер открывает карту " + super.getHand().getCard(super.getHand().getSize() - 1));
         rival.printHand();
         super.printHand();
     }
