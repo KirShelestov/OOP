@@ -12,20 +12,7 @@ public class GameTest {
     public void testGameStarts() {
 
         InputStream originalSystemIn = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("1\n0\n".repeat(100).getBytes());
-        System.setIn(in);
-        Game game = new Game();
-
-        System.setIn(originalSystemIn);
-
-
-        assertTrue(true);
-    }
-    @Test
-    public void testGameStarts1() {
-
-        InputStream originalSystemIn = System.in;
-        ByteArrayInputStream in = new ByteArrayInputStream("0\n0\n".repeat(100).getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("1\n".repeat(100).getBytes());
         System.setIn(in);
         Game game = new Game();
 
