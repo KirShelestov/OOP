@@ -16,12 +16,65 @@ public class CardTest {
     }
 
     /**
-     * тест для проверки метода toString.
+     * тест для проверки метода toString для KING.
+     */
+    @Test
+    public void testCardToStringKING() {
+        Card card1 = new Card(Suit.SPADE, CardInfo.KING);
+        assertEquals("Пиковый король (10)", card1.toString());
+        Card card2 = new Card(Suit.CLUB, CardInfo.KING);
+        assertEquals("Трефовый король (10)", card2.toString());
+        Card card3 = new Card(Suit.HEART, CardInfo.KING);
+        assertEquals("Червовый король (10)", card3.toString());
+        Card card4 = new Card(Suit.DIAMOND, CardInfo.KING);
+        assertEquals("Бубовый король (10)", card4.toString());
+    }
+
+    /**
+     * тест для проверки метода toString для KING.
+     */
+    @Test
+    public void testCardToStringQUEEN() {
+        Card card1 = new Card(Suit.SPADE, CardInfo.QUEEN);
+        assertEquals("Пиковая дама (10)", card1.toString());
+        Card card2 = new Card(Suit.CLUB, CardInfo.QUEEN);
+        assertEquals("Трефовая дама (10)", card2.toString());
+        Card card3 = new Card(Suit.HEART, CardInfo.QUEEN);
+        assertEquals("Червовая дама (10)", card3.toString());
+        Card card4 = new Card(Suit.DIAMOND, CardInfo.QUEEN);
+        assertEquals("Бубовая дама (10)", card4.toString());
+    }
+
+    /**
+     * тест для проверки метода toString для JACK.
+     */
+    @Test
+    public void testCardToStringJACK() {
+        Card card1 = new Card(Suit.SPADE, CardInfo.JACK);
+        assertEquals("Пиковый валет (10)", card1.toString());
+        Card card2 = new Card(Suit.CLUB, CardInfo.JACK);
+        assertEquals("Трефовый валет (10)", card2.toString());
+        Card card3 = new Card(Suit.HEART, CardInfo.JACK);
+        assertEquals("Червовый валет (10)", card3.toString());
+        Card card4 = new Card(Suit.DIAMOND, CardInfo.JACK);
+        assertEquals("Бубовый валет (10)", card4.toString());
+    }
+    /**
+     * тест для проверки метода toString для остальных.
      */
     @Test
     public void testCardToString() {
+        Card card1 = new Card(Suit.SPADE, CardInfo.ACE);
+        assertEquals("Туз Пики (11)", card1.toString());
+    }
+
+    /**
+     * тест для проверки метода getValue.
+     */
+    @Test
+    public void testGetValue() {
         Card card = new Card(Suit.SPADE, CardInfo.KING);
-        assertEquals("Пиковый король (10)", card.toString());
+        assertEquals(10, card.getValue());
     }
 
     /**
