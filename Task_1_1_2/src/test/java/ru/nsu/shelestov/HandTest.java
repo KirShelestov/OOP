@@ -1,10 +1,17 @@
 package ru.nsu.shelestov;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * класс для теста класса Hand.
+ */
 class HandTest {
 
+    /**
+     * метод проверяет правильность подсчета значений на руке.
+     */
     @Test
     void testGetValueOnHand() {
         Hand hand = new Hand();
@@ -14,6 +21,9 @@ class HandTest {
         assertTrue(hand.getValueOnHand() >= 2 && hand.getValueOnHand() <= 21);
     }
 
+    /**
+     * тест для еще одного метода.
+     */
     @Test
     void testDiscardHandToDeck() {
         Hand hand = new Hand();

@@ -1,11 +1,19 @@
 package ru.nsu.shelestov;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+
+
+
+
 
 /**
  * класс для теста класса Deck.
@@ -97,7 +105,7 @@ class DeckTest {
     @Test
     void testReloadDeckFromDiscard() {
         Deck discard = new Deck(false);
-        discard.addCard(new Card(Suit.DIAMOND, CardInfo.QUEEN)); 
+        discard.addCard(new Card(Suit.DIAMOND, CardInfo.QUEEN));
         deck.reloadDeckFromDiscard(discard);
 
         assertEquals(53, deck.cardsLeft());

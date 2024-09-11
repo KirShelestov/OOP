@@ -27,7 +27,7 @@ public class CardTest {
         Card card3 = new Card(Suit.HEART, CardInfo.KING);
         assertEquals("Червовый король (10)", card3.toString());
         Card card4 = new Card(Suit.DIAMOND, CardInfo.KING);
-        assertEquals("Бубовый король (10)", card4.toString());
+        assertEquals("Бубновый король (10)", card4.toString());
     }
 
     /**
@@ -42,7 +42,7 @@ public class CardTest {
         Card card3 = new Card(Suit.HEART, CardInfo.QUEEN);
         assertEquals("Червовая дама (10)", card3.toString());
         Card card4 = new Card(Suit.DIAMOND, CardInfo.QUEEN);
-        assertEquals("Бубовая дама (10)", card4.toString());
+        assertEquals("Бубновая дама (10)", card4.toString());
     }
 
     /**
@@ -57,7 +57,7 @@ public class CardTest {
         Card card3 = new Card(Suit.HEART, CardInfo.JACK);
         assertEquals("Червовый валет (10)", card3.toString());
         Card card4 = new Card(Suit.DIAMOND, CardInfo.JACK);
-        assertEquals("Бубовый валет (10)", card4.toString());
+        assertEquals("Бубновый валет (10)", card4.toString());
     }
     /**
      * тест для проверки метода toString для остальных.
