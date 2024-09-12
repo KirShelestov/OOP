@@ -32,6 +32,7 @@ class HandTest {
         Deck discardDeck = new Deck();
         hand.takeCardFromDeck(deck);
         hand.takeCardFromDeck(deck);
+        assertEquals(2, hand.getSize());
         hand.discardHandToDeck(discardDeck);
         assertEquals(2, discardDeck.getCards().size());
         assertEquals(50, deck.cardsLeft());
