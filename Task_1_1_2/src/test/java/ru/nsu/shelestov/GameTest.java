@@ -1,10 +1,20 @@
 package ru.nsu.shelestov;
+
 import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * класс для тестирования Game.
+ */
 public class GameTest {
     @Test
+    /**
+     * Игрок сразу пасует и отказывавется начинать новый раунд.
+     */
     public void testGameStarts() {
 
         InputStream originalIn = System.in;
@@ -23,6 +33,10 @@ public class GameTest {
         }
         assertTrue(true);
     }
+
+    /**
+     * Игрок берет карту одну, затем пасует, начинает новый раунд и затем пасует с отказов начинать раунд снова.
+     */
     @Test
     public void testGameStarts1() {
 
@@ -53,6 +67,9 @@ public class GameTest {
         assertTrue(true);
     }
 
+    /**
+     * Игрок пасует, начинает новый раунд и затем пасует с отказов начинать раунд снова.
+     */
     @Test
     public void testGameStarts2() {
 

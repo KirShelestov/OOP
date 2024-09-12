@@ -7,8 +7,15 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Класс, который должен тестировать Main, но почему-то покрытие все равно 0%.
+ */
 public class MainTest {
 
+    /**
+     * вызов мейна.
+     * Игрок сразу пасует и отказывается начинать новый раунд
+     */
     @Test
     public void testMain() {
         InputStream originalIn = System.in;
