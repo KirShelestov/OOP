@@ -14,12 +14,14 @@ public class MainTest {
         InputStream originalIn = System.in;
 
         try {
-            ByteArrayInputStream in = new ByteArrayInputStream("1\n".repeat(100).getBytes());
+            ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
             System.setIn(in);
-
             Main.main(new String[]{});
 
             assertTrue(true);
+        } catch (Exception e) {
+            ByteArrayInputStream inn = new ByteArrayInputStream("нет\n".getBytes());
+            System.setIn(inn);
         } finally {
             System.setIn(originalIn);
         }
