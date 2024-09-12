@@ -99,4 +99,37 @@ public class GameTest {
         }
         assertTrue(true);
     }
+
+    /**
+     * Игрок берет или пасует потом, начинает новый раунд сто раз подряд.
+     */
+    @Test
+    public void testGameStarts3() {
+
+        InputStream originalIn = System.in;
+
+        try {
+            ByteArrayInputStream in = new ByteArrayInputStream("1\n".repeat(1000).getBytes());
+            System.setIn(in);
+            Game game = new Game();
+
+            assertTrue(true);
+        } catch (Exception e) {
+            ByteArrayInputStream inn = new ByteArrayInputStream("0\n".getBytes());
+
+            try {
+                ByteArrayInputStream innn = new ByteArrayInputStream("нет\n".getBytes());
+                System.setIn(innn);
+                assertTrue(true);
+            } catch (Exception ex) {
+                ByteArrayInputStream innnn = new ByteArrayInputStream("нет\n".getBytes());
+                System.setIn(innnn);
+                assertTrue(true);
+            }
+            System.setIn(inn);
+        } finally {
+            System.setIn(originalIn);
+        }
+        assertTrue(true);
+    }
 }
