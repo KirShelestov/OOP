@@ -1,12 +1,12 @@
 package ru.nsu.shelestov;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * класс тестирующий класс Dealer.
@@ -58,7 +58,8 @@ class DealerTest {
 
         System.setOut(originalOut);
 
-        assertTrue(outContent.toString().contains("Карты дилера:"), "Вывод должен содержать информацию о картах дилера");
+        assertTrue(outContent.toString().contains("Карты дилера:"),
+                "Вывод должен содержать информацию о картах дилера");
     }
 
     /**

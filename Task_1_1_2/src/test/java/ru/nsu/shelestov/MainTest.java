@@ -1,8 +1,7 @@
 package ru.nsu.shelestov;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
+import org.junit.jupiter.api.Test;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

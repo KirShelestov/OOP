@@ -59,6 +59,7 @@ public class CardTest {
         Card card4 = new Card(Suit.DIAMOND, CardInfo.JACK);
         assertEquals("Бубновый валет (10)", card4.toString());
     }
+
     /**
      * тест для проверки метода toString для остальных.
      */

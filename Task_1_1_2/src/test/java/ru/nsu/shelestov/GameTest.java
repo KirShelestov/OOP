@@ -1,9 +1,8 @@
 package ru.nsu.shelestov;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -35,7 +34,8 @@ public class GameTest {
     }
 
     /**
-     * Игрок берет карту одну, затем пасует, начинает новый раунд и затем пасует с отказов начинать раунд снова.
+     * Игрок берет карту одну, затем пасует, начинает новый раунд.
+     * и затем пасует с отказов начинать раунд снова
      */
     @Test
     public void testGameStarts1() {
