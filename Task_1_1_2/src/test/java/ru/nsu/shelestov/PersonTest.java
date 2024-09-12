@@ -37,6 +37,6 @@ public class PersonTest {
     public void testWinBlackjack() {
         player.getHand().takeCardFromDeck(deck);
         player.getHand().takeCardFromDeck(deck);
-        assertEquals(false, player.winBlackjack());
+        assertFalse(player.winBlackjack());
     }
 }
