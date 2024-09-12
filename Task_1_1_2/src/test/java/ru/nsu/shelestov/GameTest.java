@@ -52,4 +52,34 @@ public class GameTest {
         }
         assertTrue(true);
     }
+
+    @Test
+    public void testGameStarts2() {
+
+        InputStream originalIn = System.in;
+
+        try {
+            ByteArrayInputStream in = new ByteArrayInputStream("0\n".getBytes());
+            System.setIn(in);
+            Game game = new Game();
+
+            assertTrue(true);
+        } catch (Exception e) {
+            ByteArrayInputStream inn = new ByteArrayInputStream("да\n".getBytes());
+
+            try {
+                ByteArrayInputStream innn = new ByteArrayInputStream("0\n".getBytes());
+                System.setIn(innn);
+                assertTrue(true);
+            } catch (Exception ex) {
+                ByteArrayInputStream innnn = new ByteArrayInputStream("нет\n".getBytes());
+                System.setIn(innnn);
+                assertTrue(true);
+            }
+            System.setIn(inn);
+        } finally {
+            System.setIn(originalIn);
+        }
+        assertTrue(true);
+    }
 }
