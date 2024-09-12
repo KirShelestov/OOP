@@ -19,7 +19,7 @@ public class CardTest {
      * тест для проверки метода toString для KING.
      */
     @Test
-    public void testCardToStringKING() {
+    public void testCardToStringKing() {
         Card card1 = new Card(Suit.SPADE, CardInfo.KING);
         assertEquals("Пиковый король (10)", card1.toString());
         Card card2 = new Card(Suit.CLUB, CardInfo.KING);
@@ -34,7 +34,7 @@ public class CardTest {
      * тест для проверки метода toString для KING.
      */
     @Test
-    public void testCardToStringQUEEN() {
+    public void testCardToStringQueen() {
         Card card1 = new Card(Suit.SPADE, CardInfo.QUEEN);
         assertEquals("Пиковая дама (10)", card1.toString());
         Card card2 = new Card(Suit.CLUB, CardInfo.QUEEN);
@@ -49,7 +49,7 @@ public class CardTest {
      * тест для проверки метода toString для JACK.
      */
     @Test
-    public void testCardToStringJACK() {
+    public void testCardToStringJack() {
         Card card1 = new Card(Suit.SPADE, CardInfo.JACK);
         assertEquals("Пиковый валет (10)", card1.toString());
         Card card2 = new Card(Suit.CLUB, CardInfo.JACK);

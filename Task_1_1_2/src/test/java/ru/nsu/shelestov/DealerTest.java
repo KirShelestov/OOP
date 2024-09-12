@@ -1,12 +1,12 @@
 package ru.nsu.shelestov;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * класс тестирующий класс Dealer.

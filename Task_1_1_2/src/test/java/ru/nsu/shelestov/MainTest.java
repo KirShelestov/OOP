@@ -1,10 +1,10 @@
 package ru.nsu.shelestov;
 
-import java.io.ByteArrayInputStream;
-import org.junit.jupiter.api.Test;
-import java.io.InputStream;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import org.junit.jupiter.api.Test;
 
 /**
  * Класс, который должен тестировать Main, но почему-то покрытие все равно 0%.
