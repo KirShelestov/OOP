@@ -24,8 +24,8 @@ public class PlayerTest {
     @BeforeEach
     public void setUp() {
         player = new Player();
-        deck = new Deck();
         discard = new Deck();
+        deck = new Deck();
     }
 
     /**
