@@ -29,9 +29,9 @@ class HandTest {
     void testDiscardHandToDeck() {
         Hand hand = new Hand();
         Deck deck = new Deck(true);
+        hand.takeCardFromDeck(deck);
+        hand.takeCardFromDeck(deck);
         Deck discardDeck = new Deck();
-        hand.takeCardFromDeck(deck);
-        hand.takeCardFromDeck(deck);
         assertEquals(2, hand.getSize());
         hand.discardHandToDeck(discardDeck);
         assertEquals(2, discardDeck.getCards().size());

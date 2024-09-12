@@ -3,9 +3,9 @@ package ru.nsu.shelestov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -84,6 +84,7 @@ class DealerTest {
         System.setOut(originalOut);
 
         // Проверяем, что вывод содержит информацию о картах игрока и дилера
-        assertTrue(outContent.toString().contains("Дилер открывает карту"), "Вывод должен содержать сообщение о том, что дилер открывает карту");
+        assertTrue(outContent.toString().contains("Дилер открывает карту"),
+                "Вывод должен содержать сообщение о том, что дилер открывает карту");
     }
 }

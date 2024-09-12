@@ -10,11 +10,12 @@ import org.junit.jupiter.api.Test;
  * класс для тестирования Game.
  */
 public class GameTest {
-    @Test
+
     /**
      * Игрок сразу пасует и отказывавется начинать новый раунд.
      */
-    public void testGameStarts() {
+    @Test
+        public void testGameStarts() {
 
         InputStream originalIn = System.in;
 
