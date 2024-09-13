@@ -115,7 +115,7 @@ public class Main {
      *
      * @param assignments Строка, содержащая присвоения переменных
      * @return Map, где ключами являются имена переменных (в виде строк),
-     * а значениями - соответствующие значения типа double, присвоенные этим переменным.
+     *     а значениями - соответствующие значения типа double, присвоенные этим переменным.
      */
     public static Map<String, Double> parseVariableAssignments(String assignments) {
         Map<String, Double> variables = new HashMap<>();

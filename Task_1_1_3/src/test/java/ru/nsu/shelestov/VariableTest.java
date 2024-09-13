@@ -5,7 +5,6 @@ import static ru.nsu.shelestov.Main.parseExpression;
 import static ru.nsu.shelestov.Main.parseVariableAssignments;
 
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 /**

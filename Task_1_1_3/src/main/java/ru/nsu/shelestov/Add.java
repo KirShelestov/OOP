@@ -69,6 +69,9 @@ public class Add extends Expression {
         return new Add(left.derivative(var), right.derivative(var));
     }
 
+    /**
+     * вывод выражения.
+     */
     public void print() {
         System.out.print("(");
         left.print();

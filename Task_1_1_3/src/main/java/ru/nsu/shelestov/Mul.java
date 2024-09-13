@@ -37,7 +37,7 @@ public class Mul extends Expression {
         }
 
         Mul mult = (Mul) obj; // Приведение типа
-        return left.equals(mult.left) && right.equals(mult.right); // Сравнение левой и правой частей
+        return left.equals(mult.left) && right.equals(mult.right);
     }
 
     /**
