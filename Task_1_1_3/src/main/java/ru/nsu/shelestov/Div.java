@@ -12,7 +12,7 @@ class Div extends Expression {
     /**
      * конструктор для операции деления.
      *
-     * @param numerator делимое
+     * @param numerator   делимое
      * @param denominator делитель
      */
     public Div(Expression numerator, Expression denominator) {
@@ -21,6 +21,12 @@ class Div extends Expression {
         this.denominator = denominator;
     }
 
+    /**
+     * переопределение равенства между объектами одного класса.
+     *
+     * @param obj объект с которым хотим сравнить текущий объект
+     * @return равны или не равны объекты
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true; // Сравнение ссылок

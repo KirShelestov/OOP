@@ -1,7 +1,8 @@
 package ru.nsu.shelestov;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Класс для тестирования класса Number.
@@ -13,9 +14,8 @@ class NumberTest {
      */
     @Test
     void testToString() {
-        Expression numerator = new Number(5);
-
-        assertEquals("5.0", numerator.toString());
+        Expression num = new Number(5);
+        assertEquals("5.0", num.toString());
     }
 
     /**
@@ -23,10 +23,8 @@ class NumberTest {
      */
     @Test
     void testDerivative() {
-        Expression denominator = new Number(2);
-
-
-        Expression derivative = denominator.derivative("x");
+        Expression num = new Number(2);
+        Expression derivative = num.derivative("x");
         assertEquals("0.0", derivative.toString());
     }
 
@@ -35,11 +33,9 @@ class NumberTest {
      */
     @Test
     void testPrint() {
-        Expression numerator = new Number(7);
-        numerator.print();
-        assertEquals("7.0", numerator.toString());
+        Expression num = new Number(7);
+        num.print();
+        assertEquals("7.0", num.toString());
     }
-
-
 }
 

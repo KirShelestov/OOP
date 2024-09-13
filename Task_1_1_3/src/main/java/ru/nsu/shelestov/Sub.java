@@ -12,7 +12,7 @@ class Sub extends Expression {
     /**
      * конструктор для вычитания.
      *
-     * @param left левая часть уравнения
+     * @param left  левая часть уравнения
      * @param right правая часть уравнения
      */
     public Sub(Expression left, Expression right) {
@@ -20,6 +20,12 @@ class Sub extends Expression {
         this.right = right;
     }
 
+    /**
+     * переопределение равенства между объектами одного класса.
+     *
+     * @param obj объект с которым хотим сравнить текущий объект
+     * @return равны или не равны объекты
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true; // Сравнение ссылок

@@ -12,7 +12,7 @@ class Add extends Expression {
     /**
      * конструктор операции сложения.
      *
-     * @param left левая часть уравнения
+     * @param left  левая часть уравнения
      * @param right праввая часть уравнения
      */
     public Add(Expression left, Expression right) {
@@ -20,6 +20,12 @@ class Add extends Expression {
         this.right = right;
     }
 
+    /**
+     * переопределение равенства между объектами одного класса.
+     *
+     * @param obj объект с которым хотим сравнить текущий объект
+     * @return равны или не равны объекты
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true; // Сравнение ссылок

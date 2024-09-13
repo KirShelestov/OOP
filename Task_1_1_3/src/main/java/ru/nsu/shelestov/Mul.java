@@ -12,7 +12,7 @@ class Mul extends Expression {
     /**
      * конструктор для умножения.
      *
-     * @param left левая часть выражения
+     * @param left  левая часть выражения
      * @param right правая часть выражения
      */
     public Mul(Expression left, Expression right) {
@@ -21,6 +21,12 @@ class Mul extends Expression {
     }
 
 
+    /**
+     * переопределение равенства между объектами одного класса.
+     *
+     * @param obj объект с которым хотим сравнить текущий объект
+     * @return равны или не равны объекты
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true; // Сравнение ссылок

@@ -21,6 +21,12 @@ class Number extends Expression {
         return value;
     }
 
+    /**
+     * переопределение равенства между объектами одного класса.
+     *
+     * @param obj объект с которым хотим сравнить текущий объект
+     * @return равны или не равны объекты
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

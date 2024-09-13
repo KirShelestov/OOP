@@ -1,12 +1,12 @@
 package ru.nsu.shelestov;
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.nsu.shelestov.Main.parseExpression;
 import static ru.nsu.shelestov.Main.parseVariableAssignments;
+
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Класс для тестирования правильности класса Variable.
@@ -18,9 +18,9 @@ class VariableTest {
      */
     @Test
     void testToString() {
-        Expression numerator = new Variable("x");
+        Expression vars = new Variable("x");
 
-        assertEquals("x", numerator.toString());
+        assertEquals("x", vars.toString());
     }
 
     /**
@@ -28,10 +28,10 @@ class VariableTest {
      */
     @Test
     void testDerivative() {
-        Expression numerator = new Variable("x");
+        Expression vars = new Variable("x");
 
 
-        Expression derivative = numerator.derivative("x");
+        Expression derivative = vars.derivative("x");
         assertEquals("1.0", derivative.toString());
     }
 
@@ -40,9 +40,9 @@ class VariableTest {
      */
     @Test
     void testPrint() {
-        Expression numerator = new Variable("x");
-        numerator.print();
-        assertEquals("x", numerator.toString());
+        Expression vars = new Variable("x");
+        vars.print();
+        assertEquals("x", vars.toString());
     }
 
     /**

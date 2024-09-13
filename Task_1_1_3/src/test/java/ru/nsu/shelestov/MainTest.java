@@ -1,9 +1,13 @@
 package ru.nsu.shelestov;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,16 +23,25 @@ public class MainTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
+    /**
+     * Перед каждым тестом перенаправляем стандартный вывод.
+     */
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
+    /**
+     * После каждого теста восстанавливаем стандартный вывод.
+     */
     @AfterEach
     public void tearDown() {
         System.setOut(originalOut);
     }
 
+    /**
+     * Тест проверяет правильно ли отрабатывают основные методы.
+     */
     @Test
     void testMain() {
         String input = "(x + 2)\nx=10; y=13\nx\n";

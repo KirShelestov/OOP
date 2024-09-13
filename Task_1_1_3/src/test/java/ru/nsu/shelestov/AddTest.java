@@ -1,7 +1,8 @@
 package ru.nsu.shelestov;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Класс дял тестирования правильности операции сложения.
@@ -13,11 +14,11 @@ class AddTest {
      */
     @Test
     void testToString() {
-        Expression numerator = new Number(5);
-        Expression denominator = new Number(3);
-        Add summator = new Add(numerator, denominator);
+        Expression summandFirst = new Number(5);
+        Expression summandSecond = new Number(3);
+        Add sum = new Add(summandFirst, summandSecond);
 
-        assertEquals("(5.0 + 3.0)", summator.toString());
+        assertEquals("(5.0 + 3.0)", sum.toString());
     }
 
     /**
@@ -25,11 +26,11 @@ class AddTest {
      */
     @Test
     void testDerivative() {
-        Expression numerator = new Variable("x");
-        Expression denominator = new Number(2);
-        Add summator = new Add(numerator, denominator);
+        Expression summandFirst = new Variable("x");
+        Expression summandSecond = new Number(2);
+        Add sum = new Add(summandFirst, summandSecond);
 
-        Expression derivative = summator.derivative("x");
+        Expression derivative = sum.derivative("x");
         assertEquals("(1.0 + 0.0)", derivative.toString());
     }
 
@@ -38,11 +39,11 @@ class AddTest {
      */
     @Test
     void testPrint() {
-        Expression numerator = new Number(7);
-        Expression denominator = new Variable("y");
-        Add division = new Add(numerator, denominator);
-        division.print();
-        assertEquals("(7.0 + y)", division.toString());
+        Expression summandFirst = new Number(7);
+        Expression summandSecond = new Variable("y");
+        Add sum = new Add(summandFirst, summandSecond);
+        sum.print();
+        assertEquals("(7.0 + y)", sum.toString());
     }
 }
 
