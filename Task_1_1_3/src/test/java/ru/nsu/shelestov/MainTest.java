@@ -1,8 +1,13 @@
 package ru.nsu.shelestov;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +15,41 @@ import java.util.Map;
  * Класс для тестирования класса Main.
  */
 public class MainTest {
+
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void testMain() {
+        String input = "(x + 2)\nx=10; y=13\nx\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        Main.main(new String[0]);
+
+        try {
+            String input1 = "x=10; y=13\n";
+            System.setIn(new ByteArrayInputStream(input1.getBytes()));
+        } catch (Exception e) {
+            String input2 = "x\n";
+            System.setIn(new ByteArrayInputStream(input2.getBytes()));
+        }
+
+        String output = outputStreamCaptor.toString().trim();
+        assertTrue(output.contains("Выражение:"));
+        assertTrue(output.contains("Результат: 12.0")); // Предполагаемый результат
+        assertTrue(output.contains("Производная по переменной:"));
+    }
+
 
     /**
      * тест для метода parseVariableAssignments на корректном парсинге.

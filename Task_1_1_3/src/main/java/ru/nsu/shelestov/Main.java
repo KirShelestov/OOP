@@ -96,7 +96,7 @@ class Main {
 
             System.out.println("Производная по переменной: ");
             String varDer = scanner.nextLine();
-            expr.derivative(varDer).print(); // Печать производной по заданной производной
+            expr.derivative(varDer).print();
 
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
