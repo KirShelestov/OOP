@@ -1,0 +1,62 @@
+package ru.nsu.shelestov;
+
+import java.util.Map;
+
+/**
+ * Класс представляет операцию умножения.
+ */
+class Mul extends Expression {
+    private final Expression left;
+    private final Expression right;
+
+    /**
+     * конструктор для умножения.
+     *
+     * @param left левая часть выражения
+     * @param right правая часть выражения
+     */
+    public Mul(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    /**
+     * подсчет значения при означивании
+     *
+     * @param variables означиваемые перменные
+     * @return значение выражения
+     */
+    public double evaluate(Map<String, Double> variables) {
+        return left.evaluate(variables) * right.evaluate(variables);
+    }
+
+    /**
+     * форматирование выражение в строку.
+     *
+     * @return отформатированная строка
+     */
+    public String toString() {
+        return "(" + left.toString() + " * " + right.toString() + ")";
+    }
+
+    /**
+     * дифференцирование выражения.
+     *
+     * @param var переменная по которой идет дифференцирование
+     * @return производная при умножении
+     */
+    public Expression derivative(String var) {
+        return new Add(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var)));
+    }
+
+    /**
+     * вывод выражения.
+     */
+    public void print() {
+        System.out.print("(");
+        left.print();
+        System.out.print(" * ");
+        right.print();
+        System.out.print(")");
+    }
+}
