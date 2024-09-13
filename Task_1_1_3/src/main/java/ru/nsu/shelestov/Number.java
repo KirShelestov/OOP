@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс представляет "число".
  */
-class Number extends Expression {
+public class Number extends Expression {
     private final double value;
 
     /**

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Класс для тестирования правильности операции вычитания.
  */
-class SubTest {
+public class SubTest {
 
     /**
      * тест для проверки правильности форматирования строки.

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Класс дял тестирования правильности операции сложения.
  */
-class AddTest {
+public class AddTest {
 
     /**
      * тест для проверки правильности форматирования строки.

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Класс для тестирования операции деления.
  */
-class DivTest {
+public class DivTest {
 
     /**
      * тест для проверки правильности форматирования строки.

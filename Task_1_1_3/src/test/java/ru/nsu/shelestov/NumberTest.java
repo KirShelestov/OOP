@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Класс для тестирования класса Number.
  */
-class NumberTest {
+public class NumberTest {
 
     /**
      * тест для проверки форматирования строки.

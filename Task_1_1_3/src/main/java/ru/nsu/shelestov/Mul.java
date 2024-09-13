@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс представляет операцию умножения.
  */
-class Mul extends Expression {
+public class Mul extends Expression {
     private final Expression left;
     private final Expression right;
 

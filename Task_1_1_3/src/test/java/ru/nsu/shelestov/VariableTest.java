@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Класс для тестирования правильности класса Variable.
  */
-class VariableTest {
+public class VariableTest {
 
     /**
      * тест для проверки форматирования строки.

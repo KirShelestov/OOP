@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс который представляет операцию деления.
  */
-class Div extends Expression {
+public class Div extends Expression {
     private final Expression numerator;
     private final Expression denominator;
 
