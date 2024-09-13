@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"ru.nsu.shelestov","l":"Add"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.shelestov","l":"Div"},{"p":"ru.nsu.shelestov","l":"Main"},{"p":"ru.nsu.shelestov","l":"Mul"},{"p":"ru.nsu.shelestov","l":"Number"},{"p":"ru.nsu.shelestov","l":"Sub"},{"p":"ru.nsu.shelestov","l":"Variable"}]
