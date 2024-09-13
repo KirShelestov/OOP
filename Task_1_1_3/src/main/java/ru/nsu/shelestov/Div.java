@@ -21,6 +21,15 @@ class Div extends Expression {
         this.denominator = denominator;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Сравнение ссылок
+        if (obj == null || getClass() != obj.getClass()) return false; // Проверка типа
+
+        Div div = (Div) obj; // Приведение типа
+        return numerator.equals(div.numerator) && denominator.equals(div.denominator); // Сравнение левой и правой частей
+    }
+
     /**
      * означивание при делении.
      *

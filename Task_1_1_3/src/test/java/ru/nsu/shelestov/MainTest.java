@@ -67,4 +67,59 @@ public class MainTest {
 
         assertTrue(exception.getMessage().contains("For input string: \"abc\""));
     }
+
+
+    /**
+     * Тестирует метод parseExpression на корректных математических выражениях.
+     */
+    @Test
+    public void testParseExpression() {
+        Expression expr1 = Main.parseExpression("42.0");
+        assertEquals(new Number(42.0), expr1);
+
+        Expression expr2 = Main.parseExpression("x");
+        assertEquals(new Variable("x"), expr2);
+
+        Expression expr3 = Main.parseExpression("(x + 2.0)");
+        assertInstanceOf(Add.class, expr3);
+        assertEquals(new Add(new Variable("x"), new Number(2.0)), expr3);
+
+        Expression expr4 = Main.parseExpression("(3 * (x + 4))");
+        assertInstanceOf(Mul.class, expr4);
+        assertEquals(new Mul(new Number(3.0), new Add(new Variable("x"), new Number(4.0))), expr4);
+
+
+        Expression expr5 = Main.parseExpression("((x + 2) * (y - 3))");
+        assertInstanceOf(Mul.class, expr5);
+        assertEquals(new Mul(new Add(new Variable("x"), new Number(2.0)), new Sub(new Variable("y"), new Number(3.0))), expr5);
+
+        Expression expr6 = Main.parseExpression("(x / 2.0)");
+        assertInstanceOf(Add.class, expr3);
+        assertEquals(new Div(new Variable("x"), new Number(2.0)), expr6);
+
+    }
+
+    /**
+     * Тестирует метод parseExpression на некорректных выражениях.
+     */
+    @Test
+    public void testParseInvalidExpression() {
+        // Тест на пустую строку
+        Exception exception1 = assertThrows(IllegalArgumentException.class, () -> {
+            Main.parseExpression("");
+        });
+        assertTrue(exception1.getMessage().contains("Вы ввели не выражение"));
+
+        // Тест на некорректное выражение
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> {
+            Main.parseExpression("++2");
+        });
+        assertTrue(exception2.getMessage().contains("Вы ввели не выражение"));
+
+        // Тест на выражение с неправильными скобками
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> {
+            Main.parseExpression("(2.0 + (3.0 * 4.0)");
+        });
+        assertTrue(exception3.getMessage().contains("Вы ввели не выражение"));
+    }
 }

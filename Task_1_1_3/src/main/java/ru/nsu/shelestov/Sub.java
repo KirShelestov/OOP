@@ -20,6 +20,15 @@ class Sub extends Expression {
         this.right = right;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Сравнение ссылок
+        if (obj == null || getClass() != obj.getClass()) return false; // Проверка типа
+
+        Sub sub = (Sub) obj; // Приведение типа
+        return left.equals(sub.left) && right.equals(sub.right); // Сравнение левой и правой частей
+    }
+
     /**
      * подсчет значения при означивании.
      *

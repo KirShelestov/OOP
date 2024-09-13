@@ -20,6 +20,16 @@ class Mul extends Expression {
         this.right = right;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Сравнение ссылок
+        if (obj == null || getClass() != obj.getClass()) return false; // Проверка типа
+
+        Mul mult = (Mul) obj; // Приведение типа
+        return left.equals(mult.left) && right.equals(mult.right); // Сравнение левой и правой частей
+    }
+
     /**
      * подсчет значения при означивании
      *
