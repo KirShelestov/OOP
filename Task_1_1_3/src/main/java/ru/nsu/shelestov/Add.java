@@ -28,8 +28,12 @@ class Add extends Expression {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; // Сравнение ссылок
-        if (obj == null || getClass() != obj.getClass()) return false; // Проверка типа
+        if (this == obj) {
+            return true; // Сравнение ссылок
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false; // Проверка типа
+        }
 
         Add add = (Add) obj; // Приведение типа
         return left.equals(add.left) && right.equals(add.right); // Сравнение левой и правой частей

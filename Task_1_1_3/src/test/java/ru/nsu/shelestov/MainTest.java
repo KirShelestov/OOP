@@ -5,16 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 /**
  * Класс для тестирования класса Main.
  */
@@ -139,12 +137,14 @@ public class MainTest {
 
         Expression expr4 = Main.parseExpression("(3 * (x + 4))");
         assertInstanceOf(Mul.class, expr4);
-        assertEquals(new Mul(new Number(3.0), new Add(new Variable("x"), new Number(4.0))), expr4);
+        assertEquals(new Mul(new Number(3.0),
+                new Add(new Variable("x"), new Number(4.0))), expr4);
 
 
         Expression expr5 = Main.parseExpression("((x + 2) * (y - 3))");
         assertInstanceOf(Mul.class, expr5);
-        assertEquals(new Mul(new Add(new Variable("x"), new Number(2.0)), new Sub(new Variable("y"), new Number(3.0))), expr5);
+        assertEquals(new Mul(new Add(new Variable("x"),
+                new Number(2.0)), new Sub(new Variable("y"), new Number(3.0))), expr5);
 
         Expression expr6 = Main.parseExpression("(x / 2.0)");
         assertInstanceOf(Add.class, expr3);

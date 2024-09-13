@@ -30,8 +30,12 @@ class Main {
 
             for (int i = 0; i < input.length(); i++) {
                 char c = input.charAt(i);
-                if (c == '(') level++;
-                else if (c == ')') level--;
+                if (c == '(') {
+                    level++;
+                }
+                else if (c == ')') {
+                    level--;
+                }
                 else if (level == 0 && (c == '+' || c == '-')) { // Найти оператор
                     opIndex = i;
                     break;
@@ -50,8 +54,12 @@ class Main {
 
             for (int i = 0; i < input.length(); i++) {
                 char c = input.charAt(i);
-                if (c == '(') level++;
-                else if (c == ')') level--;
+                if (c == '(') {
+                    level++;
+                }
+                else if (c == ')') {
+                    level--;
+                }
                 else if (level == 0 && (c == '*' || c == '/')) { // Найти оператор
                     opIndex = i;
                     break;

@@ -29,8 +29,12 @@ class Div extends Expression {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; // Сравнение ссылок
-        if (obj == null || getClass() != obj.getClass()) return false; // Проверка типа
+        if (this == obj) {
+            return true; // Сравнение ссылок
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false; // Проверка типа
+        }
 
         Div div = (Div) obj; // Приведение типа
         return numerator.equals(div.numerator) && denominator.equals(div.denominator); // Сравнение левой и правой частей

@@ -29,8 +29,12 @@ class Variable extends Expression {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false; // Проверка типа
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false; // Проверка типа
+        }
 
         Variable name = (Variable) obj; // Приведение типа
         return CharSequence.compare(name.getName(), name.getName()) == 0; // Сравнение значений
