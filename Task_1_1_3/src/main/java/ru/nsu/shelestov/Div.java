@@ -37,7 +37,7 @@ class Div extends Expression {
         }
 
         Div div = (Div) obj; // Приведение типа
-        return numerator.equals(div.numerator) && denominator.equals(div.denominator); // Сравнение левой и правой частей
+        return numerator.equals(div.numerator) && denominator.equals(div.denominator);
     }
 
     /**
@@ -66,7 +66,8 @@ class Div extends Expression {
      * @return производная
      */
     public Expression derivative(String var) {
-        return new Div(new Sub(new Mul(numerator.derivative(var), denominator), new Mul(numerator, denominator.derivative(var))),
+        return new Div(new Sub(new Mul(numerator.derivative(var), denominator),
+                new Mul(numerator, denominator.derivative(var))),
                 new Mul(denominator, denominator));
     }
 

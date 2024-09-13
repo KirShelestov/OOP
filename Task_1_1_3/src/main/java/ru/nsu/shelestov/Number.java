@@ -60,10 +60,10 @@ class Number extends Expression {
     }
 
     /**
-     * дифференцирование
+     * дифференцирование.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return
+     * @return ноль.
      */
     public Expression derivative(String var) {
         return new Number(0);

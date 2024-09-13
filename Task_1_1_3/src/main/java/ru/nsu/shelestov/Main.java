@@ -32,11 +32,9 @@ class Main {
                 char c = input.charAt(i);
                 if (c == '(') {
                     level++;
-                }
-                else if (c == ')') {
+                } else if (c == ')') {
                     level--;
-                }
-                else if (level == 0 && (c == '+' || c == '-')) { // Найти оператор
+                } else if (level == 0 && (c == '+' || c == '-')) { // Найти оператор
                     opIndex = i;
                     break;
                 }
@@ -56,11 +54,9 @@ class Main {
                 char c = input.charAt(i);
                 if (c == '(') {
                     level++;
-                }
-                else if (c == ')') {
+                } else if (c == ')') {
                     level--;
-                }
-                else if (level == 0 && (c == '*' || c == '/')) { // Найти оператор
+                } else if (level == 0 && (c == '*' || c == '/')) { // Найти оператор
                     opIndex = i;
                     break;
                 }
