@@ -1,1 +1,1 @@
-typeSearchIndex = [{"p":"ru.nsu.shelestov","l":"AdjacencyListGraph"},{"p":"ru.nsu.shelestov","l":"AdjacencyMatrixGraph"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.shelestov","l":"Graph"},{"p":"ru.nsu.shelestov","l":"IncidenceMatrixGraph"}]
+typeSearchIndex = [{"p":"ru.nsu.shelestov","l":"AdjacencyListGraph"},{"p":"ru.nsu.shelestov","l":"AdjacencyMatrixGraph"},{"l":"All Classes","url":"allclasses-index.html"},{"p":"ru.nsu.shelestov","l":"Graph"},{"p":"ru.nsu.shelestov","l":"IncidenceMatrixGraph"},{"p":"ru.nsu.shelestov","l":"Main"}]
