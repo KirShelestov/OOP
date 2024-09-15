@@ -112,11 +112,6 @@ public class AdjacencyMatrixGraph implements Graph {
                 if (adjacencyMatrix[index][i]) {
                     neighbors.add(getVertexByIndex(i));
                 }
-//                if (adjacencyMatrix[i][index]) {
-//                    if (index > i) {
-//                        neighbors.add(getVertexByIndex(i));
-//                    }
-//                }
             }
         }
         return neighbors;
@@ -244,7 +239,8 @@ public class AdjacencyMatrixGraph implements Graph {
         }
 
         if (sortedList.size() != vertexCount) {
-            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
+            throw new IllegalStateException("Граф содержит цикл," +
+                    " топологическая сортировка невозможна.");
         }
 
         return sortedList;

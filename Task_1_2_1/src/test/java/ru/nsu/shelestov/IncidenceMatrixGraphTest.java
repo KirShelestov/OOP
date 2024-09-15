@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 /**
  * Класс для тестирования матрица инцедентности.

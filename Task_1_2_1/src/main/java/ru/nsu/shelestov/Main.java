@@ -10,6 +10,12 @@ import java.util.List;
  * Каждая строка представляет одну вершину и ее связи с другими вершинами
  */
 public class Main {
+
+    /**
+     * Метод для проверки ключевых методов.
+     *
+     * @param args не используется
+     */
     public static void main(String[] args) {
 
         System.out.println("Список смежности");
@@ -93,7 +99,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("Граф_1, представленный в виде матрицы смежности и считанный из файла: ");
+        System.out.println("Граф_1, представленный в виде матрицы смежности "
+                + "и считанный из файла: ");
         System.out.println(graphFromFileAdjacencyMatrix.toString());
 
         System.out.println("Соседи A: " + graphFromFileAdjacencyMatrix.getNeighbors("A"));
@@ -147,7 +154,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Граф_1, представленный в виде матрицы инцедентности и считанный из файла: ");
+        System.out.println("Граф_1, представленный в виде"
+               + " матрицы инцедентности и считанный из файла: ");
         System.out.println(graphFromFileIncidenceMatrix.toString());
 
         try {
