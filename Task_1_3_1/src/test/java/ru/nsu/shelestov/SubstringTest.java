@@ -1,14 +1,13 @@
 package ru.nsu.shelestov;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
+import org.junit.jupiter.api.Test;
 
 /**
  * Класс для тестирования реализации поиска подстроки.
