@@ -67,12 +67,12 @@ public class HashTableTest {
         Iterator<HashTable.Entry<String, Integer>> iterator = hashTable.iterator();
         assertTrue(iterator.hasNext());
         HashTable.Entry<String, Integer> entry = iterator.next();
-        assertEquals("one", entry.key);
-        assertEquals(1, (int) entry.value);
-        assertTrue(iterator.hasNext());
-        entry = iterator.next();
         assertEquals("two", entry.key);
         assertEquals(2, (int) entry.value);
+        assertTrue(iterator.hasNext());
+        entry = iterator.next();
+        assertEquals("one", entry.key);
+        assertEquals(1, (int) entry.value);
         assertFalse(iterator.hasNext());
     }
 
@@ -100,7 +100,7 @@ public class HashTableTest {
         HashTable<String, Integer> hashTable = new HashTable<>();
         hashTable.put("one", 1);
         hashTable.put("two", 2);
-        assertEquals("{one=1, two=2}", hashTable.toString());
+        assertEquals("{two=2, one=1}", hashTable.toString());
     }
 
     /**
