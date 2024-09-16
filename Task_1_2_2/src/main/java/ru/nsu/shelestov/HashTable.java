@@ -225,10 +225,16 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
      * @return равны ли таблицы между собой
      */
     public boolean equals(HashTable<K, V> other) {
-        if (this == other) return true;
-        if (other == null) return false;
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
 
-        if (size != other.size) return false;
+        if (size != other.size) {
+            return false;
+        }
 
         for (Entry<K, V> entry : this) {
             K key = entry.key;
@@ -251,7 +257,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
         for (Entry<K, V> entry : this) {
             sb.append(entry.key).append("=").append(entry.value).append(", ");
         }
-        if (sb.length() > 1) sb.setLength(sb.length() - 2);
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 2);
+        }
         sb.append("}");
         return sb.toString();
     }
