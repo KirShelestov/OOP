@@ -2,9 +2,8 @@ package ru.nsu.shelestov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,7 @@ public class StudentRecordBookTest {
      * Тест на подсчет среднего балла.
      */
     @Test
-    public void testCalculateGPA() {
+    public void testCalculateGpa() {
         StudentRecordBook recordBook = new StudentRecordBook(true);
         recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
         recordBook.addGrade(1, "Physics", ControlType.TEST, 4);
@@ -135,7 +134,7 @@ public class StudentRecordBookTest {
     }
 
     /**
-     * Тест на добавление оценки, только с неправильной едом из домаю
+     * Тест на добавление оценки, только с неправильным типом.
      */
     @Test
     public void testAddGradeInvalidScore() {
