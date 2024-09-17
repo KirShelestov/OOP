@@ -4,78 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Перечисление типо контрольных работ.
- */
-enum ControlType {
-    ASSIGNMENT,
-    TEST,
-    COLLOQUIUM,
-    EXAM,
-    DIFFERENTIAL_CREDIT,
-    CREDIT,
-    PRACTICE_REPORT_DEFENSE,
-    THESIS_DEFENSE
-}
-
-/**
- * Класс для хранения информации об оценке за контрольную работу.
- */
-class Grade {
-    private String subject;
-    private ControlType controlType;
-    private int score;
-
-    /**
-     * Конструктор класса оценки.
-     *
-     * @param subject предмет
-     * @param controlType тип работы
-     * @param score оценка
-     */
-    public Grade(String subject, ControlType controlType, int score) {
-        this.subject = subject;
-        this.controlType = controlType;
-        this.score = score;
-    }
-
-    /**
-     * Геттер оценки.
-     *
-     * @return оценка
-     */
-    public int getScore() {
-        return score;
-    }
-
-    /**
-     * Геттер типа работы.
-     *
-     * @return тип работы
-     */
-    public  ControlType getControlType() {
-        return  controlType;
-    }
-
-    /**
-     * Метод на проверку типа работы - экзамен.
-     *
-     * @return является ли работа экзаменом
-     */
-    public boolean isExam() {
-        return controlType == ControlType.EXAM;
-    }
-
-    /**
-     * Метод на проверку типа работы - зачет/дифзачет.
-     *
-     * @return является ли работа каким-то зачетом
-     */
-    public boolean isCredit() {
-        return controlType == ControlType.CREDIT || controlType == ControlType.DIFFERENTIAL_CREDIT;
-    }
-}
-
-/**
  * Класс для хранения и обработки успеваемости студента.
  */
 class StudentRecordBook {
@@ -128,20 +56,20 @@ class StudentRecordBook {
      *
      * @return средний балл
      */
-    public double calculateGPA() {
+    public double calculateGpa() {
         int totalScore = 0;
         int totalGrades = 0;
 
         for (List<Grade> semester : semesters) {
             for (Grade grade : semester) {
-                if (grade.getControlType()!= ControlType.CREDIT) {
+                if (grade.getControlType() != ControlType.CREDIT) {
                     totalScore += grade.getScore();
                     totalGrades++;
                 }
             }
         }
 
-        return totalGrades == 0? 0 : (double) totalScore / totalGrades;
+        return totalGrades == 0 ? 0 : (double) totalScore / totalGrades;
     }
 
     /**
@@ -250,9 +178,81 @@ class StudentRecordBook {
 //        recordBook.addGrade(1, "Biology", ControlType.CREDIT, true);
 //
 //        recordBook.addGrade(8, "VKR", ControlType.THESIS_DEFENSE, 5);
-//        System.out.println("Текущий средний балл: " + recordBook.calculateGPA());
+//        System.out.println("Текущий средний балл: " + recordBook.calculateGpa());
 //        System.out.println("Можно перевести на бюджет: " + recordBook.canTransferToBudget(1));
 //        System.out.println("Можно получить красный диплом: " + recordBook.canGetRedDiploma());
 //        System.out.println("Можно получить повышенную стипендию: " + recordBook.canGetIncreasedScholarship(1));
 //    }
 //}
+
+/**
+ * Перечисление типо контрольных работ.
+ */
+enum ControlType {
+    ASSIGNMENT,
+    TEST,
+    COLLOQUIUM,
+    EXAM,
+    DIFFERENTIAL_CREDIT,
+    CREDIT,
+    PRACTICE_REPORT_DEFENSE,
+    THESIS_DEFENSE
+}
+
+/**
+ * Класс для хранения информации об оценке за контрольную работу.
+ */
+class Grade {
+    private String subject;
+    private ControlType controlType;
+    private int score;
+
+    /**
+     * Конструктор класса оценки.
+     *
+     * @param subject предмет
+     * @param controlType тип работы
+     * @param score оценка
+     */
+    public Grade(String subject, ControlType controlType, int score) {
+        this.subject = subject;
+        this.controlType = controlType;
+        this.score = score;
+    }
+
+    /**
+     * Геттер оценки.
+     *
+     * @return оценка
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Геттер типа работы.
+     *
+     * @return тип работы
+     */
+    public  ControlType getControlType() {
+        return  controlType;
+    }
+
+    /**
+     * Метод на проверку типа работы - экзамен.
+     *
+     * @return является ли работа экзаменом
+     */
+    public boolean isExam() {
+        return controlType == ControlType.EXAM;
+    }
+
+    /**
+     * Метод на проверку типа работы - зачет/дифзачет.
+     *
+     * @return является ли работа каким-то зачетом
+     */
+    public boolean isCredit() {
+        return controlType == ControlType.CREDIT || controlType == ControlType.DIFFERENTIAL_CREDIT;
+    }
+}

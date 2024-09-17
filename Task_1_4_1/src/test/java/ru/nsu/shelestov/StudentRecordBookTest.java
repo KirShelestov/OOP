@@ -20,7 +20,7 @@ public class StudentRecordBookTest {
         StudentRecordBook recordBook = new StudentRecordBook(true);
         recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
         recordBook.addGrade(1, "Physics", ControlType.TEST, 4);
-        assertEquals(4.5, recordBook.calculateGPA(), 0.01);
+        assertEquals(4.5, recordBook.calculateGpa(), 0.01);
     }
 
     /**
@@ -130,7 +130,8 @@ public class StudentRecordBookTest {
     @Test
     public void testAddGradeInvalidSemester() {
         StudentRecordBook recordBook = new StudentRecordBook(true);
-        assertThrows(IllegalArgumentException.class, () -> recordBook.addGrade(9, "Math", ControlType.EXAM, 5));
+        assertThrows(IllegalArgumentException.class, () -> recordBook.addGrade(9, "Math",
+                ControlType.EXAM, 5));
     }
 
     /**
@@ -139,6 +140,7 @@ public class StudentRecordBookTest {
     @Test
     public void testAddGradeInvalidScore() {
         StudentRecordBook recordBook = new StudentRecordBook(true);
-        assertThrows(IllegalArgumentException.class, () -> recordBook.addGrade(1, "Math", ControlType.EXAM, "abc"));
+        assertThrows(IllegalArgumentException.class, () -> recordBook.addGrade(1,
+                "Math", ControlType.EXAM, "abc"));
     }
 }
