@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -155,7 +155,8 @@ extends java.lang.Object</pre>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Deck</a></span>()</code></th>
 <td class="colLast">
-<div class="block">создает пустую колоду кард.</div>
+<div class="block">ArrayList
+ создает пустую колоду кард.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -197,55 +198,62 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addCards(java.util.List)">addCards</a></span>&#8203;(java.util.List&lt;<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&gt;&nbsp;cards)</code></th>
+<td class="colLast">
+<div class="block">добавляет список карт в колоду.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#cardsLeft()">cardsLeft</a></span>()</code></th>
 <td class="colLast">
 <div class="block">метод для отображения сколько карт осталось в колоде.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#emptyDeck()">emptyDeck</a></span>()</code></th>
 <td class="colLast">
 <div class="block">удаляет карты из колоды.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.ArrayList&lt;<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&gt;</code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCards()">getCards</a></span>()</code></th>
 <td class="colLast">
 <div class="block">возвращает список карт в колоде.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasCards()">hasCards</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Проверяет наличие карты в колоде.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#reloadDeckFromDiscard(ru.nsu.shelestov.Deck)">reloadDeckFromDiscard</a></span>&#8203;(<a href="Deck.html" title="class in ru.nsu.shelestov">Deck</a>&nbsp;discard)</code></th>
 <td class="colLast">
 <div class="block">Берет колоду из стопки сброса, перемешивает ее и очищает стопку сброса.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#shuffle()">shuffle</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Перемещивает карты в колоде.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="Card.html" title="class in ru.nsu.shelestov">Card</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#takeCard()">takeCard</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Карта на вершине колоды берется в руки и удаляется из вершины колоды.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
 <td class="colLast">
@@ -283,7 +291,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>Deck</h4>
 <pre>public&nbsp;Deck()</pre>
-<div class="block">создает пустую колоду кард.</div>
+<div class="block">ArrayList
+ создает пустую колоду кард.</div>
 </li>
 </ul>
 <a id="&lt;init&gt;(boolean)">
@@ -316,25 +325,25 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCards</h4>
-<pre class="methodSignature">public&nbsp;java.util.ArrayList&lt;<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&gt;&nbsp;getCards()</pre>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&gt;&nbsp;getCards()</pre>
 <div class="block">возвращает список карт в колоде.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>ArrayList содержащий карты в колоде</dd>
+<dd>List содержащий карты в колоде</dd>
 </dl>
 </li>
 </ul>
-<a id="addCard(ru.nsu.shelestov.Card)">
+<a id="addCards(java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>addCard</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;addCard&#8203;(<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&nbsp;card)</pre>
-<div class="block">добавляет карту в колоду.</div>
+<h4>addCards</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addCards&#8203;(java.util.List&lt;<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&gt;&nbsp;cards)</pre>
+<div class="block">добавляет список карт в колоду.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>card</code> - карта, которую нужно добавить в колоду</dd>
+<dd><code>cards</code> - List карты, которые нужно добавить в колоду</dd>
 </dl>
 </li>
 </ul>
@@ -434,7 +443,7 @@ extends java.lang.Object</pre>
 <a id="cardsLeft()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>cardsLeft</h4>
 <pre class="methodSignature">public&nbsp;int&nbsp;cardsLeft()</pre>
@@ -442,6 +451,20 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>количество карт в колоде</dd>
+</dl>
+</li>
+</ul>
+<a id="addCard(ru.nsu.shelestov.Card)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>addCard</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addCard&#8203;(<a href="Card.html" title="class in ru.nsu.shelestov">Card</a>&nbsp;card)</pre>
+<div class="block">добавляет карту в колоду.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>card</code> - карта, которую нужно добавить в колоду</dd>
 </dl>
 </li>
 </ul>

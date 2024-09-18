@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":9,"i2":9};
+var data = {"i0":10,"i1":10,"i2":9,"i3":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -197,19 +197,26 @@ extends java.lang.Enum&lt;<a href="Suit.html" title="enum in ru.nsu.shelestov">S
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toAdjective(ru.nsu.shelestov.Gender)">toAdjective</a></span>&#8203;(<a href="Gender.html" title="enum in ru.nsu.shelestov">Gender</a>&nbsp;gender)</code></th>
 <td class="colLast">
-<div class="block">функция для последующего вывода масти карты в консоль.</div>
+<div class="block">Правильно форматирует строку.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#toString()">toString</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Метод для каста в строку.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="Suit.html" title="enum in ru.nsu.shelestov">Suit</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#valueOf(java.lang.String)">valueOf</a></span>&#8203;(java.lang.String&nbsp;name)</code></th>
 <td class="colLast">
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="Suit.html" title="enum in ru.nsu.shelestov">Suit</a>[]</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#values()">values</a></span>()</code></th>
 <td class="colLast">
@@ -336,6 +343,22 @@ not permitted.)</div>
 </dl>
 </li>
 </ul>
+<a id="toAdjective(ru.nsu.shelestov.Gender)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>toAdjective</h4>
+<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toAdjective&#8203;(<a href="Gender.html" title="enum in ru.nsu.shelestov">Gender</a>&nbsp;gender)</pre>
+<div class="block">Правильно форматирует строку.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>gender</code> - род карты</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>правильная строка</dd>
+</dl>
+</li>
+</ul>
 <a id="toString()">
 <!--   -->
 </a>
@@ -343,12 +366,12 @@ not permitted.)</div>
 <li class="blockList">
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
-<div class="block">функция для последующего вывода масти карты в консоль.</div>
+<div class="block">Метод для каста в строку.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Enum&lt;<a href="Suit.html" title="enum in ru.nsu.shelestov">Suit</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>масть карты</dd>
+<dd>строка отформатированная правильно</dd>
 </dl>
 </li>
 </ul>
