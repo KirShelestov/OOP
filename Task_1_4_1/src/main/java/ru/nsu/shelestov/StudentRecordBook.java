@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Класс для хранения и обработки успеваемости студента.
  */
-class StudentRecordBook {
+public class StudentRecordBook {
     List<List<Grade>> semesters; // 8 семестров
     private boolean isNotPaid; // false если платное, true если бюджет
 
@@ -40,11 +40,12 @@ class StudentRecordBook {
                 throw new IllegalArgumentException("Для зачета необходимо передать boolean значение");
             }
             boolean scoreBool = (boolean) score;
-            int scoreInt = scoreBool? 5 : 2;
+            int scoreInt = scoreBool ? 5 : 2;
             semesters.get(semester - 1).add(new Grade(subject, controlType, scoreInt));
         } else {
             if (!(score instanceof Integer)) {
-                throw new IllegalArgumentException("Для остальных необходимо передать int значение");
+                throw new IllegalArgumentException("Для остальных необходимо"
+                       + " передать int значение");
             }
             int scoreInt = (int) score;
             semesters.get(semester - 1).add(new Grade(subject, controlType, scoreInt));
@@ -135,12 +136,10 @@ class StudentRecordBook {
         if (isEightthSemester) {
             if (greatGrade) {
                 return !hasUnsatisfactory && (excellentCount * 100.0 / totalCount >= 75);
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else {
+        } else {
             return !hasUnsatisfactory && (excellentCount * 100.0 / totalCount >= 75);
         }
     }
@@ -157,7 +156,7 @@ class StudentRecordBook {
             return false;
         }
 
-        List<Grade> semesterGrades = semesters.get(currentSemester-1);
+        List<Grade> semesterGrades = semesters.get(currentSemester - 1);
 
         boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScore() >= 4);
 
@@ -166,24 +165,6 @@ class StudentRecordBook {
 
 
 }
-
-//public class Main {
-//    public static void main(String[] args) {
-//        StudentRecordBook recordBook = new StudentRecordBook(true);
-//
-//        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
-//        recordBook.addGrade(1, "Physics", ControlType.TEST, 5);
-//        recordBook.addGrade(1, "Chemistry", ControlType.COLLOQUIUM, 5);
-//        recordBook.addGrade(1, "Biology", ControlType.CREDIT, true);
-//        recordBook.addGrade(1, "Biology", ControlType.CREDIT, true);
-//
-//        recordBook.addGrade(8, "VKR", ControlType.THESIS_DEFENSE, 5);
-//        System.out.println("Текущий средний балл: " + recordBook.calculateGpa());
-//        System.out.println("Можно перевести на бюджет: " + recordBook.canTransferToBudget(1));
-//        System.out.println("Можно получить красный диплом: " + recordBook.canGetRedDiploma());
-//        System.out.println("Можно получить повышенную стипендию: " + recordBook.canGetIncreasedScholarship(1));
-//    }
-//}
 
 /**
  * Перечисление типо контрольных работ.
@@ -253,6 +234,7 @@ class Grade {
      * @return является ли работа каким-то зачетом
      */
     public boolean isCredit() {
-        return controlType == ControlType.CREDIT || controlType == ControlType.DIFFERENTIAL_CREDIT;
+        return controlType == ControlType.CREDIT
+                || controlType == ControlType.DIFFERENTIAL_CREDIT;
     }
 }
