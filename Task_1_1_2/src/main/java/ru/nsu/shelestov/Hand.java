@@ -12,7 +12,7 @@ public class Hand {
      * конструктор пустой руки.
      */
     public Hand() {
-        hand = new ArrayList<Card>();
+        hand = new ArrayList<>();
     }
 
     /**
@@ -75,15 +75,15 @@ public class Hand {
      */
     @Override
     public String toString() {
-        String output = "[";
+        StringBuilder output = new StringBuilder("[");
         for (int i = 0; i < hand.size(); i++) {
-            output += hand.get(i);
+            output.append(hand.get(i));
             if (i < hand.size() - 1) {
-                output += ", ";
+                output.append(", ");
             }
         }
-        output += "]";
-        return output;
+        output.append("]");
+        return output.toString();
     }
 
     /**

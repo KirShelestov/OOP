@@ -18,9 +18,9 @@ public enum CardInfo {
     QUEEN("Дама", 10, Gender.FEMININE),
     KING("Король", 10, Gender.MASCULINE);
 
-    String cardName;
-    int cardValue;
-    Gender gender;
+    final String cardName;
+    final int cardValue;
+    final Gender gender;
 
     CardInfo(String cardName, int cardValue, Gender gender) {
         this.cardName = cardName;

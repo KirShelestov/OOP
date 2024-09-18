@@ -13,7 +13,7 @@ public class Deck {
      * создает пустую колоду кард.
      */
     public Deck() {
-        deck = new ArrayList<Card>();
+        deck = new ArrayList<>();
     }
 
     /**
@@ -41,14 +41,14 @@ public class Deck {
      */
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         for (Card card : deck) {
-            output += card;
-            output += "\n";
+            output.append(card);
+            output.append("\n");
         }
 
-        return output;
+        return output.toString();
     }
 
     /**
@@ -57,7 +57,7 @@ public class Deck {
      * @param createDeck при True колода заполняется полным наборм карт
      */
     public Deck(boolean createDeck) {
-        deck = new ArrayList<Card>();
+        deck = new ArrayList<>();
         if (createDeck) {
             for (Suit suit : Suit.values()) {
                 for (CardInfo cardInfo : CardInfo.values()) {
@@ -71,7 +71,7 @@ public class Deck {
      * Перемещивает карты в колоде.
      */
     public void shuffle() {
-        ArrayList<Card> shuffled = new ArrayList<Card>();
+        ArrayList<Card> shuffled = new ArrayList<>();
         while (!deck.isEmpty()) {
             int cardToPull = (int) (Math.random() * (deck.size() - 1));
             shuffled.add(deck.get(cardToPull));

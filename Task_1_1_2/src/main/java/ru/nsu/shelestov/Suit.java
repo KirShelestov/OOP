@@ -27,7 +27,7 @@ public enum Suit {
      * @return правильная строка
      */
     public String toAdjective(Gender gender) {
-        String adjective = this.toString() + "";
+        String adjective = this.toString();
         if (Gender.MASCULINE == gender) {
             return this.toString().substring(0, this.toString().length() - 1) + "овый ";
         }
