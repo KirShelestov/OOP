@@ -1,4 +1,6 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.players;
+
+import ru.nsu.shelestov.gamelogic.Deck;
 
 import java.util.Objects;
 

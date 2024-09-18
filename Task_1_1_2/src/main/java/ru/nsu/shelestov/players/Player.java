@@ -1,4 +1,6 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.players;
+
+import ru.nsu.shelestov.gamelogic.Deck;
 
 import java.util.Scanner;
 
@@ -36,7 +38,7 @@ public class Player extends Person {
             try {
                 System.out.println("Введите “1”, чтобы взять карту, и “0”, чтобы остановиться...");
                 decision = input.nextInt();
-                if ((decision == 1) || (decision == 0)) {
+                if (decision == 1 || decision == 0) {
                     getNum = false;
                 }
             } catch (Exception e) {

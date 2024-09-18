@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.card;
 
 /**
  * Класс для дальнейшего использования в toString.

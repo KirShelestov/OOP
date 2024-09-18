@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.card;
 
 /**
  * класс, реализующий карты от двойки до туза.
@@ -22,13 +22,43 @@ public enum CardInfo {
     final int cardValue;
     final Gender gender;
 
+    /**
+     * Конструктор.
+     *
+     * @param cardName имя карты
+     * @param cardValue  значение карты
+     * @param gender род карты
+     */
     CardInfo(String cardName, int cardValue, Gender gender) {
         this.cardName = cardName;
         this.cardValue = cardValue;
         this.gender = gender;
     }
 
-    public Gender gender() {
+    /**
+     * Геттер для имени.
+     *
+     * @return имя карты
+     */
+    String getCardName() {
+        return cardName;
+    }
+
+    /**
+     * Геттер для значения.
+     *
+     * @return значение карты
+     */
+    int getCardValue() {
+        return cardValue;
+    }
+
+    /**
+     * Геттер для рода карты.
+     *
+     * @return род карты
+     */
+    public Gender getGender() {
         return gender;
     }
 

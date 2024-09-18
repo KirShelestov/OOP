@@ -1,4 +1,7 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.players;
+
+import ru.nsu.shelestov.gamelogic.Deck;
+import ru.nsu.shelestov.card.Card;
 
 import java.util.ArrayList;
 
@@ -40,8 +43,8 @@ public class Hand {
                 acesInNumber++;
             }
         }
-        if ((value > 21) && (acesInNumber > 0)) {
-            while ((acesInNumber > 0) && (value > 21)) {
+        if (value > 21 && acesInNumber > 0) {
+            while (acesInNumber > 0 && value > 21) {
                 acesInNumber -= 1;
                 value -= 10;
             }

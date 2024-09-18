@@ -1,4 +1,8 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.gamelogic;
+
+import ru.nsu.shelestov.card.Card;
+import ru.nsu.shelestov.card.CardInfo;
+import ru.nsu.shelestov.card.Suit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,15 +109,6 @@ public class Deck {
      */
     public void emptyDeck() {
         deck.clear();
-    }
-
-    /**
-     * добавляет список карт в колоду.
-     *
-     * @param cards ArrayList карты, которые нужно добавить в колоду
-     */
-    public void addCards(ArrayList<Card> cards) {
-        deck.addAll(cards);
     }
 
     /**

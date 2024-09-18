@@ -1,4 +1,7 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.gamelogic;
+
+import ru.nsu.shelestov.players.Dealer;
+import ru.nsu.shelestov.players.Player;
 
 import java.util.Scanner;
 
@@ -146,7 +149,7 @@ public class Game {
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
 
-            if ((choice == 1) && (start == 0)) {
+            if (choice == 1 && start == 0) {
                 player.hit(deck, discarded);
                 player.revealHand();
                 dealer.printAtStart();
@@ -154,7 +157,7 @@ public class Game {
                     System.out.println("Вы превысили 21! Вы проиграли.");
                     break;
                 }
-            } else if ((choice == 1) && (start == 1)) {
+            } else if (choice == 1 && start == 1) {
                 player.hit(deck, discarded);
                 player.revealHand();
                 dealer.printHand();

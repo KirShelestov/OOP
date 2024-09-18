@@ -3,6 +3,9 @@ package ru.nsu.shelestov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.card.Card;
+import ru.nsu.shelestov.card.CardInfo;
+import ru.nsu.shelestov.card.Suit;
 
 /**
  *  класс для теста класса Card.

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.gamelogic.Deck;
+import ru.nsu.shelestov.players.Hand;
 
 /**
  * класс для теста класса Hand.

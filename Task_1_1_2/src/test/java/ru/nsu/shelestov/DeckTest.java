@@ -9,6 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.card.Card;
+import ru.nsu.shelestov.card.CardInfo;
+import ru.nsu.shelestov.card.Suit;
+import ru.nsu.shelestov.gamelogic.Deck;
 
 /**
  * класс для теста класса Deck.

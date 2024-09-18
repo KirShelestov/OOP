@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.InputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.card.Card;
+import ru.nsu.shelestov.card.CardInfo;
+import ru.nsu.shelestov.card.Suit;
+import ru.nsu.shelestov.gamelogic.Deck;
+import ru.nsu.shelestov.players.Player;
 
 /**
  * Тестовый класс для проверки функциональности класса Player.

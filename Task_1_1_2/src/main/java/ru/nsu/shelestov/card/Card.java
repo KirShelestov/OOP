@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.card;
 
 /**
  * класс представляет карту в колоде.
@@ -24,7 +24,7 @@ public class Card {
      * @return значение карты
      */
     public int getValue() {
-        return cardInfo.cardValue;
+        return cardInfo.getCardValue();
     }
 
     /**
@@ -55,14 +55,19 @@ public class Card {
         this.cardInfo = card.getCardInfo();
     }
 
+    /**
+     * Метод для текстового представления карты.
+     *
+     * @return форматированная строка
+     */
     @Override
     public String toString() {
 
-        String adjective = suit.toAdjective(cardInfo.gender());
+        String adjective = suit.toAdjective(cardInfo.getGender());
 
-        if (cardInfo.gender() == Gender.MASCULINE || cardInfo.gender() == Gender.FEMININE) {
-            return adjective + cardInfo.cardName.toLowerCase() + " (" + cardInfo.cardValue + ")";
+        if (cardInfo.getGender() == Gender.MASCULINE || cardInfo.getGender() == Gender.FEMININE) {
+            return adjective + cardInfo.getCardName().toLowerCase() + " (" + cardInfo.getCardValue() + ")";
         }
-        return cardInfo + " " + adjective + " (" + cardInfo.cardValue + ")";
+        return cardInfo + " " + adjective + " (" + cardInfo.getCardValue() + ")";
     }
 }

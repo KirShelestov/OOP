@@ -7,6 +7,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.gamelogic.Deck;
+import ru.nsu.shelestov.players.Dealer;
+import ru.nsu.shelestov.players.Player;
 
 /**
  * класс тестирующий класс Dealer.
