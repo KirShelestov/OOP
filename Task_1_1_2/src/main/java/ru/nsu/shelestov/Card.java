@@ -4,8 +4,8 @@ package ru.nsu.shelestov;
  * класс представляет карту в колоде.
  */
 public class Card {
-    Suit suit;
-    CardInfo cardInfo;
+    private final Suit suit;
+    private final CardInfo cardInfo;
 
     /**
      * конструктор карты.
@@ -55,54 +55,14 @@ public class Card {
         this.cardInfo = card.getCardInfo();
     }
 
-    /**
-     * Возвращает строку с правильеым выводом карт в консоль.
-     *
-     * @return строка, описывающая карту
-     */
+    @Override
     public String toString() {
-        if (cardInfo == cardInfo.QUEEN) {
-            if (suit == suit.CLUB) {
-                return ("Трефовая дама (" + this.getValue() + ")");
-            }
-            if (suit == suit.DIAMOND) {
-                return ("Бубновая дама (" + this.getValue() + ")");
-            }
-            if (suit == suit.HEART) {
-                return ("Червовая дама (" + this.getValue() + ")");
-            }
-            if (suit == suit.SPADE) {
-                return ("Пиковая дама (" + this.getValue() + ")");
-            }
+
+        String adjective = suit.toAdjective(cardInfo.gender());
+
+        if (cardInfo.gender() == Gender.MASCULINE || cardInfo.gender() == Gender.FEMININE) {
+            return adjective + cardInfo;
         }
-        if (cardInfo == cardInfo.KING) {
-            if (suit == suit.CLUB) {
-                return ("Трефовый король (" + this.getValue() + ")");
-            }
-            if (suit == suit.DIAMOND) {
-                return ("Бубновый король (" + this.getValue() + ")");
-            }
-            if (suit == suit.HEART) {
-                return ("Червовый король (" + this.getValue() + ")");
-            }
-            if (suit == suit.SPADE) {
-                return ("Пиковый король (" + this.getValue() + ")");
-            }
-        }
-        if (cardInfo == cardInfo.JACK) {
-            if (suit == suit.CLUB) {
-                return ("Трефовый валет (" + this.getValue() + ")");
-            }
-            if (suit == suit.DIAMOND) {
-                return ("Бубновый валет (" + this.getValue() + ")");
-            }
-            if (suit == suit.HEART) {
-                return ("Червовый валет (" + this.getValue() + ")");
-            }
-            if (suit == suit.SPADE) {
-                return ("Пиковый валет (" + this.getValue() + ")");
-            }
-        }
-        return ("" + cardInfo + " " + suit + " (" + this.getValue() + ")");
+        return cardInfo + " " + adjective;
     }
 }

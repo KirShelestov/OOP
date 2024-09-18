@@ -1,6 +1,7 @@
 package ru.nsu.shelestov;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * класс представляет колоду игральных карт.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class Deck {
     ArrayList<Card> deck;
 
-    /**
+    /**ArrayList
      * создает пустую колоду кард.
      */
     public Deck() {
@@ -18,19 +19,19 @@ public class Deck {
     /**
      * возвращает список карт в колоде.
      *
-     * @return ArrayList содержащий карты в колоде
+     * @return List содержащий карты в колоде
      */
-    public ArrayList<Card> getCards() {
+    public List<Card> getCards() {
         return deck;
     }
 
     /**
-     * добавляет карту в колоду.
+     * добавляет список карт в колоду.
      *
-     * @param card карта, которую нужно добавить в колоду
+     * @param cards List карты, которые нужно добавить в колоду
      */
-    public void addCard(Card card) {
-        deck.add(card);
+    public void addCards(List<Card> cards) {
+        deck.addAll(cards);
     }
 
     /**
@@ -134,5 +135,14 @@ public class Deck {
      */
     public int cardsLeft() {
         return deck.size();
+    }
+
+    /**
+     * добавляет карту в колоду.
+     *
+     * @param card карта, которую нужно добавить в колоду
+     */
+    public void addCard(Card card) {
+        deck.add(card);
     }
 }

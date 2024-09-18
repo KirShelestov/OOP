@@ -6,10 +6,10 @@ import java.util.Scanner;
  * класс представляет логику игры.
  */
 public class Game {
-    private Deck deck;
-    private Deck discarded;
-    private Dealer dealer;
-    private Player player;
+    private final Deck deck;
+    private final Deck discarded;
+    private final Dealer dealer;
+    private final Player player;
     private int wins;
     private int losses;
     private int draws;
@@ -115,12 +115,11 @@ public class Game {
             if (player.winBlackjack()) {
                 System.out.println("Ничья!");
                 draws++;
-                return true;
             } else {
                 System.out.println("Дилер выиграл с блэкджеком!");
                 losses++;
-                return true;
             }
+            return true;
         } else if (player.winBlackjack()) {
             System.out.println("Вы выиграли с блэкджеком!");
             wins++;

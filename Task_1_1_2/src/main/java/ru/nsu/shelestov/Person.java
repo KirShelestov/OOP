@@ -7,8 +7,8 @@ import java.util.Objects;
  */
 public abstract class Person {
 
-    String name;
-    Hand hand;
+    private String name;
+    private Hand hand;
 
     /**
      * конструктор  для персона.
@@ -73,11 +73,7 @@ public abstract class Person {
      * @return True если есть блэкджек
      */
     public boolean winBlackjack() {
-        if (this.getHand().getValueOnHand() == 21) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.getHand().getValueOnHand() == 21;
     }
 
     /**

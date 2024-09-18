@@ -9,7 +9,7 @@ public enum Suit {
     HEART("Черви"),
     SPADE("Пики");
 
-    String suitName;
+    final String suitName;
 
     /**
      * конструктор для масти.
@@ -21,11 +21,30 @@ public enum Suit {
     }
 
     /**
-     * функция для последующего вывода масти карты в консоль.
+     * Правильно форматирует строку.
      *
-     * @return масть карты
+     * @param gender род карты
+     * @return правильная строка
      */
+    public String toAdjective(Gender gender) {
+        String adjective = this.toString() + "";
+        if (Gender.MASCULINE == gender) {
+            return this.toString().substring(0, this.toString().length() - 1) + "овый ";
+        }
+        if (Gender.FEMININE == gender) {
+            return this.toString().substring(0, this.toString().length() - 1) + "овая ";
+        }
+        return adjective;
+    }
+
+    /**
+     * Метод для каста в строку.
+     *
+     * @return строка отформатированная правильно
+     */
+    @Override
     public String toString() {
         return suitName;
     }
 }
+
