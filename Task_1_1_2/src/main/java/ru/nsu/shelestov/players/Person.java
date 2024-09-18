@@ -1,8 +1,7 @@
 package ru.nsu.shelestov.players;
 
-import ru.nsu.shelestov.gamelogic.Deck;
-
 import java.util.Objects;
+import ru.nsu.shelestov.gamelogic.Deck;
 
 /**
  * класс для определения общих характеристик как Дилера, так и Игрока.

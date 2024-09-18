@@ -66,7 +66,8 @@ public class Card {
         String adjective = suit.toAdjective(cardInfo.getGender());
 
         if (cardInfo.getGender() == Gender.MASCULINE || cardInfo.getGender() == Gender.FEMININE) {
-            return adjective + cardInfo.getCardName().toLowerCase() + " (" + cardInfo.getCardValue() + ")";
+            return adjective + cardInfo.getCardName().toLowerCase()
+                    + " (" + cardInfo.getCardValue() + ")";
         }
         return cardInfo + " " + adjective + " (" + cardInfo.getCardValue() + ")";
     }

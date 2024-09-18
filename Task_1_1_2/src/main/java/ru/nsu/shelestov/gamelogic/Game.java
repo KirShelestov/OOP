@@ -1,9 +1,8 @@
 package ru.nsu.shelestov.gamelogic;
 
+import java.util.Scanner;
 import ru.nsu.shelestov.players.Dealer;
 import ru.nsu.shelestov.players.Player;
-
-import java.util.Scanner;
 
 /**
  * класс представляет логику игры.

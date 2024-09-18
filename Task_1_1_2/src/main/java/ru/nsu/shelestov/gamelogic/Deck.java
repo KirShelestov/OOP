@@ -1,11 +1,10 @@
 package ru.nsu.shelestov.gamelogic;
 
+import java.util.ArrayList;
+import java.util.List;
 import ru.nsu.shelestov.card.Card;
 import ru.nsu.shelestov.card.CardInfo;
 import ru.nsu.shelestov.card.Suit;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * класс представляет колоду игральных карт.

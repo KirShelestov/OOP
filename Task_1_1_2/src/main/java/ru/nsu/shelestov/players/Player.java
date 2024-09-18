@@ -1,8 +1,7 @@
 package ru.nsu.shelestov.players;
 
-import ru.nsu.shelestov.gamelogic.Deck;
-
 import java.util.Scanner;
+import ru.nsu.shelestov.gamelogic.Deck;
 
 /**
  * Данный класс определяет поведение пользователя.
