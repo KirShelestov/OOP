@@ -37,6 +37,7 @@ public enum CardInfo {
      *
      * @return имя карты
      */
+    @Override
     public String toString() {
         return cardName;
     }
