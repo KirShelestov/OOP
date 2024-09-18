@@ -39,6 +39,7 @@ public class Deck {
      *
      * @return строка, содержащая все карты в колоде
      */
+    @Override
     public String toString() {
         String output = "";
 

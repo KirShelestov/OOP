@@ -73,6 +73,7 @@ public class Hand {
      *
      * @return строку, отформатированную с учетом тз
      */
+    @Override
     public String toString() {
         String output = "[";
         for (int i = 0; i < hand.size(); i++) {
