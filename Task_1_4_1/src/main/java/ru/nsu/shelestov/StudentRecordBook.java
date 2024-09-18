@@ -37,7 +37,8 @@ public class StudentRecordBook {
         }
         if (controlType == ControlType.CREDIT) {
             if (!(score instanceof Boolean)) {
-                throw new IllegalArgumentException("Для зачета необходимо передать boolean значение");
+                throw new IllegalArgumentException("Для зачета необходимо"
+                        + " передать boolean значение");
             }
             boolean scoreBool = (boolean) score;
             int scoreInt = scoreBool ? 5 : 2;
@@ -164,77 +165,4 @@ public class StudentRecordBook {
     }
 
 
-}
-
-/**
- * Перечисление типо контрольных работ.
- */
-enum ControlType {
-    ASSIGNMENT,
-    TEST,
-    COLLOQUIUM,
-    EXAM,
-    DIFFERENTIAL_CREDIT,
-    CREDIT,
-    PRACTICE_REPORT_DEFENSE,
-    THESIS_DEFENSE
-}
-
-/**
- * Класс для хранения информации об оценке за контрольную работу.
- */
-class Grade {
-    private String subject;
-    private ControlType controlType;
-    private int score;
-
-    /**
-     * Конструктор класса оценки.
-     *
-     * @param subject предмет
-     * @param controlType тип работы
-     * @param score оценка
-     */
-    public Grade(String subject, ControlType controlType, int score) {
-        this.subject = subject;
-        this.controlType = controlType;
-        this.score = score;
-    }
-
-    /**
-     * Геттер оценки.
-     *
-     * @return оценка
-     */
-    public int getScore() {
-        return score;
-    }
-
-    /**
-     * Геттер типа работы.
-     *
-     * @return тип работы
-     */
-    public  ControlType getControlType() {
-        return  controlType;
-    }
-
-    /**
-     * Метод на проверку типа работы - экзамен.
-     *
-     * @return является ли работа экзаменом
-     */
-    public boolean isExam() {
-        return controlType == ControlType.EXAM;
-    }
-
-    /**
-     * Метод на проверку типа работы - зачет/дифзачет.
-     *
-     * @return является ли работа каким-то зачетом
-     */
-    public boolean isCredit() {
-        return controlType == ControlType.CREDIT
-                || controlType == ControlType.DIFFERENTIAL_CREDIT;
-    }
 }
