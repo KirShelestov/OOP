@@ -4,16 +4,16 @@ package ru.nsu.shelestov.card;
  * класс, реализующий карты от двойки до туза.
  */
 public enum CardInfo {
-    ACE("Туз", 11, Gender.NEUTRAL),
-    TWO("Двойка", 2, Gender.NEUTRAL),
-    THREE("Тройка", 3, Gender.NEUTRAL),
-    FOUR("Четверка", 4, Gender.NEUTRAL),
-    FIVE("Пятерка", 5, Gender.NEUTRAL),
-    SIX("Шестерка", 6, Gender.NEUTRAL),
-    SEVEN("Семерка", 7, Gender.NEUTRAL),
-    EIGHT("Восьмерка", 8, Gender.NEUTRAL),
-    NINE("Девятка", 9, Gender.NEUTRAL),
-    TEN("Десятка", 10, Gender.NEUTRAL),
+    ACE("Туз", 11),
+    TWO("Двойка", 2),
+    THREE("Тройка", 3),
+    FOUR("Четверка", 4),
+    FIVE("Пятерка", 5),
+    SIX("Шестерка", 6),
+    SEVEN("Семерка", 7),
+    EIGHT("Восьмерка", 8),
+    NINE("Девятка", 9),
+    TEN("Десятка", 10),
     JACK("Валет", 10, Gender.MASCULINE),
     QUEEN("Дама", 10, Gender.FEMININE),
     KING("Король", 10, Gender.MASCULINE);
@@ -23,11 +23,21 @@ public enum CardInfo {
     final Gender gender;
 
     /**
-     * Конструктор.
+     * Конструктор с двумя параметрами, устанавливающий род карты по умолчанию в NEUTRAL.
      *
      * @param cardName имя карты
-     * @param cardValue  значение карты
-     * @param gender род карты
+     * @param cardValue значение карты
+     */
+    CardInfo(String cardName, int cardValue) {
+        this(cardName, cardValue, Gender.NEUTRAL);
+    }
+
+    /**
+     * Конструктор с тремя параметрами.
+     *
+     * @param cardName имя карты
+     * @param cardValue значение карты
+     * @param gender   род карты
      */
     CardInfo(String cardName, int cardValue, Gender gender) {
         this.cardName = cardName;

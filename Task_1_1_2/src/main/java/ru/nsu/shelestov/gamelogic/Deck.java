@@ -89,6 +89,9 @@ public class Deck {
      * @return карту, которую взяли
      */
     public Card takeCard() {
+        if (deck.isEmpty()) {
+            throw new IllegalStateException("Колода пуста, невозможно взять карту.");
+        }
         Card cardToTake = new Card(deck.get(0));
         deck.remove(0);
         return cardToTake;
@@ -100,7 +103,7 @@ public class Deck {
      * @return True если есть карты, иначе False
      */
     public boolean hasCards() {
-        return (!deck.isEmpty());
+        return !deck.isEmpty();
     }
 
     /**
