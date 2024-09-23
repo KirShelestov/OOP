@@ -27,14 +27,18 @@ public record Card(Suit suit, CardInfo cardInfo) {
      *
      * @return масть
      */
-    public Suit getSuit() { return suit; }
+    public Suit getSuit() {
+        return suit;
+    }
 
     /**
      * Геттер для информации о карте.
      *
      * @return инфо о карте
      */
-    public CardInfo getCardInfo() { return cardInfo; }
+    public CardInfo getCardInfo() {
+        return cardInfo;
+    }
 
     /**
      * Метод для текстового представления карты.
