@@ -50,7 +50,7 @@ public enum CardInfo {
      *
      * @return имя карты
      */
-    String getCardName() {
+    public String getCardName() {
         return cardName;
     }
 
@@ -59,7 +59,7 @@ public enum CardInfo {
      *
      * @return значение карты
      */
-    int getCardValue() {
+    public int getCardValue() {
         return cardValue;
     }
 

@@ -9,7 +9,7 @@ public enum Suit {
     HEART("Черви"),
     SPADE("Пики");
 
-    final String suitName;
+    private final String suitName;
 
     /**
      * конструктор для масти.
