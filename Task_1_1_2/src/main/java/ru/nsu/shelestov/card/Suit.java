@@ -4,8 +4,8 @@ package ru.nsu.shelestov.card;
  * Класс для мастей карт.
  */
 public enum Suit {
-    CLUB("Трефы"),
     DIAMOND("Бубны"),
+    CLUB("Трефы"),
     HEART("Черви"),
     SPADE("Пики");
 
