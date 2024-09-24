@@ -40,9 +40,9 @@ public enum CardInfo {
      * @param gender   род карты
      */
     CardInfo(String cardName, int cardValue, Gender gender) {
+        this.gender = gender;
         this.cardName = cardName;
         this.cardValue = cardValue;
-        this.gender = gender;
     }
 
     /**
