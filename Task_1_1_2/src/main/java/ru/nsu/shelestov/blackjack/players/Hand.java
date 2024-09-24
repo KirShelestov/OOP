@@ -1,8 +1,9 @@
-package ru.nsu.shelestov.players;
+package ru.nsu.shelestov.blackjack.players;
 
 import java.util.ArrayList;
-import ru.nsu.shelestov.card.Card;
-import ru.nsu.shelestov.gamelogic.Deck;
+
+import ru.nsu.shelestov.blackjack.gamelogic.Deck;
+import ru.nsu.shelestov.blackjack.card.Card;
 
 /**
  * класс представляет "руку".

@@ -1,4 +1,4 @@
-package ru.nsu.shelestov.players;
+package ru.nsu.shelestov.blackjack.players;
 
 /**
  * данный класс представляет поведение дилера.

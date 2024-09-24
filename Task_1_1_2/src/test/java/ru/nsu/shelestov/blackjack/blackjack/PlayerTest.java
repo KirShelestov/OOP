@@ -1,15 +1,15 @@
-package ru.nsu.shelestov.blackjack;
+package ru.nsu.shelestov.blackjack.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.InputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.card.Card;
-import ru.nsu.shelestov.card.CardInfo;
-import ru.nsu.shelestov.card.Suit;
-import ru.nsu.shelestov.gamelogic.Deck;
-import ru.nsu.shelestov.players.Player;
+import ru.nsu.shelestov.blackjack.card.Card;
+import ru.nsu.shelestov.blackjack.card.CardInfo;
+import ru.nsu.shelestov.blackjack.card.Suit;
+import ru.nsu.shelestov.blackjack.gamelogic.Deck;
+import ru.nsu.shelestov.blackjack.players.Player;
 
 /**
  * Тестовый класс для проверки функциональности класса Player.

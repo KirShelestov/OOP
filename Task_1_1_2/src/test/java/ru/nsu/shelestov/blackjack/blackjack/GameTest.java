@@ -1,11 +1,11 @@
-package ru.nsu.shelestov.blackjack;
+package ru.nsu.shelestov.blackjack.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.gamelogic.Game;
+import ru.nsu.shelestov.blackjack.gamelogic.Game;
 
 /**
  * класс для тестирования Game.

@@ -1,4 +1,4 @@
-package ru.nsu.shelestov.blackjack;
+package ru.nsu.shelestov.blackjack.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.card.Card;
-import ru.nsu.shelestov.card.CardInfo;
-import ru.nsu.shelestov.card.Suit;
-import ru.nsu.shelestov.gamelogic.Deck;
+import ru.nsu.shelestov.blackjack.card.Card;
+import ru.nsu.shelestov.blackjack.card.CardInfo;
+import ru.nsu.shelestov.blackjack.card.Suit;
+import ru.nsu.shelestov.blackjack.gamelogic.Deck;
 
 /**
  * класс для теста класса Deck.

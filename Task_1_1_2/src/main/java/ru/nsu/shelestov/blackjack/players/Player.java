@@ -1,7 +1,7 @@
-package ru.nsu.shelestov.players;
+package ru.nsu.shelestov.blackjack.players;
 
 import java.util.Scanner;
-import ru.nsu.shelestov.gamelogic.Deck;
+import ru.nsu.shelestov.blackjack.gamelogic.Deck;
 
 /**
  * Данный класс определяет поведение пользователя.

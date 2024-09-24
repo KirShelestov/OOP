@@ -1,4 +1,4 @@
-package ru.nsu.shelestov.card;
+package ru.nsu.shelestov.blackjack.card;
 
 /**
  * класс, реализующий карты от двойки до туза.

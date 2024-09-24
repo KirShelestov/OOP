@@ -1,10 +1,10 @@
-package ru.nsu.shelestov.gamelogic;
+package ru.nsu.shelestov.blackjack.gamelogic;
 
 import java.util.ArrayList;
 import java.util.List;
-import ru.nsu.shelestov.card.Card;
-import ru.nsu.shelestov.card.CardInfo;
-import ru.nsu.shelestov.card.Suit;
+import ru.nsu.shelestov.blackjack.card.Card;
+import ru.nsu.shelestov.blackjack.card.CardInfo;
+import ru.nsu.shelestov.blackjack.card.Suit;
 
 /**
  * класс представляет колоду игральных карт.

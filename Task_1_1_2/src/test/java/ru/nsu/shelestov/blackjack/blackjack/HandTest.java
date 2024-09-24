@@ -1,11 +1,11 @@
-package ru.nsu.shelestov.blackjack;
+package ru.nsu.shelestov.blackjack.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.gamelogic.Deck;
-import ru.nsu.shelestov.players.Hand;
+import ru.nsu.shelestov.blackjack.gamelogic.Deck;
+import ru.nsu.shelestov.blackjack.players.Hand;
 
 /**
  * класс для теста класса Hand.

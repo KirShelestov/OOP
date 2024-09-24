@@ -1,8 +1,9 @@
-package ru.nsu.shelestov.gamelogic;
+package ru.nsu.shelestov.blackjack.gamelogic;
 
 import java.util.Scanner;
-import ru.nsu.shelestov.players.Dealer;
-import ru.nsu.shelestov.players.Player;
+
+import ru.nsu.shelestov.blackjack.players.Player;
+import ru.nsu.shelestov.blackjack.players.Dealer;
 
 /**
  * класс представляет логику игры.

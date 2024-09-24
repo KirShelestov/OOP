@@ -1,11 +1,11 @@
-package ru.nsu.shelestov.blackjack;
+package ru.nsu.shelestov.blackjack.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.gamelogic.Main;
+import ru.nsu.shelestov.blackjack.gamelogic.Main;
 
 /**
  * Класс, который должен тестировать Main, но почему-то покрытие все равно 0%.

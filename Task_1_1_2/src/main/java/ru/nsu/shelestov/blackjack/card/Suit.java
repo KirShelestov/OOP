@@ -1,4 +1,4 @@
-package ru.nsu.shelestov.card;
+package ru.nsu.shelestov.blackjack.card;
 
 /**
  * Класс для мастей карт.

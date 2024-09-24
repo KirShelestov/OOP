@@ -1,13 +1,13 @@
-package ru.nsu.shelestov.blackjack;
+package ru.nsu.shelestov.blackjack.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.gamelogic.Deck;
-import ru.nsu.shelestov.players.Person;
-import ru.nsu.shelestov.players.Player;
+import ru.nsu.shelestov.blackjack.gamelogic.Deck;
+import ru.nsu.shelestov.blackjack.players.Person;
+import ru.nsu.shelestov.blackjack.players.Player;
 
 /**
  * класс для теста Персона.

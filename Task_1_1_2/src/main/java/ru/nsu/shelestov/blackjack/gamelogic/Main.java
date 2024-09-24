@@ -1,4 +1,4 @@
-package ru.nsu.shelestov.gamelogic;
+package ru.nsu.shelestov.blackjack.gamelogic;
 
 /**
  * просто мейн.
