@@ -1,24 +1,20 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.datatypes;
 
 import java.util.Map;
 
 /**
- * класс представляет переменную.
+ * Класс представляет "число".
  */
-public class Variable extends Expression {
-    private final String name;
+public class Number extends Expression {
+    private final double value;
 
     /**
-     * конструктор для переменной.
+     * конструктор для числа.
      *
-     * @param name название переменной
+     * @param value само число
      */
-    public Variable(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
+    public Number(double value) {
+        this.value = value;
     }
 
     /**
@@ -36,10 +32,9 @@ public class Variable extends Expression {
             return false; // Проверка типа
         }
 
-        Variable name = (Variable) obj; // Приведение типа
-        return CharSequence.compare(name.getName(), name.getName()) == 0; // Сравнение значений
+        Number number = (Number) obj; // Приведение типа
+        return Double.compare(number.value, value) == 0; // Сравнение значений
     }
-
 
     /**
      * подсчет значения при означивании.
@@ -48,32 +43,32 @@ public class Variable extends Expression {
      * @return значение при означивании
      */
     public double evaluate(Map<String, Double> variables) {
-        return variables.getOrDefault(name, 0.0);
+        return value;
     }
 
     /**
-     * имя переменной как строка.
+     * форматирование строки.
      *
-     * @return имя переменной
+     * @return отформатированная строка
      */
     public String toString() {
-        return name;
+        return Double.toString(value);
     }
 
     /**
-     * дифференцирование перменной.
+     * дифференцирование.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return производная переменной
+     * @return ноль.
      */
     public Expression derivative(String var) {
-        return name.equals(var) ? new Number(1) : new Number(0);
+        return new Number(0);
     }
 
     /**
-     * вывод имени переменной.
+     * вывод числа.
      */
     public void print() {
-        System.out.print(toString());
+        System.out.print(value);
     }
 }

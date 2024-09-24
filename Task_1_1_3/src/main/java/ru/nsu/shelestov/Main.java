@@ -1,5 +1,13 @@
 package ru.nsu.shelestov;
 
+import ru.nsu.shelestov.datatypes.Expression;
+import ru.nsu.shelestov.datatypes.Number;
+import ru.nsu.shelestov.datatypes.Variable;
+import ru.nsu.shelestov.operations.Add;
+import ru.nsu.shelestov.operations.Div;
+import ru.nsu.shelestov.operations.Mul;
+import ru.nsu.shelestov.operations.Sub;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -48,7 +56,6 @@ public class Main {
             }
 
             level = 0;
-            opIndex = -1;
 
             for (int i = 0; i < input.length(); i++) {
                 char c = input.charAt(i);
@@ -83,9 +90,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String expressionInput = scanner.nextLine();
-
-        try {
+        try (scanner) {
+            String expressionInput = scanner.nextLine();
             Expression expr = parseExpression(expressionInput);
 
             System.out.print("Выражение: ");
@@ -104,8 +110,6 @@ public class Main {
 
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
-        } finally {
-            scanner.close();
         }
     }
 

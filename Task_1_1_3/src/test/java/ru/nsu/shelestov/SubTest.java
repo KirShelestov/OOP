@@ -3,6 +3,10 @@ package ru.nsu.shelestov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.datatypes.Expression;
+import ru.nsu.shelestov.datatypes.Number;
+import ru.nsu.shelestov.datatypes.Variable;
+import ru.nsu.shelestov.operations.Sub;
 
 /**
  * Класс для тестирования правильности операции вычитания.

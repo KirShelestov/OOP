@@ -6,6 +6,8 @@ import static ru.nsu.shelestov.Main.parseVariableAssignments;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.datatypes.Expression;
+import ru.nsu.shelestov.datatypes.Variable;
 
 /**
  * Класс для тестирования правильности класса Variable.

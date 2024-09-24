@@ -1,4 +1,6 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.operations;
+
+import ru.nsu.shelestov.datatypes.Expression;
 
 import java.util.Map;
 
@@ -16,7 +18,6 @@ public class Div extends Expression {
      * @param denominator делитель
      */
     public Div(Expression numerator, Expression denominator) {
-
         this.numerator = numerator;
         this.denominator = denominator;
     }

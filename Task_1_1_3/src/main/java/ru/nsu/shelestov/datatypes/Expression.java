@@ -1,11 +1,11 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.datatypes;
 
 import java.util.Map;
 
 /**
  * Абстрактный класс который определяет методы для выражения.
  */
-abstract class Expression {
+public abstract class Expression {
     /**
      * означивание выражения.
      *
