@@ -92,7 +92,7 @@ public class Deck {
         if (deck.isEmpty()) {
             throw new IllegalStateException("Колода пуста, невозможно взять карту.");
         }
-        Card cardToTake = new Card(deck.get(0));
+        Card cardToTake = new Card(deck.get(0).suit(), deck.get(0).cardInfo());
         deck.remove(0);
         return cardToTake;
     }

@@ -14,33 +14,6 @@ public record Card(Suit suit, CardInfo cardInfo) {
     }
 
     /**
-     * Создает новую карту как копию выбранной.
-     *
-     * @param card карту, которую нужно скопировать
-     */
-    public Card(Card card) {
-        this(card.getSuit(), card.getCardInfo());
-    }
-
-    /**
-     * Геттер для масти.
-     *
-     * @return масть
-     */
-    public Suit getSuit() {
-        return suit;
-    }
-
-    /**
-     * Геттер для информации о карте.
-     *
-     * @return инфо о карте
-     */
-    public CardInfo getCardInfo() {
-        return cardInfo;
-    }
-
-    /**
      * Метод для текстового представления карты.
      *
      * @return форматированная строка

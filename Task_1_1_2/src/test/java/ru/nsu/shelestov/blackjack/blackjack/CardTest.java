@@ -87,8 +87,8 @@ public class CardTest {
     @Test
     public void testCardCopyConstructor() {
         Card original = new Card(Suit.CLUB, CardInfo.QUEEN);
-        Card copy = new Card(original);
-        assertEquals(original.getSuit(), copy.getSuit());
-        assertEquals(original.getCardInfo(), copy.getCardInfo());
+        Card copy = new Card(original.suit(), original.cardInfo());
+        assertEquals(original.suit(), copy.suit());
+        assertEquals(original.cardInfo(), copy.cardInfo());
     }
 }
