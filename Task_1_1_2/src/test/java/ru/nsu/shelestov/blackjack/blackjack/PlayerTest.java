@@ -25,8 +25,8 @@ public class PlayerTest {
      */
     @BeforeEach
     public void setUp() {
-        player = new Player();
         discard = new Deck();
+        player = new Player();
         deck = new Deck();
     }
 
@@ -38,7 +38,6 @@ public class PlayerTest {
         Card card = new Card(Suit.DIAMOND, CardInfo.SIX);
         Deck deck = new Deck(true);
         player.getHand().takeCardFromDeck(deck);
-
         player.revealHand();
         assertEquals(1, player.getHand().getSize());
     }
