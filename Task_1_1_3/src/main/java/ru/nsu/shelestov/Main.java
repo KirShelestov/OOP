@@ -1,5 +1,8 @@
 package ru.nsu.shelestov;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 import ru.nsu.shelestov.datatypes.Expression;
 import ru.nsu.shelestov.datatypes.Number;
 import ru.nsu.shelestov.datatypes.Variable;
@@ -8,9 +11,6 @@ import ru.nsu.shelestov.operations.Div;
 import ru.nsu.shelestov.operations.Mul;
 import ru.nsu.shelestov.operations.Sub;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Основной класс, где происходит взаимодействие с пользователем.

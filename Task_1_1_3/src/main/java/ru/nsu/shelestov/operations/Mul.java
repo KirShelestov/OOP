@@ -1,8 +1,7 @@
 package ru.nsu.shelestov.operations;
 
-import ru.nsu.shelestov.datatypes.Expression;
-
 import java.util.Map;
+import ru.nsu.shelestov.datatypes.Expression;
 
 /**
  * Класс представляет операцию умножения.
