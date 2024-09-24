@@ -8,7 +8,7 @@ import ru.nsu.shelestov.gamelogic.Deck;
  */
 public class Player extends Person {
 
-    Scanner input = new Scanner(System.in);
+    public Scanner input = new Scanner(System.in);
 
     /**
      * конструктор для последующего вывода карт на руке у игрока.
