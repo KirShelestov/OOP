@@ -10,7 +10,7 @@ import ru.nsu.shelestov.card.Suit;
  * класс представляет колоду игральных карт.
  */
 public class Deck {
-    ArrayList<Card> deck;
+    private ArrayList<Card> deck;
 
     /**ArrayList
      * создает пустую колоду кард.

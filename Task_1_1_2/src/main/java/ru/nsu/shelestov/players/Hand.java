@@ -8,7 +8,7 @@ import ru.nsu.shelestov.gamelogic.Deck;
  * класс представляет "руку".
  */
 public class Hand {
-    ArrayList<Card> hand;
+    private ArrayList<Card> hand;
 
     /**
      * конструктор пустой руки.
