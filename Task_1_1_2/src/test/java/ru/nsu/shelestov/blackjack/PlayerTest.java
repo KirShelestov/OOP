@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.blackjack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
