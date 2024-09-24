@@ -27,8 +27,19 @@ public class MainTest {
 
             assertTrue(true);
         } catch (Exception e) {
-            ByteArrayInputStream inn = new ByteArrayInputStream("нет\n".getBytes());
+            ByteArrayInputStream inn = new ByteArrayInputStream("да\n".getBytes());
             System.setIn(inn);
+
+            try {
+                ByteArrayInputStream in1 = new ByteArrayInputStream("0\n".getBytes());
+                System.setIn(in1);
+                Main.main(new String[]{});
+
+                assertTrue(true);
+            } catch (Exception exp) {
+                ByteArrayInputStream inn1 = new ByteArrayInputStream("нет\n".getBytes());
+                System.setIn(inn1);
+            }
         } finally {
             System.setIn(originalIn);
         }
