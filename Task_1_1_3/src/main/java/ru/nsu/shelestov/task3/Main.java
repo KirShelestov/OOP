@@ -1,15 +1,15 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.task3;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import ru.nsu.shelestov.datatypes.Expression;
-import ru.nsu.shelestov.datatypes.Number;
-import ru.nsu.shelestov.datatypes.Variable;
-import ru.nsu.shelestov.operations.Add;
-import ru.nsu.shelestov.operations.Div;
-import ru.nsu.shelestov.operations.Mul;
-import ru.nsu.shelestov.operations.Sub;
+import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Number;
+import ru.nsu.shelestov.task3.datatypes.Variable;
+import ru.nsu.shelestov.task3.operations.Add;
+import ru.nsu.shelestov.task3.operations.Div;
+import ru.nsu.shelestov.task3.operations.Mul;
+import ru.nsu.shelestov.task3.operations.Sub;
 
 
 /**

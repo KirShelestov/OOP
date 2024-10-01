@@ -1,13 +1,11 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.task3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.nsu.shelestov.Main.parseExpression;
-import static ru.nsu.shelestov.Main.parseVariableAssignments;
 
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.datatypes.Expression;
-import ru.nsu.shelestov.datatypes.Variable;
+import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Variable;
 
 /**
  * Класс для тестирования правильности класса Variable.
@@ -51,9 +49,9 @@ public class VariableTest {
      */
     @Test
     void testEvaluate() {
-        Expression expr = parseExpression("x");
+        Expression expr = Main.parseExpression("x");
         String variableAssignments = "x=10";
-        Map<String, Double> variables = parseVariableAssignments(variableAssignments);
+        Map<String, Double> variables = Main.parseVariableAssignments(variableAssignments);
 
         double result = expr.evaluate(variables);
         assertEquals(10.0, result);

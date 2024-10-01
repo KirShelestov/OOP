@@ -1,26 +1,25 @@
-package ru.nsu.shelestov.operations;
+package ru.nsu.shelestov.task3.operations;
 
 import java.util.Map;
-import ru.nsu.shelestov.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Expression;
 
 /**
- * Класс представляет операцию умножения.
+ * Класс представляет операцию сложения.
  */
-public class Mul extends Expression {
+public class Add extends Expression {
     private final Expression left;
     private final Expression right;
 
     /**
-     * конструктор для умножения.
+     * конструктор операции сложения.
      *
-     * @param left  левая часть выражения
-     * @param right правая часть выражения
+     * @param left  левая часть уравнения
+     * @param right праввая часть уравнения
      */
-    public Mul(Expression left, Expression right) {
+    public Add(Expression left, Expression right) {
         this.left = left;
         this.right = right;
     }
-
 
     /**
      * переопределение равенства между объектами одного класса.
@@ -37,37 +36,38 @@ public class Mul extends Expression {
             return false; // Проверка типа
         }
 
-        Mul multi = (Mul) obj; // Приведение типа
-        return left.equals(multi.left) && right.equals(multi.right);
+        Add add = (Add) obj; // Приведение типа
+        return left.equals(add.left) && right.equals(add.right); // Сравнение левой и правой частей
     }
 
+
     /**
-     * подсчет значения при означивании.
+     * подсчет значения выражения.
      *
-     * @param variables означиваемые перменные
-     * @return значение выражения
+     * @param variables означиваемые выражения
+     * @return значение при означивании
      */
     public double evaluate(Map<String, Double> variables) {
-        return left.evaluate(variables) * right.evaluate(variables);
+        return left.evaluate(variables) + right.evaluate(variables);
     }
 
     /**
-     * форматирование выражение в строку.
+     * составление отформатированной стркои.
      *
      * @return отформатированная строка
      */
     public String toString() {
-        return "(" + left.toString() + " * " + right.toString() + ")";
+        return "(" + left.toString() + " + " + right.toString() + ")";
     }
 
     /**
      * дифференцирование выражения.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return производная при умножении
+     * @return производная по переменной
      */
     public Expression derivative(String var) {
-        return new Add(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var)));
+        return new Add(left.derivative(var), right.derivative(var));
     }
 
     /**
@@ -76,7 +76,7 @@ public class Mul extends Expression {
     public void print() {
         System.out.print("(");
         left.print();
-        System.out.print(" * ");
+        System.out.print(" + ");
         right.print();
         System.out.print(")");
     }

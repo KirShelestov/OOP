@@ -1,7 +1,7 @@
-package ru.nsu.shelestov.operations;
+package ru.nsu.shelestov.task3.operations;
 
 import java.util.Map;
-import ru.nsu.shelestov.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Expression;
 
 /**
  * Класс представляет вычитание.

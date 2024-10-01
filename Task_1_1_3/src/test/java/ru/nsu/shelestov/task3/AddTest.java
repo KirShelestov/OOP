@@ -1,12 +1,12 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.task3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.datatypes.Expression;
-import ru.nsu.shelestov.datatypes.Number;
-import ru.nsu.shelestov.datatypes.Variable;
-import ru.nsu.shelestov.operations.Add;
+import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Number;
+import ru.nsu.shelestov.task3.datatypes.Variable;
+import ru.nsu.shelestov.task3.operations.Add;
 
 /**
  * Класс дял тестирования правильности операции сложения.

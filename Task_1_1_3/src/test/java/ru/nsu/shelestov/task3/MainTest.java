@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.task3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -11,15 +11,16 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.shelestov.datatypes.Expression;
-import ru.nsu.shelestov.datatypes.Number;
-import ru.nsu.shelestov.datatypes.Variable;
-import ru.nsu.shelestov.operations.Add;
-import ru.nsu.shelestov.operations.Div;
-import ru.nsu.shelestov.operations.Mul;
-import ru.nsu.shelestov.operations.Sub;
+import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Number;
+import ru.nsu.shelestov.task3.datatypes.Variable;
+import ru.nsu.shelestov.task3.operations.Add;
+import ru.nsu.shelestov.task3.operations.Div;
+import ru.nsu.shelestov.task3.operations.Mul;
+import ru.nsu.shelestov.task3.operations.Sub;
 
 /**
  * Класс для тестирования класса Main.
@@ -155,7 +156,7 @@ public class MainTest {
 
         Expression expr6 = Main.parseExpression("(x / 2.0)");
         assertInstanceOf(Add.class, expr3);
-        assertEquals(new Div(new Variable("x"), new Number(2.0)), expr6);
+        Assertions.assertEquals(new Div(new Variable("x"), new Number(2.0)), expr6);
 
     }
 

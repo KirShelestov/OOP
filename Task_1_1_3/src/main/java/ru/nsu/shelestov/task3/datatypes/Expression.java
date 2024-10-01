@@ -1,4 +1,4 @@
-package ru.nsu.shelestov.datatypes;
+package ru.nsu.shelestov.task3.datatypes;
 
 import java.util.Map;
 
