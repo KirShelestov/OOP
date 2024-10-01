@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ru.nsu.shelestov"},{"l":"ru.nsu.shelestov.datatypes"},{"l":"ru.nsu.shelestov.operations"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ru.nsu.shelestov.task3"},{"l":"ru.nsu.shelestov.task3.datatypes"},{"l":"ru.nsu.shelestov.task3.operations"}]
