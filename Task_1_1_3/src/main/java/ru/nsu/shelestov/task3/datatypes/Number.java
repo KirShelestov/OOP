@@ -37,6 +37,17 @@ public class Number extends Expression {
     }
 
     /**
+     * Переопределение хэш-кода.
+     *
+     * @return хэш-код объекта
+     */
+    @Override
+    public int hashCode() {
+        return Double.hashCode(value);
+    }
+
+
+    /**
      * подсчет значения при означивании.
      *
      * @param variables означиваемые перменные

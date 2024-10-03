@@ -41,12 +41,27 @@ public class Div extends Expression {
     }
 
     /**
+     * Переопределение хэш-кода.
+     *
+     * @return хэш-код объекта
+     */
+    @Override
+    public int hashCode() {
+        int result = numerator.hashCode();
+        result = 31 * result + denominator.hashCode();
+        return result;
+    }
+
+    /**
      * означивание при делении.
      *
      * @param variables означиваемые перменные
      * @return значение выражения
      */
     public double evaluate(Map<String, Double> variables) {
+        if (denominator.evaluate(variables) == 0.0) {
+            throw new ArithmeticException("/ 0!");
+        }
         return numerator.evaluate(variables) / denominator.evaluate(variables);
     }
 
@@ -75,10 +90,6 @@ public class Div extends Expression {
      * вывод выражения.
      */
     public void print() {
-        System.out.print("(");
-        numerator.print();
-        System.out.print(" / ");
-        denominator.print();
-        System.out.print(")");
+        System.out.print(this.toString());
     }
 }

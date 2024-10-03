@@ -40,6 +40,17 @@ public class Add extends Expression {
         return left.equals(add.left) && right.equals(add.right); // Сравнение левой и правой частей
     }
 
+    /**
+     * Переопределение хэш-кода.
+     *
+     * @return хэш-код объекта
+     */
+    @Override
+    public int hashCode() {
+        int result = left.hashCode();
+        result = 31 * result + right.hashCode();
+        return result;
+    }
 
     /**
      * подсчет значения выражения.
@@ -74,10 +85,6 @@ public class Add extends Expression {
      * вывод выражения.
      */
     public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print(" + ");
-        right.print();
-        System.out.print(")");
+        System.out.print(this.toString());
     }
 }

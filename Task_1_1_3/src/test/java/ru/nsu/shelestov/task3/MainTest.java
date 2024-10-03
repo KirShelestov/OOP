@@ -124,7 +124,7 @@ public class MainTest {
         Exception exception = assertThrows(NumberFormatException.class,
                 () -> Main.parseVariableAssignments(input));
 
-        assertTrue(exception.getMessage().contains("For input string: \"abc\""));
+        assertTrue(exception.getMessage().contains("abc"));
     }
 
 

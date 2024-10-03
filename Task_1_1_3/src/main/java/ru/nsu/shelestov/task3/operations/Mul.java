@@ -42,6 +42,18 @@ public class Mul extends Expression {
     }
 
     /**
+     * Переопределение хэш-кода.
+     *
+     * @return хэш-код объекта
+     */
+    @Override
+    public int hashCode() {
+        int result = left.hashCode();
+        result = 31 * result + right.hashCode();
+        return result;
+    }
+
+    /**
      * подсчет значения при означивании.
      *
      * @param variables означиваемые перменные
@@ -74,10 +86,6 @@ public class Mul extends Expression {
      * вывод выражения.
      */
     public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print(" * ");
-        right.print();
-        System.out.print(")");
+        System.out.print(this.toString());
     }
 }

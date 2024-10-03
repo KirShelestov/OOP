@@ -129,11 +129,20 @@ public class Main {
             String[] parts = pair.split("=");
             if (parts.length == 2) {
                 String varName = parts[0].trim();
-                double value = Double.parseDouble(parts[1].trim());
-                variables.put(varName, value);
+                try {
+                    double value = Double.parseDouble(parts[1].trim());
+                    variables.put(varName, value);
+                } catch (NumberFormatException e) {
+                    System.err.println("Неверный формат числа для переменной: " + varName + " со значением: " + parts[1].trim());
+                    throw new NumberFormatException("Неверный формат числа для переменной: " + varName + " со значением: " + parts[1].trim());
+                }
+            } else {
+                System.err.println("Неверный формат присваивания: " + pair);
+                throw new IllegalArgumentException("Неверный формат присваивания: " + pair);
             }
         }
 
         return variables;
     }
+
 }

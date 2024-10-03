@@ -40,6 +40,15 @@ public class Variable extends Expression {
         return CharSequence.compare(name.getName(), name.getName()) == 0; // Сравнение значений
     }
 
+    /**
+     * Переопределение хэш-кода.
+     *
+     * @return хэш-код объекта
+     */
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 
     /**
      * подсчет значения при означивании.
