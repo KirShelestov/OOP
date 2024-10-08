@@ -65,6 +65,7 @@ public class Variable extends Expression {
      *
      * @return имя переменной
      */
+    @Override
     public String toString() {
         return name;
     }
@@ -77,12 +78,5 @@ public class Variable extends Expression {
      */
     public Expression derivative(String var) {
         return name.equals(var) ? new Number(1) : new Number(0);
-    }
-
-    /**
-     * вывод имени переменной.
-     */
-    public void print() {
-        System.out.print(name);
     }
 }

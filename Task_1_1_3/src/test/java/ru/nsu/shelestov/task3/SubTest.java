@@ -46,7 +46,7 @@ public class SubTest {
         Expression minuend = new Number(7);
         Expression subtrahend = new Variable("y");
         Sub subs = new Sub(minuend, subtrahend);
-        subs.print();
+        System.out.print(subs);
         assertEquals("(7.0 - y)", subs.toString());
     }
 }

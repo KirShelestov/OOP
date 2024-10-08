@@ -67,6 +67,7 @@ public class Add extends Expression {
      *
      * @return отформатированная строка
      */
+    @Override
     public String toString() {
         return "(" + left.toString() + " + " + right.toString() + ")";
     }
@@ -79,12 +80,5 @@ public class Add extends Expression {
      */
     public Expression derivative(String var) {
         return new Add(left.derivative(var), right.derivative(var));
-    }
-
-    /**
-     * вывод выражения.
-     */
-    public void print() {
-        System.out.print(this.toString());
     }
 }

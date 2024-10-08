@@ -46,7 +46,7 @@ public class DivTest {
         Expression numerator = new Number(7);
         Expression denominator = new Variable("y");
         Div division = new Div(numerator, denominator);
-        division.print();
+        System.out.print(division);
         assertEquals("(7.0 / y)", division.toString());
     }
 }

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +35,9 @@ public class MainTest {
      * Перед каждым тестом перенаправляем стандартный вывод.
      */
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         System.setOut(new PrintStream(outputStreamCaptor));
+        outputStreamCaptor.close();
     }
 
     /**
@@ -52,23 +54,18 @@ public class MainTest {
     @Test
     void testMain() {
         String input = "(x + 2)\nx=10; y=13\nx\n";
-        System.setIn(new ByteArrayInputStream(input.getBytes()));
-
-        Main.main(new String[0]);
-
-        try {
-            String input1 = "x=10; y=13\n";
-            System.setIn(new ByteArrayInputStream(input1.getBytes()));
+        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes())) {
+            System.setIn(inputStream);
+            Main.main(new String[0]);
         } catch (Exception e) {
-            String input2 = "x\n";
-            System.setIn(new ByteArrayInputStream(input2.getBytes()));
+            e.printStackTrace();
         }
-
         String output = outputStreamCaptor.toString().trim();
         assertTrue(output.contains("Выражение:"));
         assertTrue(output.contains("Результат: 12.0")); // Предполагаемый результат
         assertTrue(output.contains("Производная по переменной:"));
     }
+
 
 
     /**
@@ -155,7 +152,7 @@ public class MainTest {
                 new Number(2.0)), new Sub(new Variable("y"), new Number(3.0))), expr5);
 
         Expression expr6 = Main.parseExpression("(x / 2.0)");
-        assertInstanceOf(Add.class, expr3);
+        assertInstanceOf(Div.class, expr6);
         Assertions.assertEquals(new Div(new Variable("x"), new Number(2.0)), expr6);
 
     }
@@ -179,5 +176,19 @@ public class MainTest {
         Exception exception3 = assertThrows(IllegalArgumentException.class,
                 () -> Main.parseExpression("(2.0 + (3.0 * 4.0)"));
         assertTrue(exception3.getMessage().contains("Вы ввели не выражение"));
+    }
+
+
+    /**
+     * Тест на зубодробительное выражение.
+     */
+    @Test
+    public void testTeethCrashingExpression() {
+        Expression expr =
+                Main.parseExpression("(((x + 2) * ((y - 3) / 4)) - (z + (x*(x/(y-z)))))");
+        assertEquals(new Sub(new Mul(new Add(new Variable("x"), new Number(2)),
+                new Div(new Sub(new Variable("y"), new Number(3)), new Number(4))),
+                new Add(new Variable("z"), new Mul(new Variable("x"), new Div(new Variable("x"),
+                        new Sub(new Variable("y"), new Variable("z")))))), expr);
     }
 }

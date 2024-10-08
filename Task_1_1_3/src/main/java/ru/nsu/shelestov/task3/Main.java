@@ -95,7 +95,7 @@ public class Main {
             Expression expr = parseExpression(expressionInput);
 
             System.out.print("Выражение: ");
-            expr.print();
+            System.out.print(expr);
 
             System.out.println("\nВведите значения переменных в формате 'x=10; y=13':");
             String variableAssignments = scanner.nextLine();
@@ -106,8 +106,7 @@ public class Main {
 
             System.out.println("Производная по переменной: ");
             String varDer = scanner.nextLine();
-            expr.derivative(varDer).print();
-
+            System.out.print(expr.derivative(varDer));
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
@@ -133,12 +132,14 @@ public class Main {
                     double value = Double.parseDouble(parts[1].trim());
                     variables.put(varName, value);
                 } catch (NumberFormatException e) {
-                    System.err.println("Неверный формат числа для переменной: " + varName + " со значением: " + parts[1].trim());
-                    throw new NumberFormatException("Неверный формат числа для переменной: " + varName + " со значением: " + parts[1].trim());
+                    final var errorMessage = "Неверный формат числа для переменной: " + varName + " со значением: " + parts[1].trim();
+                    System.err.println(errorMessage);
+                    throw new NumberFormatException(errorMessage);
                 }
             } else {
-                System.err.println("Неверный формат присваивания: " + pair);
-                throw new IllegalArgumentException("Неверный формат присваивания: " + pair);
+                final var errorMessage = "Неверный формат присваивания: " + pair;
+                System.err.println(errorMessage);
+                throw new IllegalArgumentException(errorMessage);
             }
         }
 

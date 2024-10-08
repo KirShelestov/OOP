@@ -70,6 +70,7 @@ public class Div extends Expression {
      *
      * @return отформатированная строка
      */
+    @Override
     public String toString() {
         return "(" + numerator.toString() + " / " + denominator.toString() + ")";
     }
@@ -84,12 +85,5 @@ public class Div extends Expression {
         return new Div(new Sub(new Mul(numerator.derivative(var), denominator),
                 new Mul(numerator, denominator.derivative(var))),
                 new Mul(denominator, denominator));
-    }
-
-    /**
-     * вывод выражения.
-     */
-    public void print() {
-        System.out.print(this.toString());
     }
 }

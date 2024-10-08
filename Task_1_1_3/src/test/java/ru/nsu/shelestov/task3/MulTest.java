@@ -46,7 +46,7 @@ public class MulTest {
         Expression factorFirst = new Number(7);
         Expression factorSecond = new Variable("y");
         Mul mult = new Mul(factorFirst, factorSecond);
-        mult.print();
+        System.out.print(mult);
         assertEquals("(7.0 * y)", mult.toString());
     }
 }

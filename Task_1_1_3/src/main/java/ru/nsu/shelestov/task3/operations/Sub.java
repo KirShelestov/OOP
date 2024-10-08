@@ -67,6 +67,7 @@ public class Sub extends Expression {
      *
      * @return строка в нужном формате.
      */
+    @Override
     public String toString() {
         return "(" + left.toString() + " - " + right.toString() + ")";
     }
@@ -81,10 +82,4 @@ public class Sub extends Expression {
         return new Sub(left.derivative(var), right.derivative(var));
     }
 
-    /**
-     * вывод выражения.
-     */
-    public void print() {
-        System.out.print(this.toString());
-    }
 }

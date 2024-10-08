@@ -46,7 +46,7 @@ public class AddTest {
         Expression summandFirst = new Number(7);
         Expression summandSecond = new Variable("y");
         Add sum = new Add(summandFirst, summandSecond);
-        sum.print();
+        System.out.print(sum);
         assertEquals("(7.0 + y)", sum.toString());
     }
 }

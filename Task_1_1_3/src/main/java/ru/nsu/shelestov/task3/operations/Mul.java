@@ -68,6 +68,7 @@ public class Mul extends Expression {
      *
      * @return отформатированная строка
      */
+    @Override
     public String toString() {
         return "(" + left.toString() + " * " + right.toString() + ")";
     }
@@ -82,10 +83,4 @@ public class Mul extends Expression {
         return new Add(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var)));
     }
 
-    /**
-     * вывод выражения.
-     */
-    public void print() {
-        System.out.print(this.toString());
-    }
 }

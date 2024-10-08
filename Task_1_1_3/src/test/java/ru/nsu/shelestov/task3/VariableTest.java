@@ -40,7 +40,7 @@ public class VariableTest {
     @Test
     void testPrint() {
         Expression vars = new Variable("x");
-        vars.print();
+        System.out.print(vars);
         assertEquals("x", vars.toString());
     }
 

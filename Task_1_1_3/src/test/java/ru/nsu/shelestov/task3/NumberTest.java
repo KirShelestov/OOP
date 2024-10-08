@@ -36,7 +36,7 @@ public class NumberTest {
     @Test
     void testPrint() {
         Expression num = new Number(7);
-        num.print();
+        System.out.print(num);
         assertEquals("7.0", num.toString());
     }
 }

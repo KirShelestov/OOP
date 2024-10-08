@@ -29,8 +29,4 @@ public abstract class Expression {
      */
     public abstract Expression derivative(String var);
 
-    /**
-     * вывод выражения.
-     */
-    public abstract void print();
 }

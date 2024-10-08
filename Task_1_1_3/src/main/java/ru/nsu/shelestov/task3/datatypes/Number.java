@@ -62,6 +62,7 @@ public class Number extends Expression {
      *
      * @return отформатированная строка
      */
+    @Override
     public String toString() {
         return Double.toString(value);
     }
@@ -74,12 +75,5 @@ public class Number extends Expression {
      */
     public Expression derivative(String var) {
         return new Number(0);
-    }
-
-    /**
-     * вывод числа.
-     */
-    public void print() {
-        System.out.print(value);
     }
 }
