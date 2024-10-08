@@ -16,8 +16,6 @@ public abstract class Expression {
 
     /**
      * печать отформатированной строки.
-     *
-     * @return отформатированная строка
      */
     public void print() {
         System.out.println(this);
