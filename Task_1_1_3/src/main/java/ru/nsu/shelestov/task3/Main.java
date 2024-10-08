@@ -132,8 +132,8 @@ public class Main {
                     double value = Double.parseDouble(parts[1].trim());
                     variables.put(varName, value);
                 } catch (NumberFormatException e) {
-                    final var errorMessage = "Неверный формат числа для переменной: " + varName +
-                            " со значением: " + parts[1].trim();
+                    final var errorMessage = "Неверный формат числа для переменной: " + varName
+                           + " со значением: " + parts[1].trim();
                     System.err.println(errorMessage);
                     throw new NumberFormatException(errorMessage);
                 }
