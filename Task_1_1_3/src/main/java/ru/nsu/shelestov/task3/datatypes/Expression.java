@@ -15,11 +15,10 @@ public abstract class Expression {
     public abstract double evaluate(Map<String, Double> variables);
 
     /**
-     * составление отформатированной строки.
+     * печать отформатированной строки.
      *
      * @return отформатированная строка
      */
-
     public void print() {
         System.out.println(this);
     };
