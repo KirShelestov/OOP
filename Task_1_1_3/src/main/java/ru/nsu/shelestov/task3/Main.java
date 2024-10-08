@@ -1,5 +1,6 @@
 package ru.nsu.shelestov.task3;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -103,12 +104,21 @@ public class Main {
 
             double result = expr.evaluate(variables);
             System.out.println("Результат: " + result);
-
             System.out.println("Производная по переменной: ");
             String varDer = scanner.nextLine();
             expr.derivative(varDer).print();
-        } catch (Exception e) {
-            System.out.println("Ошибка: " + e.getMessage());
+        } catch (ArithmeticException e) {
+            final var errorMessage = "Ошибка арифметики: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (NumberFormatException e) {
+            final var errorMessage = "Неправильный формат числа: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (IllegalArgumentException e) {
+            final var errorMessage = "Ошибка недопустимого аргумента: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (IllegalStateException e) {
+            final var errorMessage = "Ошибка недопустимого состояния: " + e.getMessage();
+            System.err.println(errorMessage);
         }
     }
 

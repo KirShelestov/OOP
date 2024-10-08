@@ -57,12 +57,25 @@ public class MainTest {
         try (ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes())) {
             System.setIn(inputStream);
             Main.main(new String[0]);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            final var errorMessage = "Ошибка ввода/вывода: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (ArithmeticException e) {
+            final var errorMessage = "Ошибка арифметики: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (NumberFormatException e) {
+            final var errorMessage = "Неправильный формат числа: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (IllegalArgumentException e) {
+            final var errorMessage = "Ошибка недопустимого аргумента: " + e.getMessage();
+            System.err.println(errorMessage);
+        } catch (IllegalStateException e) {
+            final var errorMessage = "Ошибка недопустимого состояния: " + e.getMessage();
+            System.err.println(errorMessage);
         }
         String output = outputStreamCaptor.toString().trim();
         assertTrue(output.contains("Выражение:"));
-        assertTrue(output.contains("Результат: 12.0")); // Предполагаемый результат
+        assertTrue(output.contains("Результат: 12.0"));
         assertTrue(output.contains("Производная по переменной:"));
     }
 
@@ -180,7 +193,7 @@ public class MainTest {
 
 
     /**
-     * Тест на зубодробительное выражение.
+     * Тест на более сложное выражение.
      */
     @Test
     public void testTeethCrashingExpression() {
@@ -190,5 +203,20 @@ public class MainTest {
                 new Div(new Sub(new Variable("y"), new Number(3)), new Number(4))),
                 new Add(new Variable("z"), new Mul(new Variable("x"), new Div(new Variable("x"),
                         new Sub(new Variable("y"), new Variable("z")))))), expr);
+
+        Expression derivative = expr.derivative("x");
+        assertEquals("((((1.0 + 0.0) * ((y - 3.0) / 4.0)) + ((x + 2.0) * ((((0.0 - 0.0) * 4.0)"
+              +  " - ((y - 3.0) * 0.0)) / (4.0 * 4.0)))) - (0.0 + ((1.0 * (x / (y - z))) + "
+              +  "(x * (((1.0 * (y - z)) - (x * (0.0 - 0.0))) / ((y - z) * (y - z)))))))",
+                derivative.toString());
+
+
+        Map<String, Double> variables = new HashMap<>();
+        variables.put("x", 100.0);
+        variables.put("y", 10.0);
+        variables.put("z", 1.0);
+
+        double result = expr.evaluate(variables);
+        assertEquals(-933.6111111111111, result);
     }
 }
