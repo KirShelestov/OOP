@@ -95,7 +95,7 @@ public class Main {
             Expression expr = parseExpression(expressionInput);
 
             System.out.print("Выражение: ");
-            System.out.print(expr);
+            expr.print();
 
             System.out.println("\nВведите значения переменных в формате 'x=10; y=13':");
             String variableAssignments = scanner.nextLine();
@@ -106,7 +106,7 @@ public class Main {
 
             System.out.println("Производная по переменной: ");
             String varDer = scanner.nextLine();
-            System.out.print(expr.derivative(varDer));
+            expr.derivative(varDer).print();
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
         }

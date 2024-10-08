@@ -19,7 +19,10 @@ public abstract class Expression {
      *
      * @return отформатированная строка
      */
-    public abstract String toString();
+
+    public void print() {
+        System.out.println(this);
+    };
 
     /**
      * подсчет производной.
