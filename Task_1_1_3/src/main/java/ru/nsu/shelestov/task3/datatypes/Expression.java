@@ -19,7 +19,7 @@ public abstract class Expression {
      */
     public void print() {
         System.out.println(this);
-    };
+    }
 
     /**
      * подсчет производной.
