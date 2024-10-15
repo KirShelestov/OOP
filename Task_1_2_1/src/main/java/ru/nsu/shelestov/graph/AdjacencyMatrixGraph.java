@@ -60,7 +60,8 @@ public class AdjacencyMatrixGraph implements Graph {
 
     /**
      * Добавление ребра с учетом ориентированности.
-     * Сначала получаем индексы вершины из хеш-мапы, затем с учетом ориентированности заполняем матрицу.
+     * Сначала получаем индексы вершины из хеш-мапы.
+     * Затем с учетом ориентированности заполняем матрицу.
      *
      * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
@@ -246,7 +247,7 @@ public class AdjacencyMatrixGraph implements Graph {
         }
 
         if (sortedList.size() != vertexCount) {
-            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
+            throw new IllegalStateException("Граф содержит цикл, сортировка невозможна.");
         }
 
         return sortedList;

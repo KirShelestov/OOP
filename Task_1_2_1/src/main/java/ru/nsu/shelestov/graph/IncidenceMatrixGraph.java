@@ -261,7 +261,7 @@ public class IncidenceMatrixGraph implements Graph {
 
         if (sortedList.size() != vertexIndexMap.size()) {
             throw new
-                    IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
+                    IllegalStateException("Граф содержит цикл, сортировка невозможна.");
         }
 
         return sortedList;

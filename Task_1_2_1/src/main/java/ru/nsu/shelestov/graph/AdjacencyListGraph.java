@@ -199,7 +199,7 @@ public class AdjacencyListGraph implements Graph {
         }
 
         if (sortedOrder.size() != adjacencyList.size()) {
-            throw new IllegalStateException("Граф содержит цикл; топологическая сортировка невозможна.");
+            throw new IllegalStateException("Граф содержит цикл; сортировка невозможна.");
         }
 
         return sortedOrder;
