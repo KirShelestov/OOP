@@ -1,27 +1,29 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.graph;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
  * Класс для хранения графа в виде матрицы смежности.
  */
 public class AdjacencyMatrixGraph implements Graph {
-    Map<String, Integer> vertexIndexMap;
-    boolean[][] adjacencyMatrix;
+    final Map<String, Integer> vertexIndexMap;
+    final boolean[][] adjacencyMatrix;
     private int vertexCount;
 
     /**
-     * Конструктор для инизиализации графа.
+     * Создаем хеш-мапу для хранения вершин и матрицу смежности.
      *
-     * @param maxVertices максимальное количество возможных вершин в графе.
+     * @param maxVertices максимальное количество возможных вершин
      */
     public AdjacencyMatrixGraph(int maxVertices) {
         vertexIndexMap = new HashMap<>();
@@ -30,12 +32,11 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для добавления вершины в граф.
+     * Добавление вершины в хеш-мапу, если такой вершины еще нету.
      *
-     * @param vertex вершина, которую нужно добавить в граф
+     * @param vertex вершина, которую хотим добавить
      */
-    @Override
-    public void addVertex(String vertex) {
+    @Override public void addVertex(String vertex) {
         if (!vertexIndexMap.containsKey(vertex)) {
             vertexIndexMap.put(vertex, vertexCount);
             vertexCount++;
@@ -43,12 +44,10 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для удаления вершины из графа.
-     *
-     * @param vertex вершина, которую нужно удалить из графа
+     * Удаление вершины из хеш-мапы и связнности этой вершины с другими в матрице.
+     * @param vertex
      */
-    @Override
-    public void removeVertex(String vertex) {
+    @Override public void removeVertex(String vertex) {
         if (vertexIndexMap.containsKey(vertex)) {
             int index = vertexIndexMap.remove(vertex);
             for (int i = 0; i < vertexCount; i++) {
@@ -59,11 +58,12 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для добавления ребра в граф.
+     * Добавление ребра с учетом ориентированности.
+     * Сначала получаем индексы вершины из хеш-мапы, затем с учетом ориентированности заполняем матрицу.
      *
      * @param vertex1 начальная вершина
-     * @param vertex2 конечнаяя вершина
-     * @param isDirected ориентированный ли граф
+     * @param vertex2 конечная вершина
+     * @param isDirected ориентированность ребра
      */
     @Override
     public void addEdge(String vertex1, String vertex2, boolean isDirected) {
@@ -78,11 +78,13 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для удаления ребра из графа.
+     * Удаление ребра из графа с учетом ориентированности.
+     * Сначала получаем индексы вершины из хеш-мапы.
+     * Затем с учетом ориентированности удаляем значения из матрицы.
      *
      * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
-     * @param isDirected ориентированный ли граф
+     * @param isDirected ориентированность ребра
      */
     @Override
     public void removeEdge(String vertex1, String vertex2, boolean isDirected) {
@@ -90,7 +92,6 @@ public class AdjacencyMatrixGraph implements Graph {
             int index1 = vertexIndexMap.get(vertex1);
             int index2 = vertexIndexMap.get(vertex2);
             adjacencyMatrix[index1][index2] = false;
-            adjacencyMatrix[index2][index1] = false;
             if (!isDirected) {
                 adjacencyMatrix[index2][index1] = false;
             }
@@ -98,13 +99,12 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для получения соседних вершин.
+     * Получаем соседей вершины в виде списка.
      *
-     * @param vertex вершина, для которой ищутся соседние
-     * @return список соседний вершин
+     * @param vertex вершина, для которой хотим найти соседей
+     * @return список соседей вершины
      */
-    @Override
-    public List<String> getNeighbors(String vertex) {
+    @Override public List<String> getNeighbors(String vertex) {
         List<String> neighbors = new ArrayList<>();
         if (vertexIndexMap.containsKey(vertex)) {
             int index = vertexIndexMap.get(vertex);
@@ -118,10 +118,10 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для получения вершины по индексу.
+     * Получение вершины по индексу в хеш-мапе.
      *
      * @param index индекс вершины
-     * @return вершина по заданному индексу
+     * @return вершина, если существует по заданному индексу
      */
     private String getVertexByIndex(int index) {
         for (Map.Entry<String, Integer> entry : vertexIndexMap.entrySet()) {
@@ -133,10 +133,10 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для считывания графа из файла и составления графа на основе полученных данных.
+     * Чтение графа из файла, сначала идет вершина в строке, затем все ее соседи.
      *
-     * @param file путь, по которому находится файл
-     * @param isDirected ориентированный ли граф
+     * @param file путь, по котору находится файл с графом
+     * @param isDirected ориентированность всего графа
      * @throws IOException ошибка ввода-вывода, если указан неверный путь
      */
     @Override
@@ -155,12 +155,11 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для строкового представления графа.
+     * Строковое представление графа, как ключ:значение.
      *
-     * @return строка в отформатированном виде
+     * @return отформатированная строка
      */
-    @Override
-    public String toString() {
+    @Override public String toString() {
         StringBuilder sb = new StringBuilder();
         for (String vertex : vertexIndexMap.keySet()) {
             sb.append(vertex).append(": ").append(getNeighbors(vertex)).append("\n");
@@ -168,15 +167,13 @@ public class AdjacencyMatrixGraph implements Graph {
         return sb.toString();
     }
 
-
     /**
-     * Метод для переопределения равенства между объектами.
+     * Переопределение сравнения.
      *
-     * @param obj объект, с которым сравнивается текущим объект класса
-     * @return true, если объекты равны, иначе false
+     * @param obj объект, с которым сравнивается текущий
+     * @return равенство объектов
      */
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -201,11 +198,20 @@ public class AdjacencyMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для топологической сортировки.
+     * Переопределение хеш-кода.
      *
-     * @return отсортированный граф
+     * @return хеш-код графа
      */
-    public List<String> topologicalSort() {
+    @Override public int hashCode() {
+        return Objects.hash(vertexIndexMap, Arrays.deepHashCode(adjacencyMatrix));
+    }
+
+    /**
+     * Топологическая сортировка.
+     *
+     * @return  окончательный порядок топологической сортировки, если сортировка возможна
+     */
+    @Override public List<String> topologicalSort() {
         int[] inDegree = new int[vertexCount];
 
         for (int i = 0; i < vertexCount; i++) {
@@ -239,11 +245,9 @@ public class AdjacencyMatrixGraph implements Graph {
         }
 
         if (sortedList.size() != vertexCount) {
-            throw new IllegalStateException("Граф содержит цикл,"
-                   + " топологическая сортировка невозможна.");
+            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
         }
 
         return sortedList;
     }
 }
-

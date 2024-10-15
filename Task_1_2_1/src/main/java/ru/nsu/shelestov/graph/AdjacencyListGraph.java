@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.graph;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -15,19 +16,18 @@ import java.util.Queue;
  */
 public class AdjacencyListGraph implements Graph {
     final Map<String, List<String>> adjacencyList;
-    private int vertexCount;
 
     /**
-     * Конструктор для списка смежности.
+     * Создание изначально пустого списка смежности в виде хеш-мапы.
      */
     public AdjacencyListGraph() {
         adjacencyList = new HashMap<>();
     }
 
     /**
-     * Метод для добавления вершины в граф.
+     * Добавлние вершины как пары название вершины - список соседних вершин.
      *
-     * @param vertex вершина, которую нужно добавить в граф
+     * @param vertex вершина, которую добавляем в граф.
      */
     @Override
     public void addVertex(String vertex) {
@@ -35,9 +35,9 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для удаления вершины из графа.
+     * Удаление вершины, сначала саму вершину удаляем, затем вершины из списка смежности.
      *
-     * @param vertex вершина, которую нужно удалить из графа
+     * @param vertex вершина, которую удаляем.
      */
     @Override
     public void removeVertex(String vertex) {
@@ -48,11 +48,11 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для добавления неориентированного ребра в граф.
+     * Добавляем ребро с учетом ориентированности.
      *
-     * @param vertex1 начальная веришна
+     * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
-     * @param isDirected ориентированный ли граф
+     * @param isDirected ориентированность ребра
      */
     @Override
     public void addEdge(String vertex1, String vertex2, boolean isDirected) {
@@ -65,20 +65,20 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для удаления ребра из графа.
+     * Удаляем ребро, перед этим проверяем существуют ли вершины у ребра.
      *
      * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
-     * @param isDirected ориентированный ли граф
+     * @param isDirected ориентированность ребра, от этого зависит удаление конечной вершины
      */
     @Override
     public void removeEdge(String vertex1, String vertex2, boolean isDirected) {
         List<String> neighbors1 = adjacencyList.get(vertex1);
-        List<String> neighbors2 = adjacencyList.get(vertex2);
         if (neighbors1 != null) {
             neighbors1.remove(vertex2);
         }
         if (!isDirected) {
+            List<String> neighbors2 = adjacencyList.get(vertex2);
             if (neighbors2 != null) {
                 neighbors2.remove(vertex1);
             }
@@ -86,9 +86,9 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для получения всех соседей вершины.
+     * Получаем соседей вершины в виде списка.
      *
-     * @param vertex вершина, для которой мы хотим найти соседей
+     * @param vertex вершина, для которой хотим найти соседей
      * @return список соседей вершины
      */
     @Override
@@ -97,10 +97,10 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для считывания графа из файла и составления графа на основе полученных данных.
+     * Чтение графа из файла, сначала идет вершина в строке, затем все ее соседи.
      *
-     * @param file путь, по которому находится файл
-     * @param isDirected ориентированный ли граф
+     * @param file путь, по котору находится файл с графом
+     * @param isDirected ориентированность всего графа
      * @throws IOException ошибка ввода-вывода, если указан неверный путь
      */
     @Override
@@ -116,9 +116,9 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для строкового представления графа.
+     * Строковое представление графа, как ключ:значение в хеш-мапе.
      *
-     * @return строка в отформатированном виде
+     * @return отформатированная строка
      */
     @Override
     public String toString() {
@@ -130,10 +130,10 @@ public class AdjacencyListGraph implements Graph {
     }
 
     /**
-     * Метод для переопределения равенства между объектами.
+     * Переопределение сравнения.
      *
-     * @param obj объект, с которым сравнивается текущим объект класса
-     * @return true, если объекты равны, иначе false
+     * @param obj объект, с которым сравнивается текущий
+     * @return равенство объектов
      */
     @Override
     public boolean equals(Object obj) {
@@ -144,17 +144,28 @@ public class AdjacencyListGraph implements Graph {
             return false;
         }
         AdjacencyListGraph other = (AdjacencyListGraph) obj;
-
         return this.adjacencyList.equals(other.adjacencyList);
     }
 
     /**
-     * Метод для топологической сортировки.
+     * Переопределение хеш-кода.
      *
-     * @return отсортированный граф
+     * @return хеш-код графа
      */
+    @Override
+    public int hashCode() {
+        return Objects.hash(adjacencyList);
+    }
+
+    /**
+     * Топологическая сортировка.
+     *
+     * @return  окончательный порядок топологической сортировки, если сортировка возможна
+     */
+    @Override
     public List<String> topologicalSort() {
         Map<String, Integer> inDegree = new HashMap<>();
+
         for (String vertex : adjacencyList.keySet()) {
             inDegree.put(vertex, 0);
         }
@@ -166,6 +177,7 @@ public class AdjacencyListGraph implements Graph {
         }
 
         Queue<String> queue = new LinkedList<>();
+
         for (Map.Entry<String, Integer> entry : inDegree.entrySet()) {
             if (entry.getValue() == 0) {
                 queue.add(entry.getKey());
@@ -173,6 +185,7 @@ public class AdjacencyListGraph implements Graph {
         }
 
         List<String> sortedOrder = new ArrayList<>();
+
         while (!queue.isEmpty()) {
             String current = queue.poll();
             sortedOrder.add(current);
@@ -186,13 +199,10 @@ public class AdjacencyListGraph implements Graph {
         }
 
         if (sortedOrder.size() != adjacencyList.size()) {
-            throw new IllegalStateException("Граф содержит цикл; "
-                   + "топологическая сортировка невозможна.");
+            throw new IllegalStateException("Граф содержит цикл; топологическая сортировка невозможна.");
         }
 
         return sortedOrder;
     }
 
 }
-
-

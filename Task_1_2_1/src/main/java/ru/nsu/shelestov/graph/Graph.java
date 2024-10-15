@@ -1,11 +1,11 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.graph;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 /**
- * Интерфейс для последующей реализации раздичных способов хранения графа.
+ * Интерфейс для последующей реализации различных способов хранения графа.
  */
 public interface Graph {
 
@@ -20,5 +20,6 @@ public interface Graph {
     List<String> getNeighbors(String vertex);
 
     void readFromFile(File file, boolean isDirected) throws IOException;
-}
 
+    List<String> topologicalSort();
+}

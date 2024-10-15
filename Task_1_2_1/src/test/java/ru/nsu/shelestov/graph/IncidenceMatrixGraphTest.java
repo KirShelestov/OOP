@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.graph;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -75,7 +75,7 @@ public class IncidenceMatrixGraphTest {
         graph.addVertex("B");
         graph.addEdge("A", "B", false);
         List<String> neighbors = graph.getNeighbors("A");
-        assertEquals(1, ((List<?>) neighbors).size());
+        assertEquals(1, neighbors.size());
         assertTrue(neighbors.contains("B"));
     }
 
@@ -122,7 +122,7 @@ public class IncidenceMatrixGraphTest {
         graph2.addVertex("A");
         graph2.addVertex("B");
         graph2.addEdge("A", "B", false);
-        assertTrue(graph1.equals(graph2));
+        assertEquals(graph1, graph2);
     }
 
     /**

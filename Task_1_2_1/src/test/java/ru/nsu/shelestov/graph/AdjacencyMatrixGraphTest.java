@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.graph;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -91,7 +91,7 @@ public class AdjacencyMatrixGraphTest {
         File file = new File("test.txt");
         graph.readFromFile(file, false);
         assertEquals(5, graph.vertexIndexMap.size());
-        assertTrue(graph.adjacencyMatrix[0][1]);
+        assertTrue(graph.adjacencyMatrix[1][0]);
         assertTrue(graph.adjacencyMatrix[0][2]);
         assertTrue(graph.adjacencyMatrix[1][3]);
         assertTrue(graph.adjacencyMatrix[2][4]);

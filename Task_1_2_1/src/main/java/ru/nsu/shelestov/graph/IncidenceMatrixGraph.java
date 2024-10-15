@@ -1,29 +1,32 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.graph;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
  * Класс для хранеия графа в виде матрицы инцидентности.
  */
 public class IncidenceMatrixGraph implements Graph {
-    Map<String, Integer> vertexIndexMap;
+    final Map<String, Integer> vertexIndexMap;
     private final List<String> edges;
-    boolean[][] incidenceMatrix;
+    final boolean[][] incidenceMatrix;
     private int edgeCount;
 
     /**
-     * Конструктор для инициализации графа.
+     * Для инициализации матрицы инцидентности создаем хеш-мапу для хранения вершин.
+     * Создаем также список для ребер и матрицу инцидентности.
      *
-     * @param maxVertices максимальное количество возможных вершин в графе
-     * @param maxEdges максимальное количество возможных ребер в графе
+     * @param maxVertices
+     * @param maxEdges
      */
     public IncidenceMatrixGraph(int maxVertices, int maxEdges) {
         vertexIndexMap = new HashMap<>();
@@ -33,9 +36,9 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для добавления вершины в граф.
+     * Добавление вершины, если раньше ее не добавляли.
      *
-     * @param vertex вершина, которую нужно добавить в граф
+     * @param vertex вершину, которую хотим добавить в граф
      */
     @Override
     public void addVertex(String vertex) {
@@ -45,9 +48,9 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для удаления вершины из графа.
+     * Удаление вершины из хеш-мапы, затем удаление значений из матрицы инцидентности.
      *
-     * @param vertex вершина, которую нужно удалить из графа
+     * @param vertex вершина которую хотим удалить
      */
     @Override
     public void removeVertex(String vertex) {
@@ -60,11 +63,13 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для добавления ребра в граф.
+     * Добавление ребра с учетом ориентированности.
+     * Добавляем ребро в список ребер.
+     * Затем заполняем матрицу инцидентности по индексам вершин.
      *
      * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
-     * @param isDirected ориентированный ли граф
+     * @param isDirected ориентированность ребра
      */
     @Override
     public void addEdge(String vertex1, String vertex2, boolean isDirected) {
@@ -84,11 +89,13 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для удаления ребра из графа.
+     * Удаление ребра с учетом ориентированности.
+     * Удаляем ребро из списка ребер.
+     * Удаляем значения из матрицы инцидентности.
      *
      * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
-     * @param isDirected ориентированный ли граф
+     * @param isDirected ориентированность ребра
      */
     @Override
     public void removeEdge(String vertex1, String vertex2, boolean isDirected) {
@@ -106,10 +113,12 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для получения соседних вершин.
+     * Получение соседей вершины.
+     * Проходимя по хеш-мапе.
+     * Затем по индексам вершин проходимся по матрице инцидентности.
      *
-     * @param vertex вершина, для которой ищутся соседние
-     * @return список соседний вершин
+     * @param vertex вершина, для которой хотим найти соседей
+     * @return список соседей
      */
     @Override
     public List<String> getNeighbors(String vertex) {
@@ -133,9 +142,10 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для считывания графа из файла и составления графа на основе полученных данных.
+     * Чтение графа из файла, сначала идет вершина в строке, затем все ее соседи.
      *
-     * @param file путь, по которому находится файл
+     * @param file путь, по котору находится файл с графом
+     * @param isDirected ориентированность всего графа
      * @throws IOException ошибка ввода-вывода, если указан неверный путь
      */
     @Override
@@ -153,12 +163,11 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для строкового представления графа.
+     * Строковое представление графа.
      *
-     * @return строка в отформатированном виде
+     * @return отформатированная строка
      */
-    @Override
-    public String toString() {
+    @Override public String toString() {
         StringBuilder sb = new StringBuilder();
 
         for (String edge : edges) {
@@ -169,13 +178,12 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для переопределения равенства между объектами.
+     * Переопределение сравнения.
      *
-     * @param obj объект, с которым сравнивается текущим объект класса
-     * @return true, если объекты равны, иначе false
+     * @param obj объект, с которым сравнивается текущий
+     * @return равенство объектов
      */
-    @Override
-    public boolean equals(Object obj) {
+    @Override public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
@@ -184,8 +192,7 @@ public class IncidenceMatrixGraph implements Graph {
         }
         IncidenceMatrixGraph other = (IncidenceMatrixGraph) obj;
 
-        if (this.edgeCount != other.edgeCount
-                || this.vertexIndexMap.size() != other.vertexIndexMap.size()) {
+        if (this.edgeCount != other.edgeCount || this.vertexIndexMap.size() != other.vertexIndexMap.size()) {
             return false;
         }
 
@@ -201,11 +208,21 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Метод для топологической сортировки.
+     * Переопределение хеш-кода.
      *
-     * @return отсортированный граф
+     * @return хеш-код графа
      */
-    public List<String> topologicalSort() {
+    @Override
+    public int hashCode() {
+        return Objects.hash(vertexIndexMap, edges, Arrays.deepHashCode(incidenceMatrix));
+    }
+
+    /**
+     * Топологическая сортировка.
+     *
+     * @return  окончательный порядок топологической сортировки, если сортировка возможна
+     */
+    @Override public List<String> topologicalSort() {
         List<String> sortedList = new ArrayList<>();
         Map<String, Integer> inDegree = new HashMap<>();
 
@@ -242,11 +259,9 @@ public class IncidenceMatrixGraph implements Graph {
         }
 
         if (sortedList.size() != vertexIndexMap.size()) {
-            throw new IllegalStateException("Граф содержит цикл, "
-                   + "топологическая сортировка невозможна.");
+            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
         }
 
         return sortedList;
     }
-
 }
