@@ -3,8 +3,8 @@ package ru.nsu.shelestov.graph;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,7 +45,8 @@ public class AdjacencyMatrixGraph implements Graph {
 
     /**
      * Удаление вершины из хеш-мапы и связнности этой вершины с другими в матрице.
-     * @param vertex
+     *
+     * @param vertex вершина, которую хотим удалить
      */
     @Override public void removeVertex(String vertex) {
         if (vertexIndexMap.containsKey(vertex)) {

@@ -3,8 +3,8 @@ package ru.nsu.shelestov.graph;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,8 +25,8 @@ public class IncidenceMatrixGraph implements Graph {
      * Для инициализации матрицы инцидентности создаем хеш-мапу для хранения вершин.
      * Создаем также список для ребер и матрицу инцидентности.
      *
-     * @param maxVertices
-     * @param maxEdges
+     * @param maxVertices максимальное количество вершин
+     * @param maxEdges максимальное количество ребер
      */
     public IncidenceMatrixGraph(int maxVertices, int maxEdges) {
         vertexIndexMap = new HashMap<>();
@@ -192,7 +192,8 @@ public class IncidenceMatrixGraph implements Graph {
         }
         IncidenceMatrixGraph other = (IncidenceMatrixGraph) obj;
 
-        if (this.edgeCount != other.edgeCount || this.vertexIndexMap.size() != other.vertexIndexMap.size()) {
+        if (this.edgeCount != other.edgeCount || this.vertexIndexMap.size()
+                != other.vertexIndexMap.size()) {
             return false;
         }
 
@@ -259,7 +260,8 @@ public class IncidenceMatrixGraph implements Graph {
         }
 
         if (sortedList.size() != vertexIndexMap.size()) {
-            throw new IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
+            throw new
+                    IllegalStateException("Граф содержит цикл, топологическая сортировка невозможна.");
         }
 
         return sortedList;
