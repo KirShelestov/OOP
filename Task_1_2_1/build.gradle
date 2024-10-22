@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'ru.nsu.shelestov'
+group = 'ru.nsu.shelestov.graph'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -24,4 +24,18 @@ jacocoTestReport {
         html.required = false
 
     }
+}
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+task run(type: JavaExec) {
+    main = 'ru.nsu.shelestov.graph.Main' // Замените на ваш основной класс
+    classpath = sourceSets.main.runtimeClasspath
 }

@@ -1,166 +1,77 @@
 package ru.nsu.shelestov.graph;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.File;
-import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/**
- * Класс для тестирования списка смежности.
- */
-public class AdjacencyListGraphTest {
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 
-    /**
-     * Тест на добавления вершины.
-     */
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+class AdjacencyListGraphTest {
+    private AdjacencyListGraph<String> graph;
+
+    @BeforeEach
+    public void setUp() {
+        graph = new AdjacencyListGraph<>();
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addEdge("A", "B", 5, false);
+        graph.addEdge("B", "C", 5, false);
+    }
+
     @Test
     public void testAddVertex() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        assertTrue(graph.adjacencyList.containsKey("A"));
+        graph.addVertex("D");
+        assertTrue(graph.getVertices().contains("D"));
     }
 
-    /**
-     * Тест на удаление вершины.
-     */
     @Test
     public void testRemoveVertex() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addEdge("A", "B", false);
-        graph.removeVertex("A");
-        assertFalse(graph.adjacencyList.containsKey("A"));
-        assertFalse(graph.adjacencyList.get("B").contains("A"));
+        graph.removeVertex("C");
+        assertFalse(graph.getVertices().contains("C"));
+        assertFalse(graph.getNeighbors("B").contains("C"));
     }
 
-    /**
-     * Тест на добавление ребра.
-     */
     @Test
     public void testAddEdge() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addEdge("A", "B", false);
-        assertTrue(graph.adjacencyList.get("A").contains("B"));
-        assertTrue(graph.adjacencyList.get("B").contains("A"));
+        graph.addEdge("A", "C", 5, false);
+        assertTrue(graph.getNeighbors("A").contains("C"));
+        assertTrue(graph.getNeighbors("C").contains("A"));
     }
 
-    /**
-     * Тест на удаление ребра.
-     */
     @Test
     public void testRemoveEdge() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addEdge("A", "B", false);
         graph.removeEdge("A", "B", false);
-        assertFalse(graph.adjacencyList.get("A").contains("B"));
-        assertFalse(graph.adjacencyList.get("B").contains("A"));
+        assertFalse(graph.getNeighbors("A").contains("B"));
+        assertFalse(graph.getNeighbors("B").contains("A"));
     }
 
-    /**
-     * Тест на поиск соседних вершин.
-     */
     @Test
     public void testGetNeighbors() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addEdge("A", "B", false);
-        assertEquals(1, graph.getNeighbors("A").size());
-        assertTrue(graph.getNeighbors("A").contains("B"));
+        List<String> neighbors = graph.getNeighbors("B");
+        assertEquals(2, neighbors.size());
+        assertTrue(neighbors.contains("A"));
+        assertTrue(neighbors.contains("C"));
     }
 
-    /**
-     * Тест на чтение из файла графа.
-     *
-     * @throws Exception ошибка при считывания файла
-     */
-    @Test
-    public void testReadFromFile() throws Exception {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        File file = new File("test.txt");
+    @Test public void testReadGraph() throws IOException, URISyntaxException {
+        Path tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
 
-        graph.readFromFile(file, false);
-        assertEquals(5, graph.adjacencyList.size());
-        assertTrue(graph.adjacencyList.get("A").contains("B"));
-        assertTrue(graph.adjacencyList.get("A").contains("C"));
-        assertTrue(graph.adjacencyList.get("B").contains("D"));
-        assertTrue(graph.adjacencyList.get("C").contains("E"));
-    }
-
-    /**
-     * Тест на правильное форматирование строки, которая представляет собой граф.
-     */
-    @Test
-    public void testToString() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addEdge("A", "B", false);
-        String expected = "A: [B]\nB: [A]\n";
-        assertEquals(expected, graph.toString());
-    }
-
-    /**
-     * Тест на сравнение графов.
-     */
-    @Test
-    public void testEquals() {
-        AdjacencyListGraph graph1 = new AdjacencyListGraph();
-        graph1.addVertex("A");
-        graph1.addVertex("B");
-        graph1.addEdge("A", "B", false);
-        AdjacencyListGraph graph2 = new AdjacencyListGraph();
-        graph2.addVertex("A");
-        graph2.addVertex("B");
-        graph2.addEdge("A", "B", false);
-        assertEquals(graph1, graph2);
-    }
-
-    /**
-     * Тест на правильность топологической сортировки.
-     */
-    @Test
-    public void testTopologicalSort() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addVertex("C");
-        graph.addVertex("D");
-        graph.addVertex("E");
-        graph.addEdge("A", "B", true);
-        graph.addEdge("A", "C", true);
-        graph.addEdge("B", "D", true);
-        graph.addEdge("C", "E", true);
-        List<String> sortedOrder = graph.topologicalSort();
-        assertEquals(5, sortedOrder.size());
-        assertEquals("A", sortedOrder.get(0));
-        assertEquals("B", sortedOrder.get(1));
-        assertEquals("C", sortedOrder.get(2));
-        assertEquals("D", sortedOrder.get(3));
-        assertEquals("E", sortedOrder.get(4));
-    }
-
-    /**
-     * Тест на нахождения цикла при топологической сортировке.
-     */
-    @Test
-    public void testTopologicalSortWithCycle() {
-        AdjacencyListGraph graph = new AdjacencyListGraph();
-        graph.addVertex("A");
-        graph.addVertex("B");
-        graph.addVertex("C");
-        graph.addEdge("A", "B", true);
-        graph.addEdge("B", "C", true);
-        graph.addEdge("C", "A", true);
-        assertThrows(IllegalStateException.class, graph::topologicalSort);
+        AdjacencyListGraph<String> newGraph = new AdjacencyListGraph<>();
+        newGraph.read(tempFile.toFile(), false, Function.identity());
+        assertTrue(newGraph.getVertices().contains("A"));
+        assertTrue(newGraph.getVertices().contains("B"));
+        assertTrue(newGraph.getVertices().contains("C"));
+        assertTrue(newGraph.getNeighbors("A").contains("B"));
+        assertTrue(newGraph.getNeighbors("B").contains("C"));
     }
 }

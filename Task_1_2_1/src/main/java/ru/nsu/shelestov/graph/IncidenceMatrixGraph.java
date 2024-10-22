@@ -4,160 +4,173 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Queue;
+import java.util.function.Function;
 
 /**
- * Класс для хранеия графа в виде матрицы инцидентности.
+ * Класс, представляющий граф с использованием матрицы инцидентности.
+ *
+ * @param <T> тип вершин графа
  */
-public class IncidenceMatrixGraph implements Graph {
-    final Map<String, Integer> vertexIndexMap;
-    private final List<String> edges;
-    final boolean[][] incidenceMatrix;
-    private int edgeCount;
+public class IncidenceMatrixGraph<T> implements Graph<T> {
+    private final List<T> vertices;
+    private final List<List<Boolean>> incidenceMatrix;
+    private final List<Double> edgeWeights;
 
     /**
-     * Для инициализации матрицы инцидентности создаем хеш-мапу для хранения вершин.
-     * Создаем также список для ребер и матрицу инцидентности.
+     * Инициализация матрицы инцедентности.
      *
-     * @param maxVertices максимальное количество вершин
-     * @param maxEdges максимальное количество ребер
+     * @param size размер матрицы
      */
-    public IncidenceMatrixGraph(int maxVertices, int maxEdges) {
-        vertexIndexMap = new HashMap<>();
-        edges = new ArrayList<>();
-        incidenceMatrix = new boolean[maxVertices][maxEdges];
-        edgeCount = 0;
+    public IncidenceMatrixGraph(int size) {
+        vertices = new ArrayList<>(size);
+        incidenceMatrix = new ArrayList<>();
+        edgeWeights = new ArrayList<>();
     }
 
     /**
-     * Добавление вершины, если раньше ее не добавляли.
+     * Добавление вершины и заполнение матрицы смежности.
      *
-     * @param vertex вершину, которую хотим добавить в граф
+     * @param vertex вершина, которую хотим добавить
      */
     @Override
-    public void addVertex(String vertex) {
-        if (!vertexIndexMap.containsKey(vertex)) {
-            vertexIndexMap.put(vertex, vertexIndexMap.size());
-        }
-    }
-
-    /**
-     * Удаление вершины из хеш-мапы, затем удаление значений из матрицы инцидентности.
-     *
-     * @param vertex вершина которую хотим удалить
-     */
-    @Override
-    public void removeVertex(String vertex) {
-        if (vertexIndexMap.containsKey(vertex)) {
-            int index = vertexIndexMap.remove(vertex);
-            for (int i = 0; i < edgeCount; i++) {
-                incidenceMatrix[index][i] = false;
+    public void addVertex(T vertex) {
+        if (!vertices.contains(vertex)) {
+            vertices.add(vertex);
+            for (List<Boolean> row : incidenceMatrix) {
+                row.add(false);
             }
         }
     }
 
     /**
-     * Добавление ребра с учетом ориентированности.
-     * Добавляем ребро в список ребер.
-     * Затем заполняем матрицу инцидентности по индексам вершин.
+     * Удаление вершины.
+     *
+     * @param vertex вершина, которую хотим удалить
+     */
+    @Override
+    public void removeVertex(T vertex) {
+        int index = vertices.indexOf(vertex);
+        if (index != -1) {
+            vertices.remove(index);
+            incidenceMatrix.remove(index-1);
+            for (List<Boolean> row : incidenceMatrix) {
+                row.remove(index);
+            }
+        }
+    }
+
+    /**
+     * Добавление ребра между вершинами.
+     *
+     * @param vertex1 начальная вершина
+     * @param vertex2 конечная вершина
+     * @param weight вес ребра
+     * @param isDirected ориентированность ребра
+     */
+    @Override public void addEdge(T vertex1, T vertex2, double weight, boolean isDirected) {
+        int index1 = vertices.indexOf(vertex1);
+        int index2 = vertices.indexOf(vertex2);
+        if (index1 != -1 && index2 != -1) {
+            List<Boolean> edge = new ArrayList<>(Collections.nCopies(vertices.size(), false));
+            edge.set(index1, true);
+            edge.set(index2, true);
+            incidenceMatrix.add(edge);
+            edgeWeights.add(weight);
+            if (isDirected) {
+                edge.set(index2, false);
+            }
+        }
+    }
+
+    /**
+     * Удаление ребра между указанными вершинами.
      *
      * @param vertex1 начальная вершина
      * @param vertex2 конечная вершина
      * @param isDirected ориентированность ребра
      */
     @Override
-    public void addEdge(String vertex1, String vertex2, boolean isDirected) {
-        addVertex(vertex1);
-        addVertex(vertex2);
-
-        edges.add(vertex1 + "-" + vertex2);
-        int edgeIndex = edgeCount++;
-
-        int index1 = vertexIndexMap.get(vertex1);
-        int index2 = vertexIndexMap.get(vertex2);
-
-        incidenceMatrix[index1][edgeIndex] = true;
-        if (!isDirected) {
-            incidenceMatrix[index2][edgeIndex] = true;
-        }
+    public void removeEdge(T vertex1, T vertex2, boolean isDirected) {
+        int index1 = vertices.indexOf(vertex1);
+        int index2 = vertices.indexOf(vertex2);
+        incidenceMatrix.removeIf(edge -> edge.get(index1) && edge.get(index2));
+        edgeWeights.removeIf(weight -> weight == getEdgeWeight(vertex1, vertex2));
     }
 
     /**
-     * Удаление ребра с учетом ориентированности.
-     * Удаляем ребро из списка ребер.
-     * Удаляем значения из матрицы инцидентности.
+     * Получение соседей.
      *
-     * @param vertex1 начальная вершина
-     * @param vertex2 конечная вершина
-     * @param isDirected ориентированность ребра
+     * @param vertex веришна, для которой ищем соседей.
+     * @return список соседей вершины
      */
     @Override
-    public void removeEdge(String vertex1, String vertex2, boolean isDirected) {
-        String edgeToRemove = vertex1 + "-" + vertex2;
-
-        for (int i = 0; i < edgeCount; i++) {
-            if (edges.get(i).equals(edgeToRemove)) {
-                edges.remove(i);
-                for (int j = 0; j < incidenceMatrix.length; j++) {
-                    incidenceMatrix[j][i] = false;
-                }
-                break;
-            }
-        }
-    }
-
-    /**
-     * Получение соседей вершины.
-     * Проходимя по хеш-мапе.
-     * Затем по индексам вершин проходимся по матрице инцидентности.
-     *
-     * @param vertex вершина, для которой хотим найти соседей
-     * @return список соседей
-     */
-    @Override
-    public List<String> getNeighbors(String vertex) {
-        List<String> neighbors = new ArrayList<>();
-
-        if (vertexIndexMap.containsKey(vertex)) {
-            int index = vertexIndexMap.get(vertex);
-            for (int i = 0; i < edgeCount; i++) {
-                if (incidenceMatrix[index][i]) {
-                    String[] vertices = edges.get(i).split("-");
-                    if (vertices[0].equals(vertex)) {
-                        neighbors.add(vertices[1]);
-                    } else {
-                        neighbors.add(vertices[0]);
+    public List<T> getNeighbors(T vertex) {
+        List<T> neighbors = new ArrayList<>();
+        int index = vertices.indexOf(vertex);
+        for (List<Boolean> edge : incidenceMatrix) {
+            if (edge.get(index)) {
+                for (int i = 0; i < edge.size(); i++) {
+                    if (edge.get(i) && i != index) {
+                        neighbors.add(vertices.get(i));
                     }
                 }
             }
         }
-
         return neighbors;
     }
 
     /**
-     * Чтение графа из файла, сначала идет вершина в строке, затем все ее соседи.
+     * Получение спискаа всех вершин в графе.
      *
-     * @param file путь, по котору находится файл с графом
-     * @param isDirected ориентированность всего графа
-     * @throws IOException ошибка ввода-вывода, если указан неверный путь
+     * @return список всех вершин
      */
     @Override
-    public void readFromFile(File file, boolean isDirected) throws IOException {
-        List<String> lines = Files.readAllLines(file.toPath());
+    public List<T> getVertices() {
+        return new ArrayList<>(vertices);
+    }
 
+    /**
+     * Получение веса ребра.
+     *
+     * @param vertex1 начальная вершина
+     * @param vertex2 конечная вершина
+     * @return вес ребра между двумя заданнами вершинами
+     */
+    @Override
+    public double getEdgeWeight(T vertex1, T vertex2) {
+        int index1 = vertices.indexOf(vertex1);
+        int index2 = vertices.indexOf(vertex2);
+        for (int i = 0; i < incidenceMatrix.size(); i++) {
+            List<Boolean> edge = incidenceMatrix.get(i);
+            if (edge.get(index1) && edge.get(index2)) {
+                return edgeWeights.get(i);
+            }
+        }
+        return Double.NaN;
+    }
+
+    /**
+     * Чтение графа из файла
+     *
+     * @param file файл, из которого считываем граф
+     * @param isDirected ориентированность графа
+     * @param parse функция для преобразования строк в вершины
+     * @throws IOException ошибка чтения файла
+     */
+    @Override
+    public void read(File file, boolean isDirected, Function<String, T> parse) throws IOException {
+        List<String> lines = Files.readAllLines(file.toPath());
         for (String line : lines) {
             String[] parts = line.split(" ");
-            addVertex(parts[0]);
-
-            for (int i = 1; i < parts.length; i++) {
-                addEdge(parts[0], parts[i], isDirected);
+            T vertex1 = parse.apply(parts[0]);
+            addVertex(vertex1);
+            for (int i = 1; i < parts.length - 1; i += 2) {
+                T vertex2 = parse.apply(parts[i]);
+                double weight = Double.parseDouble(parts[i + 1]);
+                addEdge(vertex1, vertex2, weight, isDirected);
             }
         }
     }
@@ -165,105 +178,47 @@ public class IncidenceMatrixGraph implements Graph {
     /**
      * Строковое представление графа.
      *
-     * @return отформатированная строка
+     * @return строковое представление графа
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-
-        for (String edge : edges) {
-            sb.append(edge).append("\n");
+        for (int i = 0; i < incidenceMatrix.size(); i++) {
+            sb.append("Edge ").append(i).append(": ");
+            for (int j = 0; j < vertices.size(); j++) {
+                if (incidenceMatrix.get(i).get(j)) {
+                    sb.append(vertices.get(j)).append(" (").append(edgeWeights.get(i)).append(") ");
+                }
+            }
+            sb.append("\n");
         }
-
         return sb.toString();
     }
 
     /**
-     * Переопределение сравнения.
+     * Переопределение сравнения графа.
      *
      * @param obj объект, с которым сравнивается текущий
      * @return равенство объектов
      */
-    @Override public boolean equals(Object obj) {
+    @Override
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
         if (!(obj instanceof IncidenceMatrixGraph)) {
             return false;
         }
-        IncidenceMatrixGraph other = (IncidenceMatrixGraph) obj;
-
-        if (this.edgeCount != other.edgeCount || this.vertexIndexMap.size()
-                != other.vertexIndexMap.size()) {
-            return false;
-        }
-
-        for (int i = 0; i < incidenceMatrix.length; i++) {
-            for (int j = 0; j < edgeCount; j++) {
-                if (this.incidenceMatrix[i][j] != other.incidenceMatrix[i][j]) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        IncidenceMatrixGraph<?> other = (IncidenceMatrixGraph<?>) obj;
+        return vertices.equals(other.vertices) && incidenceMatrix.equals(other.incidenceMatrix) && edgeWeights.equals(other.edgeWeights);
     }
 
     /**
      * Переопределение хеш-кода.
      *
-     * @return хеш-код графа
+     * @return хеш-код
      */
-    @Override
-    public int hashCode() {
-        return Objects.hash(vertexIndexMap, edges, Arrays.deepHashCode(incidenceMatrix));
-    }
-
-    /**
-     * Топологическая сортировка.
-     *
-     * @return  окончательный порядок топологической сортировки, если сортировка возможна
-     */
-    @Override public List<String> topologicalSort() {
-        List<String> sortedList = new ArrayList<>();
-        Map<String, Integer> inDegree = new HashMap<>();
-
-        for (String vertex : vertexIndexMap.keySet()) {
-            inDegree.put(vertex, 0);
-        }
-
-        for (int j = 0; j < edgeCount; j++) {
-            String[] vertices = edges.get(j).split("-");
-            inDegree.put(vertices[1], inDegree.get(vertices[1]) + 1);
-        }
-
-        Queue<String> queue = new LinkedList<>();
-        for (String vertex : inDegree.keySet()) {
-            if (inDegree.get(vertex) == 0) {
-                queue.add(vertex);
-            }
-        }
-
-        while (!queue.isEmpty()) {
-            String currentVertex = queue.poll();
-            sortedList.add(currentVertex);
-
-            for (int j = 0; j < edgeCount; j++) {
-                String[] vertices = edges.get(j).split("-");
-                if (vertices[0].equals(currentVertex)) {
-                    String neighbor = vertices[1];
-                    inDegree.put(neighbor, inDegree.get(neighbor) - 1);
-                    if (inDegree.get(neighbor) == 0) {
-                        queue.add(neighbor);
-                    }
-                }
-            }
-        }
-
-        if (sortedList.size() != vertexIndexMap.size()) {
-            throw new
-                    IllegalStateException("Граф содержит цикл, сортировка невозможна.");
-        }
-
-        return sortedList;
+    @Override public int hashCode() {
+        return Objects.hash(vertices, incidenceMatrix, edgeWeights);
     }
 }
