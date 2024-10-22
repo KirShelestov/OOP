@@ -80,11 +80,10 @@ class AdjacencyMatrixGraphTest {
 
     @Test
     public void testReadGraph() throws IOException, URISyntaxException {
-        Path
-                tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
+        Path temp = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
 
         AdjacencyMatrixGraph<String> newGraph = new AdjacencyMatrixGraph<>(3);
-        newGraph.read(tempFile.toFile(), false, Function.identity());
+        newGraph.read(temp.toFile(), false, Function.identity());
 
         assertTrue(newGraph.getVertices().contains("A"));
         assertTrue(newGraph.getVertices().contains("B"));

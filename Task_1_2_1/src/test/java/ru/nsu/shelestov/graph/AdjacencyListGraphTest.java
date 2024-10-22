@@ -63,11 +63,10 @@ class AdjacencyListGraphTest {
     }
 
     @Test public void testReadGraph() throws IOException, URISyntaxException {
-        Path
-                tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
+        Path temp = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
 
         AdjacencyListGraph<String> newGraph = new AdjacencyListGraph<>();
-        newGraph.read(tempFile.toFile(), false, Function.identity());
+        newGraph.read(temp.toFile(), false, Function.identity());
         assertTrue(newGraph.getVertices().contains("A"));
         assertTrue(newGraph.getVertices().contains("B"));
         assertTrue(newGraph.getVertices().contains("C"));
@@ -83,6 +82,7 @@ class AdjacencyListGraphTest {
         String expected = "A: {B=1.0}\nB: {A=5.0, C=2.0}\nC: {B=5.0}\n";
         assertEquals(expected, graph.toString());
     }
+
     @Test
     void testEqualsAndHashCode() {
         AdjacencyListGraph<String> anotherGraph = new AdjacencyListGraph<>();
