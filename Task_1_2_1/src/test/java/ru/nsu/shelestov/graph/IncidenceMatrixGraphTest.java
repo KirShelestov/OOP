@@ -1,13 +1,12 @@
 package ru.nsu.shelestov.graph;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class IncidenceMatrixGraphTest {
     private IncidenceMatrixGraph<String> graph;
@@ -52,10 +51,5 @@ class IncidenceMatrixGraphTest {
         assertTrue(neighbors.contains("A"));
         assertTrue(neighbors.contains("C"));
     }
-
-//    @Test
-//    public void testToString() {
-//        String expected = "Edge 0: [A, B] \nEdge 1: [B, C] \n";
-//        assertEquals(expected, graph.toString());
-//    }
+    
 }
