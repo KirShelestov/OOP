@@ -1,6 +1,8 @@
 package ru.nsu.shelestov.graph;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -114,11 +116,9 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
     public List<T> getNeighbors(T vertex) {
         List<T> neighbors = new ArrayList<>();
         int index = vertices.indexOf(vertex);
-        if (index != -1) {
-            for (int i = 0; i < adjacencyMatrix.length; i++) {
-                if (!Double.isNaN(adjacencyMatrix[index][i])) {
-                    neighbors.add(vertices.get(i));
-                }
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            if (adjacencyMatrix[index][i] > 0) {
+                neighbors.add(vertices.get(i));
             }
         }
         return neighbors;
@@ -156,7 +156,6 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
      * @param parse функция для преобразования строк в вершины
      * @throws IOException ошибка чтения файла
      */
-    @Override
     public void read(File file, boolean isDirected, Function<String, T> parse) throws IOException {
         List<String> lines = Files.readAllLines(file.toPath());
         for (String line : lines) {
@@ -166,10 +165,11 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
             for (int i = 1; i < parts.length - 1; i += 2) {
                 T vertex2 = parse.apply(parts[i]);
                 double weight = Double.parseDouble(parts[i + 1]);
+                addVertex(vertex2);
                 addEdge(vertex1, vertex2, weight, isDirected);
-            }
         }
     }
+}
 
     /**
      * Строковое представление графа.

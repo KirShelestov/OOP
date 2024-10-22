@@ -3,6 +3,8 @@ package ru.nsu.shelestov.graph;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -71,5 +73,28 @@ class AdjacencyListGraphTest {
         assertTrue(newGraph.getVertices().contains("C"));
         assertTrue(newGraph.getNeighbors("A").contains("B"));
         assertTrue(newGraph.getNeighbors("B").contains("C"));
+    }
+
+    @Test
+    void testToString() {
+        graph.addEdge("A", "B", 1.0, true);
+        graph.addEdge("B", "C", 2.0, true);
+
+        String expected = "A: {B=1.0}\nB: {A=5.0, C=2.0}\nC: {B=5.0}\n";
+        assertEquals(expected, graph.toString());
+    }
+    @Test
+    void testEqualsAndHashCode() {
+        AdjacencyListGraph<String> anotherGraph = new AdjacencyListGraph<>();
+        anotherGraph.addVertex("A");
+        anotherGraph.addVertex("B");
+        anotherGraph.addVertex("C");
+        anotherGraph.addEdge("A", "B", 5, false);
+        anotherGraph.addEdge("B", "C", 5, false);
+
+        assertEquals(graph, anotherGraph);
+        assertEquals(graph.hashCode(), anotherGraph.hashCode());
+        anotherGraph.addEdge("B", "C", 2.0, true);
+        assertNotEquals(graph, anotherGraph);
     }
 }

@@ -169,6 +169,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
             addVertex(vertex1);
             for (int i = 1; i < parts.length - 1; i += 2) {
                 T vertex2 = parse.apply(parts[i]);
+                addVertex(vertex2);
                 double weight = Double.parseDouble(parts[i + 1]);
                 addEdge(vertex1, vertex2, weight, isDirected);
             }

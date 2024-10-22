@@ -41,7 +41,7 @@ class TopologicalSorterTest {
         assert (sorted.contains("C"));
         assert (sorted.contains("D"));
     }
-    
+
     @Test
     void testEmptyGraph () {
         Graph<String> graph = new AdjacencyListGraph<>();
