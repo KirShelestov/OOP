@@ -121,18 +121,20 @@ public class AdjacencyListGraph<T> implements Graph<T> {
      */
     @Override
     public double getEdgeWeight(T vertex1, T vertex2) {
-        return adjacencyList.getOrDefault(vertex1, new HashMap<>()).getOrDefault(vertex2, Double.NaN);
+        return adjacencyList.getOrDefault(vertex1, new HashMap<>()).getOrDefault(vertex2,
+                Double.NaN);
     }
 
     /**
-     * Чтение графа из файла
+     * Чтение графа из файла.
      *
      * @param file файл, из которого считываем граф
      * @param isDirected ориентированность графа
      * @param parse функция для преобразования строк в вершины
      * @throws IOException ошибка чтения файла
      */
-    @Override public void read(File file, boolean isDirected, Function<String, T> parse) throws IOException {
+    @Override
+    public void read(File file, boolean isDirected, Function<String, T> parse) throws IOException {
         List<String> lines = Files.readAllLines(file.toPath());
         for (String line : lines) {
             String[] parts = line.split(" ");

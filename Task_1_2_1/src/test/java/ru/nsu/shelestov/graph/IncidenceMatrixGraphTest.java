@@ -51,5 +51,5 @@ class IncidenceMatrixGraphTest {
         assertTrue(neighbors.contains("A"));
         assertTrue(neighbors.contains("C"));
     }
-    
+
 }

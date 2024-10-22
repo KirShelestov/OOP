@@ -55,7 +55,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
         int index = vertices.indexOf(vertex);
         if (index != -1) {
             vertices.remove(index);
-            incidenceMatrix.remove(index-1);
+            incidenceMatrix.remove(index - 1);
             for (List<Boolean> row : incidenceMatrix) {
                 row.remove(index);
             }
@@ -153,7 +153,7 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
     }
 
     /**
-     * Чтение графа из файла
+     * Чтение графа из файла.
      *
      * @param file файл, из которого считываем граф
      * @param isDirected ориентированность графа
@@ -210,7 +210,8 @@ public class IncidenceMatrixGraph<T> implements Graph<T> {
             return false;
         }
         IncidenceMatrixGraph<?> other = (IncidenceMatrixGraph<?>) obj;
-        return vertices.equals(other.vertices) && incidenceMatrix.equals(other.incidenceMatrix) && edgeWeights.equals(other.edgeWeights);
+        return vertices.equals(other.vertices) && incidenceMatrix.equals(other.incidenceMatrix)
+                && edgeWeights.equals(other.edgeWeights);
     }
 
     /**

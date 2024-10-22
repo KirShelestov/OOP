@@ -149,7 +149,7 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
     }
 
     /**
-     * Чтение графа из файла
+     * Чтение графа из файла.
      *
      * @param file файл, из которого считываем граф
      * @param isDirected ориентированность графа
@@ -183,7 +183,8 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
             sb.append(vertices.get(i)).append(": ");
             for (int j = 0; j < vertices.size(); j++) {
                 if (!Double.isNaN(adjacencyMatrix[i][j])) {
-                    sb.append(vertices.get(j)).append(" (").append(adjacencyMatrix[i][j]).append(") ");
+                    sb.append(vertices.get(j)).append(" (").append(
+                            adjacencyMatrix[i][j]).append(") ");
                 }
             }
             sb.append("\n");
@@ -206,7 +207,8 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
             return false;
         }
         AdjacencyMatrixGraph<?> other = (AdjacencyMatrixGraph<?>) obj;
-        return Arrays.deepEquals(adjacencyMatrix, other.adjacencyMatrix) && vertices.equals(other.vertices);
+        return Arrays.deepEquals(adjacencyMatrix, other.adjacencyMatrix)
+                && vertices.equals(other.vertices);
     }
 
     /**
