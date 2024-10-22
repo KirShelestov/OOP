@@ -25,5 +25,5 @@ public interface Graph<T> {
     double getEdgeWeight(T vertex1, T vertex2);
 
     void read(File file, boolean isDirected, Function<String, T> parse) throws IOException;
-    
+
 }
