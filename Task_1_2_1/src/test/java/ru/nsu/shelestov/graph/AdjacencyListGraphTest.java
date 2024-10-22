@@ -1,10 +1,9 @@
 package ru.nsu.shelestov.graph;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -64,7 +63,8 @@ class AdjacencyListGraphTest {
     }
 
     @Test public void testReadGraph() throws IOException, URISyntaxException {
-        Path tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
+        Path
+                tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
 
         AdjacencyListGraph<String> newGraph = new AdjacencyListGraph<>();
         newGraph.read(tempFile.toFile(), false, Function.identity());

@@ -167,9 +167,9 @@ public class AdjacencyMatrixGraph<T> implements Graph<T> {
                 double weight = Double.parseDouble(parts[i + 1]);
                 addVertex(vertex2);
                 addEdge(vertex1, vertex2, weight, isDirected);
+            }
         }
     }
-}
 
     /**
      * Строковое представление графа.

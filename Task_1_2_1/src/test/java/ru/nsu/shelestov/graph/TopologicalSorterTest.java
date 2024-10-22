@@ -1,11 +1,11 @@
 package ru.nsu.shelestov.graph;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TopologicalSorterTest {
 
@@ -43,7 +43,7 @@ class TopologicalSorterTest {
     }
 
     @Test
-    void testEmptyGraph () {
+    void testEmptyGraph() {
         Graph<String> graph = new AdjacencyListGraph<>();
 
         List<String> sorted = sorter.sort(graph);

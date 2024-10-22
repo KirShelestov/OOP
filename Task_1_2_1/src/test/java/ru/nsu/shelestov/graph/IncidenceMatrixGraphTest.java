@@ -1,9 +1,9 @@
 package ru.nsu.shelestov.graph;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +24,7 @@ class IncidenceMatrixGraphTest {
         graph.addVertex("B");
         graph.addVertex("C");
         graph.addEdge("A", "B", 5, false);
-        graph.addEdge("B", "C", 5,false);
+        graph.addEdge("B", "C", 5, false);
     }
 
     @Test
@@ -41,7 +40,7 @@ class IncidenceMatrixGraphTest {
 
     @Test
     public void testAddEdge() {
-        graph.addEdge("A", "C", 5,false);
+        graph.addEdge("A", "C", 5, false);
         assertTrue(graph.getNeighbors("A").contains("C"));
         assertTrue(graph.getNeighbors("C").contains("A"));
     }
@@ -70,7 +69,7 @@ class IncidenceMatrixGraphTest {
         anotherGraph.addVertex("B");
         anotherGraph.addVertex("C");
         anotherGraph.addEdge("A", "B", 5, false);
-        anotherGraph.addEdge("B", "C", 5,false);
+        anotherGraph.addEdge("B", "C", 5, false);
 
         assertEquals(graph, anotherGraph);
         assertEquals(graph.hashCode(), anotherGraph.hashCode());
@@ -81,7 +80,8 @@ class IncidenceMatrixGraphTest {
 
     @Test
     public void testReadGraph() throws IOException, URISyntaxException {
-        Path tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
+        Path
+                tempFile = Path.of(Objects.requireNonNull(getClass().getResource("/test2.txt")).toURI());
 
         IncidenceMatrixGraph<String> newGraph = new IncidenceMatrixGraph<>(3);
         newGraph.read(tempFile.toFile(), false, Function.identity());
