@@ -1,10 +1,11 @@
 package ru.nsu.shelestov.graph;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.Stack;
 
 /**
  * Класс, представляющий реализацию топосорта.
@@ -22,16 +23,16 @@ public class TopologicalSorter<T> {
     public List<T> sort(Graph<T> graph) {
         List<T> sortedList = new ArrayList<>();
         Set<T> visited = new HashSet<>();
-        Stack<T> stack = new Stack<>();
+        Deque<T> deque = new LinkedList<>(); 
 
         for (T vertex : graph.getVertices()) {
             if (!visited.contains(vertex)) {
-                topologicalSortUtil(graph, vertex, visited, stack);
+                topologicalSortUtil(graph, vertex, visited, deque);
             }
         }
 
-        while (!stack.isEmpty()) {
-            sortedList.add(stack.pop());
+        while (!deque.isEmpty()) {
+            sortedList.add(deque.pollLast());
         }
         return sortedList;
     }
@@ -42,17 +43,17 @@ public class TopologicalSorter<T> {
      * @param graph граф, который хотим отсортировать
      * @param vertex вершина для обработки
      * @param visited множество посещенных вершин
-     * @param stack стек для хранения порядка вершин
+     * @param deque стек для хранения порядка вершин
      */
-    private void topologicalSortUtil(Graph<T> graph, T vertex, Set<T> visited, Stack<T> stack) {
+    private void topologicalSortUtil(Graph<T> graph, T vertex, Set<T> visited, Deque<T> deque) {
         visited.add(vertex);
 
         for (T neighbor : graph.getNeighbors(vertex)) {
             if (!visited.contains(neighbor)) {
-                topologicalSortUtil(graph, neighbor, visited, stack);
+                topologicalSortUtil(graph, neighbor, visited, deque);
             }
         }
 
-        stack.push(vertex);
+        deque.addLast(vertex);
     }
 }
