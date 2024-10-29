@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+group = 'ru.nsu.shelestov.graph'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = false
+
+    }
+}
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+task run(type: JavaExec) {
+    main = 'ru.nsu.shelestov.graph.Main' // Замените на ваш основной класс
+    classpath = sourceSets.main.runtimeClasspath
+}
