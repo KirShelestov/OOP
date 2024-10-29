@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.hashtable;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -247,6 +247,20 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     }
 
     /**
+     * Метод для получения хеш-кода хеш-таблицы.
+     *
+     * @return хеш-код
+     */
+    @Override
+    public int hashCode() {
+        int result = 1;
+        for (Entry<K, V> entry : this) {
+            result = 31 * result + (entry == null ? 0 : entry.hashCode());
+        }
+        return result;
+    }
+
+    /**
      * Метод для представления хеш-таблицы в строковом формате.
      *
      * @return отформатированная строка
@@ -294,6 +308,16 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
             this.key = key;
             this.value = value;
             this.next = null;
+        }
+
+        /**
+         * Метод для получения хеш-кода хеш-таблицы.
+         *
+         * @return хеш-код
+         */
+        @Override
+        public int hashCode() {
+            return Objects.hash(key, value);
         }
     }
 }
