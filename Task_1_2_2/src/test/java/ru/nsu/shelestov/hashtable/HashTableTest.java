@@ -136,4 +136,69 @@ public class HashTableTest {
             }
         });
     }
+
+    /**
+     * Тест на ConcurrentModificationException при удалении элемента во время итерации.
+     */
+    @Test
+    public void testIteratorThrowsConcurrentModificationExceptionOnRemove() {
+        HashTable<String, Integer> hashTable = new HashTable<>();
+        hashTable.put("one", 1);
+        hashTable.put("two", 2);
+        hashTable.put("three", 3);
+
+        Iterator<HashTable.Entry<String, Integer>> iterator = hashTable.iterator();
+
+        hashTable.remove("two");
+
+        assertThrows(ConcurrentModificationException.class, () -> {
+            while (iterator.hasNext()) {
+                iterator.next();
+            }
+        });
+    }
+
+    /**
+     * Тест на ConcurrentModificationException при обновлении элемента во время итерации.
+     */
+    @Test
+    public void testIteratorThrowsConcurrentModificationExceptionOnUpdate() {
+        HashTable<String, Integer> hashTable = new HashTable<>();
+        hashTable.put("one", 1);
+        hashTable.put("two", 2);
+        hashTable.put("three", 3);
+
+        Iterator<HashTable.Entry<String, Integer>> iterator = hashTable.iterator();
+
+        hashTable.update("three", 33);
+
+        assertThrows(ConcurrentModificationException.class, () -> {
+            while (iterator.hasNext()) {
+                iterator.next();
+            }
+        });
+    }
+
+    /**
+     * Тест на ConcurrentModificationException при добавлении элемента во время итерации.
+     */
+    @Test
+    public void testIteratorThrowsConcurrentModificationExceptionOnMultipleAdd() {
+        HashTable<String, Integer> hashTable = new HashTable<>();
+        hashTable.put("one", 1);
+        hashTable.put("two", 2);
+
+        Iterator<HashTable.Entry<String, Integer>> iterator = hashTable.iterator();
+
+        hashTable.put("three", 3);
+        hashTable.put("four", 4);
+
+        assertThrows(ConcurrentModificationException.class, () -> {
+            while (iterator.hasNext()) {
+                iterator.next();
+            }
+        });
+    }
+
+
 }

@@ -118,6 +118,17 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
      * @param value значение
      */
     public void update(K key, V value) {
+        int index = getIndex(key);
+        Entry<K, V> current = table[index];
+
+        while (current != null) {
+            if (current.key.equals(key)) {
+                current.value = value;
+                modCount++;
+                return;
+            }
+            current = current.next;
+        }
         put(key, value);
     }
 
