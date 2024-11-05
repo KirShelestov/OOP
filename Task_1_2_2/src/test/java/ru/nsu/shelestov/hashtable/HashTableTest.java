@@ -1,12 +1,10 @@
 package ru.nsu.shelestov.hashtable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Класс для тестирования хеш-таблицы.
@@ -109,9 +107,29 @@ public class HashTableTest {
     @Test
     public void testResize() {
         HashTable<String, Integer> hashTable = new HashTable<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10000; i++) {
             hashTable.put("key" + i, i);
         }
-        assertEquals(100, hashTable.size());
+        assertEquals(10000, hashTable.size());
+    }
+
+    /**
+     * Тест на ConcurrentModificationException.
+     */
+    @Test
+    public void testConcurrentModificationException() {
+        HashTable<String, Integer> hashTable = new HashTable<>();
+        hashTable.put("one", 1);
+        hashTable.put("two", 2);
+
+        Iterator<HashTable.Entry<String, Integer>> iterator = hashTable.iterator();
+
+        hashTable.put("three", 3);
+
+        assertThrows(ConcurrentModificationException.class, () -> {
+            while (iterator.hasNext()) {
+                iterator.next();
+            }
+        });
     }
 }
