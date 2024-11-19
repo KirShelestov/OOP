@@ -1,9 +1,10 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.substring;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,8 +16,9 @@ public class Substring {
      *
      * @param inputFilePath путь к файлу
      * @param patternString нужная подстрока
+     * @return
      */
-    public static void find(String inputFilePath, String patternString) {
+    public static List<Integer> find(String inputFilePath, String patternString) {
         List<Integer> matches = new ArrayList<>();
 
         try (FileInputStream fis = new FileInputStream(inputFilePath)) {
@@ -56,6 +58,7 @@ public class Substring {
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
+        return matches;
     }
 
     /**
@@ -69,13 +72,15 @@ public class Substring {
         List<Integer> matches = new ArrayList<>();
         int patternLength = pattern.length();
         int textLength = text.length();
-        int[] right = new int[256];
 
-        for (int c = 0; c < 256; c++) {
-            right[c] = -1;
+        if (pattern.isEmpty()) {
+            return matches;
         }
+
+        HashMap<Character, Integer> right = new HashMap<>();
+
         for (int j = 0; j < patternLength; j++) {
-            right[pattern.charAt(j)] = j;
+            right.put(pattern.charAt(j), j);
         }
 
         int skip;
@@ -83,7 +88,7 @@ public class Substring {
             skip = 0;
             for (int j = patternLength - 1; j >= 0; j--) {
                 if (pattern.charAt(j) != text.charAt(i + j)) {
-                    skip = Math.max(1, j - right[text.charAt(i + j)]);
+                    skip = Math.max(1, j - right.getOrDefault(text.charAt(i + j), -1));
                     break;
                 }
             }
