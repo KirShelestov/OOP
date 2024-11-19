@@ -75,12 +75,10 @@ public class SubstringTest {
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             byte[] buffer = new byte[1024 * 1024];
             Random random = new Random();
-
             while (fos.getChannel().size() < FILE_SIZE) {
                 random.nextBytes(buffer);
                 fos.write(buffer);
             }
-
             String testPattern = PATTERN + "\n";
             fos.write(testPattern.getBytes(StandardCharsets.UTF_8));
         }
