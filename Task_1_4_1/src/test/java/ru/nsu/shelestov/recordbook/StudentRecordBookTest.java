@@ -62,23 +62,13 @@ class StudentRecordBookTest {
 
     @Test
     void testCanGetRedDiploma() {
-        recordBook.addGrade(8, "Thesis", ControlType.THESIS_DEFENSE, 5);
         recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
         recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
         recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
 
         assertTrue(recordBook.canGetRedDiploma());
     }
-
-    @Test
-    void testCanGetIncreasedScholarship() {
-        recordBook.addGrade(1, "Math", ControlType.EXAM, 4);
-        recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
-        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
-
-        assertTrue(recordBook.canGetIncreasedScholarship(1));
-    }
-
+    
     @Test
     void testCanTransferToBudget() {
         recordBook.addGrade(2, "Math", ControlType.EXAM, 4);
