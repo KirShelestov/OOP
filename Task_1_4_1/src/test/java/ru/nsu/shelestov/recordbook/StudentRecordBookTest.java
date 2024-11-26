@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 class StudentRecordBookTest {
     private StudentRecordBook recordBook;
-    private StudentRecordBook NotPaidrecordBook;
+    private StudentRecordBook notPaidrecordBook;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ class StudentRecordBookTest {
             semesterConfigs.add(controlTypes);
         }
         recordBook = new StudentRecordBook(true, semesterConfigs);
-        NotPaidrecordBook = new StudentRecordBook(true, semesterConfigs);
+        notPaidrecordBook = new StudentRecordBook(true, semesterConfigs);
 
     }
 
@@ -82,11 +82,11 @@ class StudentRecordBookTest {
 
     @Test
     void testCantGetIncreasedScholarship() {
-        NotPaidrecordBook.addGrade(1, "Math", ControlType.EXAM, 2);
-        NotPaidrecordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
-        NotPaidrecordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+        notPaidrecordBook.addGrade(1, "Math", ControlType.EXAM, 2);
+        notPaidrecordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        notPaidrecordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
 
-        assertFalse(NotPaidrecordBook.canGetIncreasedScholarship(1));
+        assertFalse(notPaidrecordBook.canGetIncreasedScholarship(1));
     }
 
     @Test
@@ -98,7 +98,7 @@ class StudentRecordBookTest {
         assertTrue(recordBook.canTransferToBudget(2));
     }
 
- 
+
     @Test
     void testCanAddSubjectWithDifferentControlTypesInDifferentSemesters() {
         recordBook.addGrade(1, "Mathematics", ControlType.EXAM, 4);
@@ -106,6 +106,16 @@ class StudentRecordBookTest {
         assertDoesNotThrow(() -> {
             recordBook.addGrade(2, "Mathematics", ControlType.CREDIT, true);
         });
+    }
+
+    @Test
+    void testCanGetIncreasedScholarship1() {
+        notPaidrecordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        notPaidrecordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        notPaidrecordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+        notPaidrecordBook.addGrade(2, "Chemistry", ControlType.CREDIT, true);
+
+        assertTrue(!notPaidrecordBook.canGetIncreasedScholarship(2));
     }
 
 

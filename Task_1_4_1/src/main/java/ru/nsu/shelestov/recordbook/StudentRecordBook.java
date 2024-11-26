@@ -111,7 +111,8 @@ public class StudentRecordBook {
                 .filter(grade -> grade.isExam() && grade.getScore() < 3)
                 .count();
 
-        boolean hasUnsatisfactoryCredits = semesters.subList(currentSemester - 2, currentSemester).stream()
+        boolean hasUnsatisfactoryCredits
+                = semesters.subList(currentSemester - 2, currentSemester).stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
                 .anyMatch(grade -> grade.getControlType() == ControlType.DIFFERENTIAL_CREDIT
@@ -153,9 +154,10 @@ public class StudentRecordBook {
                 .flatMap(List::stream)
                 .anyMatch(grade -> grade.getControlType() == ControlType.THESIS_DEFENSE);
 
-        return (isEighthSemester && greatGrade && !hasUnsatisfactory &&
-                (excellentCount * 100.0 / totalCount >= 75)) ||
-                (!isEighthSemester && !hasUnsatisfactory && (excellentCount * 100.0 / totalCount >= 75));
+        return (isEighthSemester && greatGrade && !hasUnsatisfactory
+                && (excellentCount * 100.0 / totalCount >= 75))
+                || (!isEighthSemester && !hasUnsatisfactory && (excellentCount * 100.0
+                / totalCount >= 75));
     }
 
     /**
@@ -176,7 +178,8 @@ public class StudentRecordBook {
                 .collect(Collectors.toList());
 
         boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScore() >= 4);
-        boolean hasUnsatisfactory = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
+        boolean hasUnsatisfactory
+                = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
 
         return hasExcellent && (!hasUnsatisfactory);
     }
