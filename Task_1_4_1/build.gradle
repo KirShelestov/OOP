@@ -3,7 +3,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'ru.nsu.shelestov'
+group = 'ru.nsu.shelestov.recordbook'
 version = '1.0-SNAPSHOT'
 
 repositories {

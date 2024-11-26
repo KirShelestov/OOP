@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.recordbook;
 
 /**
  * Перечисление типо контрольных работ.

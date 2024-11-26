@@ -1,4 +1,4 @@
-package ru.nsu.shelestov;
+package ru.nsu.shelestov.recordbook;
 
 /**
  * Класс для хранения информации об оценке за контрольную работу.
@@ -28,6 +28,15 @@ public class Grade {
      */
     public int getScore() {
         return score;
+    }
+
+    /**
+     * Геттер предмета.
+     *
+     * @return предмет
+     */
+    public String getSubject() {
+        return subject;
     }
 
     /**
