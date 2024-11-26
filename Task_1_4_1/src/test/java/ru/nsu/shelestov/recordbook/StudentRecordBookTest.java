@@ -14,8 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StudentRecordBookTest {
-    private StudentRecordBook recordBookPaid;
-    private StudentRecordBook recordBookNotPaid;
+    private StudentRecordBook recordBook;
+    private StudentRecordBook NotPaidrecordBook;
 
     @BeforeEach
     void setUp() {
@@ -27,77 +27,87 @@ class StudentRecordBookTest {
             controlTypes.put(ControlType.DIFFERENTIAL_CREDIT, 1);
             semesterConfigs.add(controlTypes);
         }
-        // Initialize both paid and not paid record books
-        recordBookPaid = new StudentRecordBook(false, semesterConfigs); // isNotPaid = false
-        recordBookNotPaid = new StudentRecordBook(true, semesterConfigs); // isNotPaid = true
-    }
+        recordBook = new StudentRecordBook(true, semesterConfigs);
+        NotPaidrecordBook = new StudentRecordBook(true, semesterConfigs);
 
-    // Test for isNotPaid = false
-    @Test
-    void testAddGradePaid() {
-        recordBookPaid.addGrade(1, "Math", ControlType.EXAM, 5);
-        recordBookPaid.addGrade(1, "Physics", ControlType.EXAM, 4);
-        recordBookPaid.addGrade(1, "Chemistry", ControlType.CREDIT, true);
-
-        assertEquals(2, recordBookPaid.semesters.get(0).get(ControlType.EXAM).size());
-        assertEquals(1, recordBookPaid.semesters.get(0).get(ControlType.CREDIT).size());
     }
 
     @Test
-    void testCanGetIncreasedScholarshipPaid() {
-        recordBookPaid.addGrade(1, "Math", ControlType.EXAM, 2);
-        recordBookPaid.addGrade(1, "Physics", ControlType.EXAM, 5);
-        recordBookPaid.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+    void testAddGrade() {
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 4);
+        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
 
-        assertFalse(recordBookPaid.canGetIncreasedScholarship(1)); // Should return false for paid students
+        assertEquals(2, recordBook.semesters.get(0).get(ControlType.EXAM).size());
+        assertEquals(1, recordBook.semesters.get(0).get(ControlType.CREDIT).size());
     }
 
     @Test
-    void testCanTransferToBudgetPaid() {
-        recordBookPaid.addGrade(2, "Math", ControlType.EXAM, 4);
-        recordBookPaid.addGrade(2, "Physics", ControlType.EXAM, 5);
-        recordBookPaid.addGrade(2, "Chemistry", ControlType.CREDIT, true);
+    void testAddGradeExceedLimit() {
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 4);
 
-        assertTrue(recordBookPaid.canTransferToBudget(2)); // Should return false for paid students
-    }
-
-    // Test for isNotPaid = true
-    @Test
-    void testAddGradeNotPaid() {
-        recordBookNotPaid.addGrade(1, "Math", ControlType.EXAM, 5);
-        recordBookNotPaid.addGrade(1, "Physics", ControlType.EXAM, 4);
-        recordBookNotPaid.addGrade(1, "Chemistry", ControlType.CREDIT, true);
-
-        assertEquals(2, recordBookNotPaid.semesters.get(0).get(ControlType.EXAM).size());
-        assertEquals(1, recordBookNotPaid.semesters.get(0).get(ControlType.CREDIT).size());
-    }
-
-    @Test
-    void testCanGetIncreasedScholarshipNotPaid() {
-        recordBookNotPaid.addGrade(1, "Math", ControlType.EXAM, 2);
-        recordBookNotPaid.addGrade(1, "Physics", ControlType.EXAM, 5);
-        recordBookNotPaid.addGrade(1, "Chemistry", ControlType.CREDIT, true);
-
-        assertFalse(recordBookNotPaid.canGetIncreasedScholarship(1)); // Should return true for not paid students
-    }
-
-    @Test
-    void testCanTransferToBudgetNotPaid() {
-        recordBookNotPaid.addGrade(2, "Math", ControlType.EXAM, 4);
-        recordBookNotPaid.addGrade(2, "Physics", ControlType.EXAM, 5);
-        recordBookNotPaid.addGrade(2, "Chemistry", ControlType.CREDIT, true);
-
-        assertTrue(recordBookNotPaid.canTransferToBudget(2)); // Should return true for not paid students
-    }
-
-
-
-    @Test
-    void testCanAddSubjectWithDifferentControlTypesInDifferentSemesters() {
-        recordBookNotPaid.addGrade(1, "Mathematics", ControlType.EXAM, 4);
-
-        assertDoesNotThrow(() -> {
-            recordBookNotPaid.addGrade(2, "Mathematics", ControlType.CREDIT, true);
+        assertThrows(IllegalArgumentException.class, () -> {
+            recordBook.addGrade(1, "Chemistry", ControlType.EXAM, 3); // Превышение лимита
         });
     }
+
+    @Test
+    void testCalculateGpa() {
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 4);
+        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+
+        double gpa = recordBook.calculateGpa();
+        assertEquals(4.5, gpa, 0.01);
+    }
+
+    @Test
+    void testCanGetRedDiploma() {
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+
+        assertTrue(recordBook.canGetRedDiploma());
+    }
+
+    @Test
+    void testCanGetIncreasedScholarship() {
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 2);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+
+        assertFalse(recordBook.canGetIncreasedScholarship(1));
+    }
+
+    @Test
+    void testCantGetIncreasedScholarship() {
+        NotPaidrecordBook.addGrade(1, "Math", ControlType.EXAM, 2);
+        NotPaidrecordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        NotPaidrecordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+
+        assertFalse(NotPaidrecordBook.canGetIncreasedScholarship(1));
+    }
+
+    @Test
+    void testCanTransferToBudget() {
+        recordBook.addGrade(2, "Math", ControlType.EXAM, 4);
+        recordBook.addGrade(2, "Physics", ControlType.EXAM, 5);
+        recordBook.addGrade(2, "Chemistry", ControlType.CREDIT, true);
+
+        assertTrue(recordBook.canTransferToBudget(2));
+    }
+
+ 
+    @Test
+    void testCanAddSubjectWithDifferentControlTypesInDifferentSemesters() {
+        recordBook.addGrade(1, "Mathematics", ControlType.EXAM, 4);
+
+        assertDoesNotThrow(() -> {
+            recordBook.addGrade(2, "Mathematics", ControlType.CREDIT, true);
+        });
+    }
+
+
+
 }
