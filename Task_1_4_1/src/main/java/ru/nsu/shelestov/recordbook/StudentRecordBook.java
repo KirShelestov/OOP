@@ -18,7 +18,7 @@ public class StudentRecordBook {
      * Конструктор класса.
      *
      * @param isNotPaid платка/бюджет
-     * @param semesterConfigs список конфигураций семестров, где каждая конфигурация - это карта типа контроля и количества оценок
+     * @param semesterConfigs список конфигураций семестро
      */
     public StudentRecordBook(boolean isNotPaid, List<Map<ControlType, Integer>> semesterConfigs) {
         this.semesters = new ArrayList<>();
@@ -65,14 +65,14 @@ public class StudentRecordBook {
 
         if (controlType == ControlType.CREDIT) {
             if (!(score instanceof Boolean)) {
-                throw new IllegalArgumentException("Для зачета необходимо передать boolean значение");
+                throw new IllegalArgumentException("Для зачета необходимо передать значение");
             }
             boolean scoreBool = (boolean) score;
             int scoreInt = scoreBool ? 5 : 2;
             grades.add(new Grade(subject, controlType, scoreInt));
         } else {
             if (!(score instanceof Integer)) {
-                throw new IllegalArgumentException("Для остальных необходимо передать int значение");
+                throw new IllegalArgumentException("Для остальных необходимо передать");
             }
             int scoreInt = (int) score;
             grades.add(new Grade(subject, controlType, scoreInt));
@@ -114,8 +114,8 @@ public class StudentRecordBook {
         boolean hasUnsatisfactoryCredits = semesters.subList(currentSemester - 2, currentSemester).stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
-                .anyMatch(grade -> grade.getControlType() == ControlType.DIFFERENTIAL_CREDIT &&
-                        grade.isCredit() && grade.getScore() == 2);
+                .anyMatch(grade -> grade.getControlType() == ControlType.DIFFERENTIAL_CREDIT
+                        && grade.isCredit() && grade.getScore() == 2);
 
         return failedExamsCount == 0 && !hasUnsatisfactoryCredits;
     }
