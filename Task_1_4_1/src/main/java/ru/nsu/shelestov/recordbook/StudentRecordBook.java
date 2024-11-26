@@ -54,13 +54,13 @@ public class StudentRecordBook {
                 .anyMatch(grade -> grade.getSubject().equals(subject));
 
         if (subjectExists) {
-            throw new IllegalArgumentException("Предмет " + subject + " уже добавлен в текущем семестре с другим видом контроля.");
+            throw new IllegalArgumentException("Предмет " + subject + " уже добавлен");
         }
 
-        int maxGrades = maxGradesPerSemester.get(semester - 1).get(controlType); // Get the max from the config
+        int maxGrades = maxGradesPerSemester.get(semester - 1).get(controlType);
 
         if (grades.size() >= maxGrades) {
-            throw new IllegalArgumentException("Достигнуто максимальное количество оценок для данного типа контроля в семестре");
+            throw new IllegalArgumentException("Достигнуто максимальное количество оцено]");
         }
 
         if (controlType == ControlType.CREDIT) {
@@ -114,7 +114,8 @@ public class StudentRecordBook {
         boolean hasUnsatisfactoryCredits = semesters.subList(currentSemester - 2, currentSemester).stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
-                .anyMatch(grade -> grade.getControlType() == ControlType.DIFFERENTIAL_CREDIT && grade.isCredit() && grade.getScore() == 2);
+                .anyMatch(grade -> grade.getControlType() == ControlType.DIFFERENTIAL_CREDIT &&
+                        grade.isCredit() && grade.getScore() == 2);
 
         return failedExamsCount == 0 && !hasUnsatisfactoryCredits;
     }
@@ -152,7 +153,8 @@ public class StudentRecordBook {
                 .flatMap(List::stream)
                 .anyMatch(grade -> grade.getControlType() == ControlType.THESIS_DEFENSE);
 
-        return (isEighthSemester && greatGrade && !hasUnsatisfactory && (excellentCount * 100.0 / totalCount >= 75)) ||
+        return (isEighthSemester && greatGrade && !hasUnsatisfactory &&
+                (excellentCount * 100.0 / totalCount >= 75)) ||
                 (!isEighthSemester && !hasUnsatisfactory && (excellentCount * 100.0 / totalCount >= 75));
     }
 
