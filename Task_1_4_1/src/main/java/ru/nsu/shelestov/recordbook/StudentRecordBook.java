@@ -173,7 +173,7 @@
                 return false;
             }
 
-            Map<ControlType, List<Grade>> controlTypeMap = semesters.get(currentSemester - 1);
+            Map<ControlType, List<Grade>> controlTypeMap = semesters.get(currentSemester);
 
             List<Grade> semesterGrades = controlTypeMap.values().stream()
                     .flatMap(List::stream)
@@ -182,7 +182,7 @@
             boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScore() >= 4);
             boolean hasUnsatisfactory = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
 
-            return hasExcellent && !hasUnsatisfactory;
+            return hasExcellent && (!hasUnsatisfactory);
         }
 
     }

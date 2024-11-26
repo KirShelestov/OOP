@@ -1,15 +1,15 @@
 package ru.nsu.shelestov.recordbook;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -68,7 +68,16 @@ class StudentRecordBookTest {
 
         assertTrue(recordBook.canGetRedDiploma());
     }
-    
+
+    @Test
+    void testCanGetIncreasedScholarship() {
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 2);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+
+        assertFalse(recordBook.canGetIncreasedScholarship(1));
+    }
+
     @Test
     void testCanTransferToBudget() {
         recordBook.addGrade(2, "Math", ControlType.EXAM, 4);
