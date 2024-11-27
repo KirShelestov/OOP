@@ -174,14 +174,15 @@ public class StudentRecordBook {
         }
 
         Map<ControlType, List<Grade>> controlTypeMap = semesters.get(currentSemester - 1);
-        
+
         List<Grade> semesterGrades = controlTypeMap.values().stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
 
 
         boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScore() >= 4);
-        boolean hasUnsatisfactory = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
+        boolean hasUnsatisfactory
+                = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
 
 
         return hasExcellent && (!hasUnsatisfactory);
