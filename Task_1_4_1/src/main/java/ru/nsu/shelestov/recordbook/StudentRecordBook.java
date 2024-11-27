@@ -24,6 +24,8 @@ public class StudentRecordBook {
         this.semesters = new ArrayList<>();
         this.maxGradesPerSemester = new ArrayList<>();
 
+        this.isNotPaid = isNotPaid;
+
         for (Map<ControlType, Integer> controlTypeMap : semesterConfigs) {
             Map<ControlType, List<Grade>> semester = new HashMap<>();
             for (Map.Entry<ControlType, Integer> entry : controlTypeMap.entrySet()) {
@@ -101,7 +103,7 @@ public class StudentRecordBook {
      * @return возможен ли перевод
      */
     public boolean canTransferToBudget(int currentSemester) {
-        if (isNotPaid || currentSemester < 2) {
+        if (!isNotPaid || currentSemester < 2) {
             return false;
         }
 
@@ -171,16 +173,19 @@ public class StudentRecordBook {
             return false;
         }
 
-        Map<ControlType, List<Grade>> controlTypeMap = semesters.get(currentSemester);
-
+        Map<ControlType, List<Grade>> controlTypeMap = semesters.get(currentSemester - 1);
+        
         List<Grade> semesterGrades = controlTypeMap.values().stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
 
+
         boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScore() >= 4);
-        boolean hasUnsatisfactory
-                = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
+        boolean hasUnsatisfactory = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
+
 
         return hasExcellent && (!hasUnsatisfactory);
     }
+
+
 }

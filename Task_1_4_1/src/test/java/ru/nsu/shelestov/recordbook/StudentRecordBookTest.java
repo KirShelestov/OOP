@@ -28,7 +28,7 @@ class StudentRecordBookTest {
             semesterConfigs.add(controlTypes);
         }
         recordBook = new StudentRecordBook(true, semesterConfigs);
-        notPaidrecordBook = new StudentRecordBook(true, semesterConfigs);
+        notPaidrecordBook = new StudentRecordBook(false, semesterConfigs);
 
     }
 
@@ -73,11 +73,12 @@ class StudentRecordBookTest {
 
     @Test
     void testCanGetIncreasedScholarship() {
-        recordBook.addGrade(1, "Math", ControlType.EXAM, 2);
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
         recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
         recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+        recordBook.addGrade(1, "OBJ", ControlType.DIFFERENTIAL_CREDIT, 5);
 
-        assertFalse(recordBook.canGetIncreasedScholarship(1));
+        assertTrue(recordBook.canGetIncreasedScholarship(1));
     }
 
     @Test
@@ -90,7 +91,30 @@ class StudentRecordBookTest {
     }
 
     @Test
+    void testCanTransferToBudgetPaid() {
+
+        notPaidrecordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        notPaidrecordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        notPaidrecordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+        notPaidrecordBook.addGrade(1, "OBJ", ControlType.DIFFERENTIAL_CREDIT, 5);
+        notPaidrecordBook.addGrade(2, "OBJ", ControlType.DIFFERENTIAL_CREDIT, 5);
+
+        notPaidrecordBook.addGrade(2, "Math", ControlType.EXAM, 4);
+        notPaidrecordBook.addGrade(2, "Physics", ControlType.EXAM, 5);
+        notPaidrecordBook.addGrade(2, "Chemistry", ControlType.CREDIT, true);
+
+        assertFalse(notPaidrecordBook.canTransferToBudget(2));
+    }
+
+    @Test
     void testCanTransferToBudget() {
+
+        recordBook.addGrade(1, "Math", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
+        recordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
+        recordBook.addGrade(1, "OBJ", ControlType.DIFFERENTIAL_CREDIT, 5);
+        recordBook.addGrade(2, "OBJ", ControlType.DIFFERENTIAL_CREDIT, 5);
+
         recordBook.addGrade(2, "Math", ControlType.EXAM, 4);
         recordBook.addGrade(2, "Physics", ControlType.EXAM, 5);
         recordBook.addGrade(2, "Chemistry", ControlType.CREDIT, true);
@@ -107,17 +131,5 @@ class StudentRecordBookTest {
             recordBook.addGrade(2, "Mathematics", ControlType.CREDIT, true);
         });
     }
-
-    @Test
-    void testCanGetIncreasedScholarship1() {
-        notPaidrecordBook.addGrade(1, "Math", ControlType.EXAM, 5);
-        notPaidrecordBook.addGrade(1, "Physics", ControlType.EXAM, 5);
-        notPaidrecordBook.addGrade(1, "Chemistry", ControlType.CREDIT, true);
-        notPaidrecordBook.addGrade(2, "Chemistry", ControlType.CREDIT, true);
-
-        assertTrue(!notPaidrecordBook.canGetIncreasedScholarship(2));
-    }
-
-
 
 }
