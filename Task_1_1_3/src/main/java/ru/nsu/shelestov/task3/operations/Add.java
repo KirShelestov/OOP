@@ -2,6 +2,7 @@ package ru.nsu.shelestov.task3.operations;
 
 import java.util.Map;
 import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Number;
 
 /**
  * Класс представляет операцию сложения.
@@ -11,10 +12,10 @@ public class Add extends Expression {
     private final Expression right;
 
     /**
-     * конструктор операции сложения.
+     * Конструктор.
      *
-     * @param left  левая часть уравнения
-     * @param right праввая часть уравнения
+     * @param left левое слагаемое
+     * @param right правое слагаемое
      */
     public Add(Expression left, Expression right) {
         this.left = left;
@@ -22,50 +23,20 @@ public class Add extends Expression {
     }
 
     /**
-     * переопределение равенства между объектами одного класса.
+     * Означивание.
      *
-     * @param obj объект с которым хотим сравнить текущий объект
-     * @return равны или не равны объекты
+     * @param variables означиваемые перменные
+     * @return сумма означивания слагаемых
      */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true; // Сравнение ссылок
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; // Проверка типа
-        }
-
-        Add add = (Add) obj; // Приведение типа
-        return left.equals(add.left) && right.equals(add.right); // Сравнение левой и правой частей
-    }
-
-    /**
-     * Переопределение хэш-кода.
-     *
-     * @return хэш-код объекта
-     */
-    @Override
-    public int hashCode() {
-        int result = left.hashCode();
-        result = 31 * result + right.hashCode();
-        return result;
-    }
-
-    /**
-     * подсчет значения выражения.
-     *
-     * @param variables означиваемые выражения
-     * @return значение при означивании
-     */
     public double evaluate(Map<String, Double> variables) {
         return left.evaluate(variables) + right.evaluate(variables);
     }
 
     /**
-     * составление отформатированной стркои.
+     * Строкове представление.
      *
-     * @return отформатированная строка
+     * @return строчка
      */
     @Override
     public String toString() {
@@ -73,12 +44,69 @@ public class Add extends Expression {
     }
 
     /**
-     * дифференцирование выражения.
+     * Производная.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return производная по переменной
+     * @return сумма производных
      */
+    @Override
     public Expression derivative(String var) {
         return new Add(left.derivative(var), right.derivative(var));
+    }
+
+    /**
+     * Упрощенние по правилам.
+     *
+     * @return упрощенное выражение.
+     */
+    @Override
+    public Expression simplify() {
+        Expression simplifiedLeft = left.simplify();
+        Expression simplifiedRight = right.simplify();
+
+        // Если оба числа числа, то вернуть их сумму
+        if (simplifiedLeft instanceof Number leftNum && simplifiedRight instanceof Number rightNum) {
+            return new Number(leftNum.evaluate(Map.of()) + rightNum.evaluate(Map.of()));
+        }
+
+        // Если слева ноль, то вернуть правую часть
+        if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 0) {
+            return simplifiedRight;
+        }
+
+        // Наоборот
+        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 0) {
+            return simplifiedLeft;
+        }
+
+        return new Add(simplifiedLeft, simplifiedRight);
+    }
+
+    /**
+     * Переопределение равенства.
+     *
+     * @param obj объект с которым мы сравниваем текущий
+     * @return равенство объектов
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Add)) {
+            return false;
+        }
+        Add other = (Add) obj;
+        return left.equals(other.left) && right.equals(other.right);
+    }
+
+    /**
+     * Переопределение hashCode.
+     *
+     * @return хеш-код переменной
+     */
+    @Override
+    public int hashCode() {
+        return 31 * left.hashCode() + right.hashCode();
     }
 }

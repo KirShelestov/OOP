@@ -9,58 +9,29 @@ public class Number extends Expression {
     private final double value;
 
     /**
-     * конструктор для числа.
+     * Конструктор.
      *
-     * @param value само число
+     * @param value чиселка
      */
     public Number(double value) {
         this.value = value;
     }
 
     /**
-     * переопределение равенства между объектами одного класса.
-     *
-     * @param obj объект с которым хотим сравнить текущий объект
-     * @return равны или не равны объекты
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; // Проверка типа
-        }
-
-        Number number = (Number) obj; // Приведение типа
-        return Double.compare(number.value, value) == 0; // Сравнение значений
-    }
-
-    /**
-     * Переопределение хэш-кода.
-     *
-     * @return хэш-код объекта
-     */
-    @Override
-    public int hashCode() {
-        return Double.hashCode(value);
-    }
-
-
-    /**
-     * подсчет значения при означивании.
+     * Означивание.
      *
      * @param variables означиваемые перменные
-     * @return значение при означивании
+     * @return чиселка
      */
+    @Override
     public double evaluate(Map<String, Double> variables) {
         return value;
     }
 
     /**
-     * форматирование строки.
+     * Строкове представление.
      *
-     * @return отформатированная строка
+     * @return строчка
      */
     @Override
     public String toString() {
@@ -68,12 +39,51 @@ public class Number extends Expression {
     }
 
     /**
-     * дифференцирование.
+     * Производная.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return ноль.
+     * @return ноль как производная для числа
      */
+    @Override
     public Expression derivative(String var) {
         return new Number(0);
+    }
+
+    /**
+     * Упрощения нету.
+     *
+     * @return циферкак
+     */
+    @Override
+    public Expression simplify() {
+        return this;
+    }
+
+    /**
+     * Переопределние equals.
+     *
+     * @param obj объект с которым сравниваем
+     * @return равны ли объекты
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Number)) {
+            return false;
+        }
+        Number other = (Number) obj;
+        return Double.compare(value, other.value) == 0;
+    }
+
+    /**
+     * Переопределение hashCode.
+     *
+     * @return хеш-код числа
+     */
+    @Override
+    public int hashCode() {
+        return Double.hashCode(value);
     }
 }

@@ -2,6 +2,7 @@ package ru.nsu.shelestov.task3.operations;
 
 import java.util.Map;
 import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Number;
 
 /**
  * Класс представляет операцию умножения.
@@ -11,62 +12,32 @@ public class Mul extends Expression {
     private final Expression right;
 
     /**
-     * конструктор для умножения.
+     * Конструктор.
      *
-     * @param left  левая часть выражения
-     * @param right правая часть выражения
+     * @param left уменьшаемое
+     * @param right вычитаемое
      */
+
     public Mul(Expression left, Expression right) {
         this.left = left;
         this.right = right;
     }
 
-
     /**
-     * переопределение равенства между объектами одного класса.
-     *
-     * @param obj объект с которым хотим сравнить текущий объект
-     * @return равны или не равны объекты
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true; // Сравнение ссылок
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; // Проверка типа
-        }
-
-        Mul multi = (Mul) obj; // Приведение типа
-        return left.equals(multi.left) && right.equals(multi.right);
-    }
-
-    /**
-     * Переопределение хэш-кода.
-     *
-     * @return хэш-код объекта
-     */
-    @Override
-    public int hashCode() {
-        int result = left.hashCode();
-        result = 31 * result + right.hashCode();
-        return result;
-    }
-
-    /**
-     * подсчет значения при означивании.
+     * Означивание.
      *
      * @param variables означиваемые перменные
-     * @return значение выражения
+     * @return произведение означивания слагаемых
      */
+    @Override
     public double evaluate(Map<String, Double> variables) {
         return left.evaluate(variables) * right.evaluate(variables);
     }
 
     /**
-     * форматирование выражение в строку.
+     * Строкове представление.
      *
-     * @return отформатированная строка
+     * @return строчка
      */
     @Override
     public String toString() {
@@ -74,13 +45,78 @@ public class Mul extends Expression {
     }
 
     /**
-     * дифференцирование выражения.
+     * Производная.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return производная при умножении
+     * @return по правилам
      */
+    @Override
     public Expression derivative(String var) {
         return new Add(new Mul(left.derivative(var), right), new Mul(left, right.derivative(var)));
+    }
+
+    /**
+     * Упрощенние по правилам.
+     *
+     * @return упрощенное выражение.
+     */
+    @Override
+    public Expression simplify() {
+        Expression simplifiedLeft = left.simplify();
+        Expression simplifiedRight = right.simplify();
+
+        // Если умножаем на ноль, то возвращаем просто 0
+        if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 0) {
+            return new Number(0);
+        }
+        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 0) {
+            return new Number(0);
+        }
+
+        // Если перед нами числа, то просто умножаем их
+        if (simplifiedLeft instanceof Number leftNum && simplifiedRight instanceof Number rightNum) {
+            return new Number(leftNum.evaluate(Map.of()) * rightNum.evaluate(Map.of()));
+        }
+
+        // Если слева один, то просто возвращаем правую часть
+        if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 1) {
+            return simplifiedRight;
+        }
+
+        // Наоборот
+        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 1) {
+            return simplifiedLeft;
+        }
+
+        return new Mul(simplifiedLeft, simplifiedRight);
+    }
+
+    /**
+     * Переопределение равенства.
+     *
+     * @param obj объект с которым мы сравниваем текущий
+     * @return равенство объектов
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Mul)) {
+            return false;
+        }
+        Mul other = (Mul) obj;
+        return left.equals(other.left) && right.equals(other.right);
+    }
+
+    /**
+     * Переопределение hashCode.
+     *
+     * @return хеш-код переменной
+     */
+    @Override
+    public int hashCode() {
+        return 31 * left.hashCode() + right.hashCode();
     }
 
 }

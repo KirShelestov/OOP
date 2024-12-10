@@ -6,6 +6,7 @@ import java.util.Map;
  * Абстрактный класс который определяет методы для выражения.
  */
 public abstract class Expression {
+
     /**
      * означивание выражения.
      *
@@ -29,4 +30,10 @@ public abstract class Expression {
      */
     public abstract Expression derivative(String var);
 
+    /**
+     * Упрощение выражения по заданным правилам.
+     *
+     * @return упрощённое выражение
+     */
+    public abstract Expression simplify();
 }
