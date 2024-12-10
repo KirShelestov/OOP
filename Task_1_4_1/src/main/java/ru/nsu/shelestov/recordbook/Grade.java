@@ -68,17 +68,18 @@ public class Grade {
      */
     public int getScoreAsInt() {
         if (controlType == ControlType.CREDIT) {
-            if (score instanceof Boolean) {
-                return (Boolean) score ? 5 : 2; // Convert boolean to int
+            if (score instanceof Boolean booleanScore) {
+                return booleanScore ? 5 : 2;
             } else {
                 throw new IllegalArgumentException("Score must be a Boolean for credits");
             }
-        } else if (score instanceof Integer) {
-            return (Integer) score; // Return the integer score
+        } else if (score instanceof Integer integerScore) {
+            return integerScore;
         } else {
             throw new IllegalArgumentException("Score must be an Integer or Boolean");
         }
     }
+
 
     /**
      * Метод на проверку типа работы - экзамен.

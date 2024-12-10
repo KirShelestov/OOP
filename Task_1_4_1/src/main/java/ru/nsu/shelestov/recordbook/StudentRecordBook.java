@@ -81,11 +81,7 @@ public class StudentRecordBook {
                 .flatMap(List::stream)
                 .filter(grade -> grade.getControlType() != ControlType.CREDIT)
                 .mapToDouble(grade -> {
-                    if (grade.isCredit()) {
-                        return grade.getScoreAsInt(); // Use the method to get score as int
-                    } else {
-                        return grade.getScoreAsInt(); // This should return int for exams
-                    }
+                    return grade.getScoreAsInt();
                 })
                 .average()
                 .orElse(0);
@@ -231,7 +227,7 @@ public class StudentRecordBook {
      * @return объект StudentRecordBook
      */
     public static StudentRecordBook deserializeFromTxt(String filename,
- List<Map<ControlType, Integer>> semesterConfigs) {
+        List<Map<ControlType, Integer>> semesterConfigs) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String header = reader.readLine();
 
