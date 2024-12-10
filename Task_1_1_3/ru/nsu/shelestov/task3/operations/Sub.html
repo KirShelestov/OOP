@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../script.js"></script>
-<script type="text/javascript" src="../../../../../script-dir/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="../../../../../script-dir/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
@@ -94,7 +94,7 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.shelestov.task3.datatypes.Expression,ru.nsu.shelestov.task3.datatypes.Expression)" class="member-name-link">Sub</a><wbr>(<a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a>&nbsp;left,
  <a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a>&nbsp;right)</code></div>
 <div class="col-last even-row-color">
-<div class="block">конструктор для вычитания.</div>
+<div class="block">Конструктор.</div>
 </div>
 </div>
 </section>
@@ -113,27 +113,32 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#derivative(java.lang.String)" class="member-name-link">derivative</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">дифференцирование операции вычитания.</div>
+<div class="block">Производная.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">переопределение равенства между объектами одного класса.</div>
+<div class="block">Переопределение равенства.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#evaluate(java.util.Map)" class="member-name-link">evaluate</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;variables)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">подсчет значения при означивании.</div>
+<div class="block">Означивание.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Переопределение хэш-кода.</div>
+<div class="block">Переопределение hashCode.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#simplify()" class="member-name-link">simplify</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">форматирование строки.</div>
+<div class="block">Упрощенние по правилам.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toString()" class="member-name-link">toString</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Строкове представление.</div>
 </div>
 </div>
 </div>
@@ -160,11 +165,11 @@ loadScripts(document, 'script');</script>
 <h3>Sub</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Sub</span><wbr><span class="parameters">(<a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a>&nbsp;left,
  <a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a>&nbsp;right)</span></div>
-<div class="block">конструктор для вычитания.</div>
+<div class="block">Конструктор.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>left</code> - левая часть уравнения</dd>
-<dd><code>right</code> - правая часть уравнения</dd>
+<dd><code>left</code> - </dd>
+<dd><code>right</code> - правое слагаемое</dd>
 </dl>
 </section>
 </li>
@@ -177,45 +182,17 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="equals(java.lang.Object)">
-<h3>equals</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
-<div class="block">переопределение равенства между объектами одного класса.</div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
-<dt>Parameters:</dt>
-<dd><code>obj</code> - объект с которым хотим сравнить текущий объект</dd>
-<dt>Returns:</dt>
-<dd>равны или не равны объекты</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hashCode()">
-<h3>hashCode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
-<div class="block">Переопределение хэш-кода.</div>
-<dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
-<dt>Returns:</dt>
-<dd>хэш-код объекта</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="evaluate(java.util.Map)">
 <h3>evaluate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">evaluate</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Double.html" title="class or interface in java.lang" class="external-link">Double</a>&gt;&nbsp;variables)</span></div>
-<div class="block">подсчет значения при означивании.</div>
+<div class="block">Означивание.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../datatypes/Expression.html#evaluate(java.util.Map)">evaluate</a></code>&nbsp;in class&nbsp;<code><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>variables</code> - означиваемые перменные</dd>
 <dt>Returns:</dt>
-<dd>значение при означивании</dd>
+<dd>разность означивания слагаемых</dd>
 </dl>
 </section>
 </li>
@@ -223,12 +200,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="toString()">
 <h3>toString</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">toString</span>()</div>
-<div class="block">форматирование строки.</div>
+<div class="block">Строкове представление.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
 <dt>Returns:</dt>
-<dd>строка в нужном формате.</dd>
+<dd>строчка</dd>
 </dl>
 </section>
 </li>
@@ -236,14 +213,55 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="derivative(java.lang.String)">
 <h3>derivative</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></span>&nbsp;<span class="element-name">derivative</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;var)</span></div>
-<div class="block">дифференцирование операции вычитания.</div>
+<div class="block">Производная.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../datatypes/Expression.html#derivative(java.lang.String)">derivative</a></code>&nbsp;in class&nbsp;<code><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>var</code> - переменная по которой идет дифференцирование</dd>
 <dt>Returns:</dt>
-<dd>производная вычитания</dd>
+<dd>по правилам</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="simplify()">
+<h3>simplify</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></span>&nbsp;<span class="element-name">simplify</span>()</div>
+<div class="block">Упрощенние по правилам.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../datatypes/Expression.html#simplify()">simplify</a></code>&nbsp;in class&nbsp;<code><a href="../datatypes/Expression.html" title="class in ru.nsu.shelestov.task3.datatypes">Expression</a></code></dd>
+<dt>Returns:</dt>
+<dd>упрощенное выражение.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="equals(java.lang.Object)">
+<h3>equals</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;obj)</span></div>
+<div class="block">Переопределение равенства.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>obj</code> - объект с которым мы сравниваем текущий</dd>
+<dt>Returns:</dt>
+<dd>равенство объектов</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="hashCode()">
+<h3>hashCode</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
+<div class="block">Переопределение hashCode.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Returns:</dt>
+<dd>хеш-код переменной</dd>
 </dl>
 </section>
 </li>
