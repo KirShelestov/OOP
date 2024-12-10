@@ -1,7 +1,9 @@
 package ru.nsu.shelestov.recordbook;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,7 +174,8 @@ public class StudentRecordBook {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
 
-        boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScoreAsInt() >= 4);
+        boolean hasExcellent = semesterGrades.stream()
+                .anyMatch(grade -> grade.getScoreAsInt() >= 4);
         boolean hasUnsatisfactory
                 = semesterGrades.stream().anyMatch(grade -> grade.getScoreAsInt() <= 3);
 
@@ -219,5 +222,41 @@ public class StudentRecordBook {
         return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 
+
+    /**
+     * Метод для десериализации зачетки из файла.
+     *
+     * @param filename путь до файла
+     * @param semesterConfigs базовая информация по семестрам
+     * @return объект StudentRecordBook
+     */
+    public static StudentRecordBook deserializeFromTxt(String filename,
+                                                       List<Map<ControlType, Integer>> semesterConfigs) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String header = reader.readLine();
+
+            StudentRecordBook recordBook = new StudentRecordBook(false, semesterConfigs);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int semester = Integer.parseInt(parts[0]);
+                ControlType controlType = ControlType.valueOf(parts[1]);
+                String subject = parts[2].replace("\"", "");
+                int grade = Integer.parseInt(parts[3]);
+                boolean isCredit = Boolean.parseBoolean(parts[4]);
+
+                if (controlType == ControlType.CREDIT
+                        || controlType == ControlType.DIFFERENTIAL_CREDIT) {
+                    recordBook.addGrade(semester, new Grade(subject, controlType, isCredit));
+                } else {
+                    recordBook.addGrade(semester, new Grade(subject, controlType, grade));
+                }
+            }
+            return recordBook;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 class StudentRecordBookTest {
     private StudentRecordBook recordBook;
+    private StudentRecordBook recordBook1;
     private StudentRecordBook notPaidrecordBook;
     private static final String TEST_FILENAME = "src/test/resources/test_recordbook.txt";
 
@@ -32,6 +33,7 @@ class StudentRecordBookTest {
             controlTypes.put(ControlType.DIFFERENTIAL_CREDIT, 1);
             semesterConfigs.add(controlTypes);
         }
+        recordBook1 = new StudentRecordBook(true, semesterConfigs);
         recordBook = new StudentRecordBook(true, semesterConfigs);
         notPaidrecordBook = new StudentRecordBook(false, semesterConfigs);
     }
@@ -136,26 +138,56 @@ class StudentRecordBookTest {
 
     @Test
     void testSerializetotxt() {
-        recordBook.addGrade(1, new Grade("Mathematics", ControlType.EXAM, 5));
-        recordBook.addGrade(1, new Grade("Physics", ControlType.CREDIT, true));
+        recordBook1.addGrade(1, new Grade("Mathematics", ControlType.EXAM, 5));
+        recordBook1.addGrade(1, new Grade("Physics", ControlType.CREDIT, true));
 
-        recordBook.serializeTotxt(TEST_FILENAME);
+        recordBook1.serializeTotxt(TEST_FILENAME);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILENAME))) {
             String line = reader.readLine();
             assertEquals("Semester,ControlType,Subject,Grade,IsCredit", line);
 
             line = reader.readLine();
+            assertEquals("1,CREDIT,\"Physics\",5,true", line);
 
-            assertEquals("1,EXAM,\"Mathematics\",5,false", line);
 
             line = reader.readLine();
-            assertEquals("1,CREDIT,\"Physics\",5,true", line);
+            assertEquals("1,EXAM,\"Mathematics\",5,false", line);
+
 
         } catch (IOException e) {
             fail("IOException while reading the TXT file: " + e.getMessage());
         }
     }
 
+
+    @Test
+    void testDeserializeFromTxt() {
+        List<Map<ControlType, Integer>> semesterConfigs = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            Map<ControlType, Integer> controlTypes = new HashMap<>();
+            controlTypes.put(ControlType.EXAM, 2);
+            controlTypes.put(ControlType.CREDIT, 1);
+            controlTypes.put(ControlType.DIFFERENTIAL_CREDIT, 1);
+            semesterConfigs.add(controlTypes);
+        }
+
+        recordBook1.addGrade(1, new Grade("Mathematics", ControlType.EXAM, 5));
+        recordBook1.addGrade(1, new Grade("Physics", ControlType.CREDIT, true));
+        recordBook1.serializeTotxt(TEST_FILENAME);
+
+        StudentRecordBook deserializedRecordBook = StudentRecordBook.deserializeFromTxt(TEST_FILENAME, semesterConfigs);
+
+        assertEquals(1, deserializedRecordBook.semesters.get(0).get(ControlType.EXAM).size());
+        assertEquals(1, deserializedRecordBook.semesters.get(0).get(ControlType.CREDIT).size());
+
+        Grade mathGrade = deserializedRecordBook.semesters.get(0).get(ControlType.EXAM).get(0);
+        assertEquals("Mathematics", mathGrade.getSubject());
+        assertEquals(5, mathGrade.getScoreAsInt());
+
+        Grade physicsGrade = deserializedRecordBook.semesters.get(0).get(ControlType.CREDIT).get(0);
+        assertEquals("Physics", physicsGrade.getSubject());
+        assertTrue(physicsGrade.isCredit());
+    }
 
 }
