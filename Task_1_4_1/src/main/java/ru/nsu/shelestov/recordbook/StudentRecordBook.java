@@ -2,8 +2,8 @@ package ru.nsu.shelestov.recordbook;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -231,7 +231,7 @@ public class StudentRecordBook {
      * @return объект StudentRecordBook
      */
     public static StudentRecordBook deserializeFromTxt(String filename,
-                                                       List<Map<ControlType, Integer>> semesterConfigs) {
+ List<Map<ControlType, Integer>> semesterConfigs) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String header = reader.readLine();
 

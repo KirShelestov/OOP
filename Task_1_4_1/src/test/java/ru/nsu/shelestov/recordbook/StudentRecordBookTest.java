@@ -175,7 +175,8 @@ class StudentRecordBookTest {
         recordBook1.addGrade(1, new Grade("Physics", ControlType.CREDIT, true));
         recordBook1.serializeTotxt(TEST_FILENAME);
 
-        StudentRecordBook deserializedRecordBook = StudentRecordBook.deserializeFromTxt(TEST_FILENAME, semesterConfigs);
+        StudentRecordBook deserializedRecordBook =
+                StudentRecordBook.deserializeFromTxt(TEST_FILENAME, semesterConfigs);
 
         assertEquals(1, deserializedRecordBook.semesters.get(0).get(ControlType.EXAM).size());
         assertEquals(1, deserializedRecordBook.semesters.get(0).get(ControlType.CREDIT).size());
