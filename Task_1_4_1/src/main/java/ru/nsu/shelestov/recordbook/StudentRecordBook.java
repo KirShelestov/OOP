@@ -1,5 +1,8 @@
 package ru.nsu.shelestov.recordbook;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +26,6 @@ public class StudentRecordBook {
     public StudentRecordBook(boolean isNotPaid, List<Map<ControlType, Integer>> semesterConfigs) {
         this.semesters = new ArrayList<>();
         this.maxGradesPerSemester = new ArrayList<>();
-
         this.isNotPaid = isNotPaid;
 
         for (Map<ControlType, Integer> controlTypeMap : semesterConfigs) {
@@ -40,45 +42,30 @@ public class StudentRecordBook {
      * Метод для добавления оценки.
      *
      * @param semester семестр
-     * @param subject предмет
-     * @param controlType тип контрольной работы
-     * @param score оценка
+     * @param grade оценка
      */
-    public void addGrade(int semester, String subject, ControlType controlType, Object score) {
+    public void addGrade(int semester, Grade grade) {
         if (semester < 1 || semester > semesters.size()) {
             throw new IllegalArgumentException("Числа от 1 до " + semesters.size());
         }
-        Map<ControlType, List<Grade>> controlTypeMap = semesters.get(semester - 1);
-        List<Grade> grades = controlTypeMap.get(controlType);
 
-        boolean subjectExists = controlTypeMap.values().stream()
-                .flatMap(List::stream)
-                .anyMatch(grade -> grade.getSubject().equals(subject));
+        Map<ControlType, List<Grade>> controlTypeMap = semesters.get(semester - 1);
+        List<Grade> grades = controlTypeMap.get(grade.getControlType());
+
+        boolean subjectExists = grades.stream()
+                .anyMatch(existingGrade -> existingGrade.getSubject().equals(grade.getSubject()));
 
         if (subjectExists) {
-            throw new IllegalArgumentException("Предмет " + subject + " уже добавлен");
+            throw new IllegalArgumentException("Предмет " + grade.getSubject() + " уже добавлен");
         }
 
-        int maxGrades = maxGradesPerSemester.get(semester - 1).get(controlType);
+        int maxGrades = maxGradesPerSemester.get(semester - 1).get(grade.getControlType());
 
         if (grades.size() >= maxGrades) {
-            throw new IllegalArgumentException("Достигнуто максимальное количество оцено]");
+            throw new IllegalArgumentException("Достигнуто максимальное количество оценок");
         }
 
-        if (controlType == ControlType.CREDIT) {
-            if (!(score instanceof Boolean)) {
-                throw new IllegalArgumentException("Для зачета необходимо передать значение");
-            }
-            boolean scoreBool = (boolean) score;
-            int scoreInt = scoreBool ? 5 : 2;
-            grades.add(new Grade(subject, controlType, scoreInt));
-        } else {
-            if (!(score instanceof Integer)) {
-                throw new IllegalArgumentException("Для остальных необходимо передать");
-            }
-            int scoreInt = (int) score;
-            grades.add(new Grade(subject, controlType, scoreInt));
-        }
+        grades.add(grade); // Add the grade directly
     }
 
     /**
@@ -91,7 +78,13 @@ public class StudentRecordBook {
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
                 .filter(grade -> grade.getControlType() != ControlType.CREDIT)
-                .mapToInt(Grade::getScore)
+                .mapToDouble(grade -> {
+                    if (grade.isCredit()) {
+                        return grade.getScoreAsInt(); // Use the method to get score as int
+                    } else {
+                        return grade.getScoreAsInt(); // This should return int for exams
+                    }
+                })
                 .average()
                 .orElse(0);
     }
@@ -110,7 +103,7 @@ public class StudentRecordBook {
         long failedExamsCount = semesters.subList(currentSemester - 2, currentSemester).stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
-                .filter(grade -> grade.isExam() && grade.getScore() < 3)
+                .filter(grade -> grade.isExam() && grade.getScoreAsInt() < 3)
                 .count();
 
         boolean hasUnsatisfactoryCredits
@@ -118,7 +111,7 @@ public class StudentRecordBook {
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
                 .anyMatch(grade -> grade.getControlType() == ControlType.DIFFERENTIAL_CREDIT
-                        && grade.isCredit() && grade.getScore() == 2);
+                        && grade.isCredit() && grade.getScoreAsInt() == 2);
 
         return failedExamsCount == 0 && !hasUnsatisfactoryCredits;
     }
@@ -137,19 +130,19 @@ public class StudentRecordBook {
         long excellentCount = semesters.stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
-                .filter(grade -> grade.getScore() >= 4)
+                .filter(grade -> grade.getScoreAsInt() >= 4)
                 .count();
 
         boolean hasUnsatisfactory = semesters.stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
-                .anyMatch(grade -> grade.getScore() < 4);
+                .anyMatch(grade -> grade.getScoreAsInt() < 4);
 
         boolean greatGrade = semesters.stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
                 .flatMap(List::stream)
                 .filter(grade -> grade.getControlType() == ControlType.THESIS_DEFENSE)
-                .anyMatch(grade -> grade.getScore() == 5);
+                .anyMatch(grade -> grade.getScoreAsInt() == 5);
 
         boolean isEighthSemester = semesters.stream()
                 .flatMap(controlTypeMap -> controlTypeMap.values().stream())
@@ -179,13 +172,50 @@ public class StudentRecordBook {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
 
-
-        boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScore() >= 4);
+        boolean hasExcellent = semesterGrades.stream().anyMatch(grade -> grade.getScoreAsInt() >= 4);
         boolean hasUnsatisfactory
-                = semesterGrades.stream().anyMatch(grade -> grade.getScore() <= 3);
-
+                = semesterGrades.stream().anyMatch(grade -> grade.getScoreAsInt() <= 3);
 
         return hasExcellent && (!hasUnsatisfactory);
+    }
+
+
+    /**
+     * Записываем зачетку в файл.
+     * @param filename путь до файла
+     */
+    public void serializeToTXT(String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            writer.write("Semester,ControlType,Subject,Grade,IsCredit");
+            writer.newLine();
+
+            for (int semester = 0; semester < semesters.size(); semester++) {
+                Map<ControlType, List<Grade>> controlTypeMap = semesters.get(semester);
+                for (ControlType controlType : controlTypeMap.keySet()) {
+                    for (Grade grade : controlTypeMap.get(controlType)) {
+                        writer.write(String.format("%d,%s,%s,%d,%s",
+                                semester + 1,
+                                controlType.name(),
+                                escape(grade.getSubject()),
+                                grade.getScoreAsInt(),
+                                grade.isCredit()));
+                        writer.newLine();
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Избавляемся от кавычек.
+     *
+     * @param value строка с ковычками
+     * @return исправленная строка
+     */
+    private static String escape(String value) {
+        return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 
 
