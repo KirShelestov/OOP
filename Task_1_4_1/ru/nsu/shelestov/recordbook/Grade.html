@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -153,6 +153,14 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,ru.nsu.shelestov.recordbook.ControlType,boolean)">Grade</a></span>&#8203;(java.lang.String&nbsp;subject,
+     <a href="ControlType.html" title="enum in ru.nsu.shelestov.recordbook">ControlType</a>&nbsp;controlType,
+     boolean&nbsp;isCredit)</code></th>
+<td class="colLast">
+<div class="block">Новый конструктор класса оценки, который принимает boolean для зачетов.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.lang.String,ru.nsu.shelestov.recordbook.ControlType,int)">Grade</a></span>&#8203;(java.lang.String&nbsp;subject,
      <a href="ControlType.html" title="enum in ru.nsu.shelestov.recordbook">ControlType</a>&nbsp;controlType,
      int&nbsp;score)</code></th>
@@ -186,27 +194,34 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>int</code></td>
+<td class="colFirst"><code>java.lang.Object</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScore()">getScore</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Геттер оценки.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScoreAsInt()">getScoreAsInt</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Метод для получения оценки в виде int.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getSubject()">getSubject</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Геттер предмета.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isCredit()">isCredit</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Метод на проверку типа работы - зачет/дифзачет.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isExam()">isExam</a></span>()</code></th>
 <td class="colLast">
@@ -240,7 +255,7 @@ extends java.lang.Object</pre>
 <a id="&lt;init&gt;(java.lang.String,ru.nsu.shelestov.recordbook.ControlType,int)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>Grade</h4>
 <pre>public&nbsp;Grade&#8203;(java.lang.String&nbsp;subject,
@@ -251,7 +266,25 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>subject</code> - предмет</dd>
 <dd><code>controlType</code> - тип работы</dd>
-<dd><code>score</code> - оценка</dd>
+<dd><code>score</code> - оценка (int)</dd>
+</dl>
+</li>
+</ul>
+<a id="&lt;init&gt;(java.lang.String,ru.nsu.shelestov.recordbook.ControlType,boolean)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Grade</h4>
+<pre>public&nbsp;Grade&#8203;(java.lang.String&nbsp;subject,
+             <a href="ControlType.html" title="enum in ru.nsu.shelestov.recordbook">ControlType</a>&nbsp;controlType,
+             boolean&nbsp;isCredit)</pre>
+<div class="block">Новый конструктор класса оценки, который принимает boolean для зачетов.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>subject</code> - предмет</dd>
+<dd><code>controlType</code> - тип работы</dd>
+<dd><code>isCredit</code> - является ли работа зачетом</dd>
 </dl>
 </li>
 </ul>
@@ -271,11 +304,11 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getScore</h4>
-<pre class="methodSignature">public&nbsp;int&nbsp;getScore()</pre>
+<pre class="methodSignature">public&nbsp;java.lang.Object&nbsp;getScore()</pre>
 <div class="block">Геттер оценки.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>оценка</dd>
+<dd>оценка в виде int, если это экзамен, или boolean, если это зачет.</dd>
 </dl>
 </li>
 </ul>
@@ -304,6 +337,20 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>тип работы</dd>
+</dl>
+</li>
+</ul>
+<a id="getScoreAsInt()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getScoreAsInt</h4>
+<pre class="methodSignature">public&nbsp;int&nbsp;getScoreAsInt()</pre>
+<div class="block">Метод для получения оценки в виде int.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>оценка в виде int</dd>
 </dl>
 </li>
 </ul>
