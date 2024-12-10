@@ -182,9 +182,10 @@ public class StudentRecordBook {
 
     /**
      * Записываем зачетку в файл.
+     *
      * @param filename путь до файла
      */
-    public void serializeToTXT(String filename) {
+    public void serializeTotxt(String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write("Semester,ControlType,Subject,Grade,IsCredit");
             writer.newLine();

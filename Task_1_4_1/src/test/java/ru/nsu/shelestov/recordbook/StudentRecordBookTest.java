@@ -1,5 +1,12 @@
 package ru.nsu.shelestov.recordbook;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StudentRecordBookTest {
     private StudentRecordBook recordBook;
@@ -47,7 +52,7 @@ class StudentRecordBookTest {
         recordBook.addGrade(1, new Grade("Physics", ControlType.EXAM, 4));
 
         assertThrows(IllegalArgumentException.class, () -> {
-            recordBook.addGrade(1, new Grade("Chemistry", ControlType.EXAM, 3)); // Превышение лимита
+            recordBook.addGrade(1, new Grade("Chemistry", ControlType.EXAM, 3));
         });
     }
 
@@ -130,11 +135,11 @@ class StudentRecordBookTest {
 
 
     @Test
-    void testSerializeToTXT() {
+    void testSerializetotxt() {
         recordBook.addGrade(1, new Grade("Mathematics", ControlType.EXAM, 5));
         recordBook.addGrade(1, new Grade("Physics", ControlType.CREDIT, true));
 
-        recordBook.serializeToTXT(TEST_FILENAME);
+        recordBook.serializeTotxt(TEST_FILENAME);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILENAME))) {
             String line = reader.readLine();
