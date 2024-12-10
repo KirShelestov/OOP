@@ -148,11 +148,11 @@ class StudentRecordBookTest {
             assertEquals("Semester,ControlType,Subject,Grade,IsCredit", line);
 
             line = reader.readLine();
-            assertEquals("1,EXAM,\"Mathematics\",5,false", line);
-
-            line = reader.readLine();
             assertEquals("1,CREDIT,\"Physics\",5,true", line);
 
+            line = reader.readLine();
+
+            assertEquals("1,EXAM,\"Mathematics\",5,false", line);
 
         } catch (IOException e) {
             fail("IOException while reading the TXT file: " + e.getMessage());
