@@ -1,8 +1,11 @@
 package ru.nsu.shelestov.task3;
 
 import java.text.ParseException;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import ru.nsu.shelestov.task3.datatypes.Expression;
 import ru.nsu.shelestov.task3.datatypes.Number;
 import ru.nsu.shelestov.task3.datatypes.Variable;
@@ -28,11 +31,9 @@ public class Main {
 
         if (input.matches("-?\\d+(\\.\\d+)?")) {
             return new Number(Double.parseDouble(input));
-        }
-        else if (input.matches("[a-zA-Z]+")) {
+        } else if (input.matches("[a-zA-Z]+")) {
             return new Variable(input);
         }
-
         if (input.startsWith("(") && input.endsWith(")")) {
             input = input.substring(1, input.length() - 1);
         }
@@ -89,6 +90,7 @@ public class Main {
             }
 
             if (opIndex != -1) {
+
                 Expression left = expressions.get(opIndex);
                 Expression right = expressions.get(opIndex + 1);
                 expressions.remove(opIndex);
@@ -99,7 +101,7 @@ public class Main {
                     case '-' -> new Sub(left, right);
                     case '*' -> new Mul(left, right);
                     case '/' -> new Div(left, right);
-                    default -> throw new IllegalArgumentException("Неизвестный оператор: " + operator);
+                    default -> throw new IllegalArgumentException("Непонятен: " + operator);
                 };
                 expressions.add(opIndex, newExpr);
             }

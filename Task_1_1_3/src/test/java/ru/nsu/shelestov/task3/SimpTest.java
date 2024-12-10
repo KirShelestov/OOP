@@ -7,9 +7,9 @@ import ru.nsu.shelestov.task3.datatypes.Expression;
 import ru.nsu.shelestov.task3.datatypes.Number;
 import ru.nsu.shelestov.task3.datatypes.Variable;
 import ru.nsu.shelestov.task3.operations.Add;
-import ru.nsu.shelestov.task3.operations.Sub;
-import ru.nsu.shelestov.task3.operations.Mul;
 import ru.nsu.shelestov.task3.operations.Div;
+import ru.nsu.shelestov.task3.operations.Mul;
+import ru.nsu.shelestov.task3.operations.Sub;
 
 /**
  * Класс для тестирования упрощения.

@@ -14,8 +14,8 @@ public class Sub extends Expression {
     /**
      * Конструктор.
      *
-     * @param left
-     * @param right правое слагаемое
+     * @param left уменьшаемое
+     * @param right вычитаемое
      */
     public Sub(Expression left, Expression right) {
         this.left = left;
