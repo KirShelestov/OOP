@@ -72,12 +72,12 @@ public class Add extends Expression {
 
 
         // Если слева ноль, то вернуть правую часть
-        if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 0) {
+        if (simplifiedLeft instanceof Number leftNum && leftNum.getValue() == 0) {
             return simplifiedRight;
         }
 
         // Наоборот
-        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 0) {
+        if (simplifiedRight instanceof Number rightNum && rightNum.getValue() == 0) {
             return simplifiedLeft;
         }
 

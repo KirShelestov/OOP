@@ -70,7 +70,7 @@ public class Sub extends Expression {
         }
 
         // Если справа ноль, то возвращаем правую часть
-        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 0) {
+        if (simplifiedRight instanceof Number rightNum && rightNum.getValue() == 0) {
             return simplifiedLeft;
         }
 

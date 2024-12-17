@@ -79,7 +79,7 @@ public class Div extends Expression {
         }
 
         // Если делим на 1, то вернуть числитель
-        if (simplifiedDenominator instanceof Number denom && denom.evaluate(Map.of()) == 1) {
+        if (simplifiedDenominator instanceof Number denom && denom.getValue() == 1) {
             return simplifiedNumerator;
         }
 

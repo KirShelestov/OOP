@@ -66,10 +66,10 @@ public class Mul extends Expression {
         Expression simplifiedRight = right.simplify();
 
         // Если умножаем на ноль, то возвращаем просто 0
-        if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 0) {
+        if (simplifiedLeft instanceof Number leftNum && leftNum.getValue() == 0) {
             return new Number(0);
         }
-        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 0) {
+        if (simplifiedRight instanceof Number rightNum && rightNum.getValue() == 0) {
             return new Number(0);
         }
 
@@ -80,12 +80,12 @@ public class Mul extends Expression {
         }
 
         // Если слева один, то просто возвращаем правую часть
-        if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 1) {
+        if (simplifiedLeft instanceof Number leftNum && leftNum.getValue() == 1) {
             return simplifiedRight;
         }
 
         // Наоборот
-        if (simplifiedRight instanceof Number rightNum && rightNum.evaluate(Map.of()) == 1) {
+        if (simplifiedRight instanceof Number rightNum && rightNum.getValue() == 1) {
             return simplifiedLeft;
         }
 
