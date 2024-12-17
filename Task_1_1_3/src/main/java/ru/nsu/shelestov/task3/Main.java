@@ -92,7 +92,9 @@ public class Main {
             if (opIndex != -1) {
 
                 Expression left = expressions.get(opIndex);
+                left = left;
                 Expression right = expressions.get(opIndex + 1);
+                right = right;
                 expressions.remove(opIndex);
                 expressions.remove(opIndex);
                 operators.remove(opIndex);

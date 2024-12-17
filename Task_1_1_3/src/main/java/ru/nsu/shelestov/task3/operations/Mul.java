@@ -74,8 +74,8 @@ public class Mul extends Expression {
         }
 
         // Если перед нами числа, то просто умножаем их
-        if (simplifiedLeft instanceof Number leftNum &&
-                simplifiedRight instanceof Number rightNum) {
+        if (simplifiedLeft instanceof Number leftNum
+                && simplifiedRight instanceof Number rightNum) {
             return new Number(leftNum.evaluate(Map.of()) * rightNum.evaluate(Map.of()));
         }
 
