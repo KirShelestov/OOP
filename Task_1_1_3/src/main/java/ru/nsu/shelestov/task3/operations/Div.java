@@ -70,7 +70,8 @@ public class Div extends Expression {
         Expression simplifiedDenominator = denominator.simplify();
 
         // Если перед нами числа, то просто их делим
-        if (simplifiedNumerator instanceof Number num && simplifiedDenominator instanceof Number denom) {
+        if (simplifiedNumerator instanceof Number num
+                && simplifiedDenominator instanceof Number denom) {
             if (denom.evaluate(Map.of()) == 0) {
                 return new Div(num, denom); // Если поделили на ноль, то возвращаем на место
             }

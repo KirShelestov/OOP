@@ -140,7 +140,8 @@ public class MainTest {
     @Test
     void testParseExpression() {
         Expression expr1 = Main.parseExpression("((x + 2) * (y - 3))");
-        assertEquals(new Mul(new Add(new Variable("x"), new Number(2)), new Sub(new Variable("y"), new Number(3))), expr1);
+        assertEquals(new Mul(new Add(new Variable("x"),
+                new Number(2)), new Sub(new Variable("y"), new Number(3))), expr1);
 
         Expression expr2 = Main.parseExpression("(x / (2 + 3))");
         assertEquals(new Div(new Variable("x"), new Add(new Number(2), new Number(3))), expr2);
