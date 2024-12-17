@@ -65,10 +65,10 @@ public class Add extends Expression {
         Expression simplifiedRight = right.simplify();
 
         // Если оба числа числа, то вернуть их сумму
-        if (simplifiedLeft instanceof Number leftNum
-                && simplifiedRight instanceof Number rightNum) {
-            return new Number(leftNum.evaluate(Map.of()) + rightNum.evaluate(Map.of()));
+        if (simplifiedLeft instanceof Number leftNum && simplifiedRight instanceof Number rightNum) {
+            return new Number(leftNum.getValue() + rightNum.getValue());
         }
+
 
         // Если слева ноль, то вернуть правую часть
         if (simplifiedLeft instanceof Number leftNum && leftNum.evaluate(Map.of()) == 0) {

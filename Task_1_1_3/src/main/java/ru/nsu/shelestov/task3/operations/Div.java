@@ -72,10 +72,10 @@ public class Div extends Expression {
         // Если перед нами числа, то просто их делим
         if (simplifiedNumerator instanceof Number num
                 && simplifiedDenominator instanceof Number denom) {
-            if (denom.evaluate(Map.of()) == 0) {
+            if (denom.getValue() == 0) {
                 return new Div(num, denom); // Если поделили на ноль, то возвращаем на место
             }
-            return new Number(num.evaluate(Map.of()) / denom.evaluate(Map.of()));
+            return new Number(num.getValue() / denom.getValue());
         }
 
         // Если делим на 1, то вернуть числитель

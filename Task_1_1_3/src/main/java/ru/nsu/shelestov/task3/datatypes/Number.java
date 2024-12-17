@@ -39,6 +39,15 @@ public class Number extends Expression {
     }
 
     /**
+     * Получить значение числа.
+     *
+     * @return значение числа
+     */
+    public double getValue() {
+        return value;
+    }
+
+    /**
      * Производная.
      *
      * @param var переменная по которой идет дифференцирование
