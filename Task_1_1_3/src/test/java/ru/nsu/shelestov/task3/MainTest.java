@@ -137,34 +137,46 @@ public class MainTest {
         assertTrue(exception.getMessage().contains("abc"));
     }
 
+    @Test
+    void testParseExpression() {
+        Expression expr1 = Main.parseExpression("((x + 2) * (y - 3))");
+        assertEquals(new Mul(new Add(new Variable("x"),
+                new Number(2)), new Sub(new Variable("y"), new Number(3))), expr1);
+
+        Expression expr2 = Main.parseExpression("(x / (2 + 3))");
+        assertEquals(new Div(new Variable("x"), new Add(new Number(2), new Number(3))), expr2);
+
+        // Проверка на некорректное выражение
+        assertThrows(IllegalArgumentException.class, () -> Main.parseExpression("(x + 2) +"));
+    }
 
     /**
      * Тестирует метод parseExpression на корректных математических выражениях.
      */
     @Test
-    public void testParseExpression() {
-        Expression expr1 = Main.parseExpression("42.0");
+    public void testParseExpressionNew() {
+        Expression expr1 = Main.parseWithout("42.0");
         assertEquals(new Number(42.0), expr1);
 
-        Expression expr2 = Main.parseExpression("x");
+        Expression expr2 = Main.parseWithout("x");
         assertEquals(new Variable("x"), expr2);
 
-        Expression expr3 = Main.parseExpression("(x + 2.0)");
+        Expression expr3 = Main.parseWithout("(x + 2.0)");
         assertInstanceOf(Add.class, expr3);
         assertEquals(new Add(new Variable("x"), new Number(2.0)), expr3);
 
-        Expression expr4 = Main.parseExpression("(3 * (x + 4))");
+        Expression expr4 = Main.parseWithout("(3 * (x + 4))");
         assertInstanceOf(Mul.class, expr4);
         assertEquals(new Mul(new Number(3.0),
                 new Add(new Variable("x"), new Number(4.0))), expr4);
 
 
-        Expression expr5 = Main.parseExpression("((x + 2) * (y - 3))");
-        assertInstanceOf(Mul.class, expr5);
-        assertEquals(new Mul(new Add(new Variable("x"),
-                new Number(2.0)), new Sub(new Variable("y"), new Number(3.0))), expr5);
+        Expression expr5 = Main.parseWithout("x + y * 2 ");
+        assertInstanceOf(Add.class, expr5);
+        assertEquals(new Add(new Variable("x"),
+                new Mul(new Variable("y"), new Number(2.0))), expr5);
 
-        Expression expr6 = Main.parseExpression("(x / 2.0)");
+        Expression expr6 = Main.parseWithout("x / 2.0");
         assertInstanceOf(Div.class, expr6);
         Assertions.assertEquals(new Div(new Variable("x"), new Number(2.0)), expr6);
 

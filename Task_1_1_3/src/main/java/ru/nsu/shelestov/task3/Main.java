@@ -1,7 +1,9 @@
 package ru.nsu.shelestov.task3;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import ru.nsu.shelestov.task3.datatypes.Expression;
@@ -19,20 +21,115 @@ import ru.nsu.shelestov.task3.operations.Sub;
 public class Main {
 
     /**
+     * Метод для парсинга выражения из строки без скобок.
+     *
+     * @param input строка на ввод
+     * @return выражение, если нашли его
+     */
+    public static Expression parseWithout(String input) {
+        input = input.replaceAll("\\s+", "");
+
+        if (input.matches("-?\\d+(\\.\\d+)?")) {
+            return new Number(Double.parseDouble(input));
+        } else if (input.matches("[a-zA-Z]+")) {
+            return new Variable(input);
+        }
+        if (input.startsWith("(") && input.endsWith(")")) {
+            input = input.substring(1, input.length() - 1);
+        }
+
+        List<Expression> expressions = new ArrayList<>();
+        List<Character> operators = new ArrayList<>();
+        int level = 0;
+        StringBuilder current = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == '(') {
+                level++;
+                current.append(c);
+            } else if (c == ')') {
+                level--;
+                current.append(c);
+            } else if (level == 0 && (c == '+' || c == '-' || c == '*' || c == '/')) {
+                if (current.length() > 0) {
+                    expressions.add(parseWithout(current.toString()));
+                    current.setLength(0);
+                }
+                operators.add(c);
+            } else {
+                current.append(c);
+            }
+        }
+
+        if (current.length() > 0) {
+            expressions.add(parseWithout(current.toString()));
+        }
+
+        while (!operators.isEmpty()) {
+            int opIndex = -1;
+            char operator = ' ';
+            for (int j = 0; j < operators.size(); j++) {
+                char op = operators.get(j);
+                if (op == '*' || op == '/') {
+                    opIndex = j;
+                    operator = op;
+                    break;
+                }
+            }
+
+            if (opIndex == -1) {
+                for (int j = 0; j < operators.size(); j++) {
+                    char op = operators.get(j);
+                    if (op == '+' || op == '-') {
+                        opIndex = j;
+                        operator = op;
+                        break;
+                    }
+                }
+            }
+
+            if (opIndex != -1) {
+
+                Expression left = expressions.get(opIndex);
+                left = left;
+                Expression right = expressions.get(opIndex + 1);
+                right = right;
+                expressions.remove(opIndex);
+                expressions.remove(opIndex);
+                operators.remove(opIndex);
+                Expression newExpr = switch (operator) {
+                    case '+' -> new Add(left, right);
+                    case '-' -> new Sub(left, right);
+                    case '*' -> new Mul(left, right);
+                    case '/' -> new Div(left, right);
+                    default -> throw new IllegalArgumentException("Непонятен: " + operator);
+                };
+                expressions.add(opIndex, newExpr);
+            }
+        }
+
+        if (expressions.size() != 1) {
+            throw new IllegalArgumentException("Ошибка разбора выражения: " + input);
+        }
+
+        return expressions.get(0);
+    }
+
+    /**
      * Метод для парсинга выражения из строки.
      *
      * @param input строка на ввод
      * @return выражение, если нашли его
      */
     public static Expression parseExpression(String input) {
-        // Убираем пробелы
         input = input.replaceAll("\\s+", "");
 
-        if (input.matches("-?\\d+(\\.\\d+)?")) { // Число
+        if (input.matches("-?\\d+(\\.\\d+)?")) {
             return new Number(Double.parseDouble(input));
-        } else if (input.matches("[a-zA-Z]+")) { // Переменная
+        } else if (input.matches("[a-zA-Z]+")) {
             return new Variable(input);
-        } else if (input.startsWith("(") && input.endsWith(")")) { // Удаляем внешние скобки
+        } else if (input.startsWith("(") && input.endsWith(")")) {
             input = input.substring(1, input.length() - 1);
             int level = 0;
             int opIndex = -1;
@@ -43,13 +140,13 @@ public class Main {
                     level++;
                 } else if (c == ')') {
                     level--;
-                } else if (level == 0 && (c == '+' || c == '-')) { // Найти оператор
+                } else if (level == 0 && (c == '+' || c == '-')) {
                     opIndex = i;
                     break;
                 }
             }
 
-            if (opIndex != -1) { // Нашли оператор
+            if (opIndex != -1) {
                 char operator = input.charAt(opIndex);
                 Expression left = parseExpression(input.substring(0, opIndex));
                 Expression right = parseExpression(input.substring(opIndex + 1));
@@ -64,13 +161,13 @@ public class Main {
                     level++;
                 } else if (c == ')') {
                     level--;
-                } else if (level == 0 && (c == '*' || c == '/')) { // Найти оператор
+                } else if (level == 0 && (c == '*' || c == '/')) {
                     opIndex = i;
                     break;
                 }
             }
 
-            if (opIndex != -1) { // Нашли оператор
+            if (opIndex != -1) {
                 char operator = input.charAt(opIndex);
                 Expression left = parseExpression(input.substring(0, opIndex));
                 Expression right = parseExpression(input.substring(opIndex + 1));
@@ -92,11 +189,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         try (scanner) {
+            System.out.println("Введите математическое выражение:");
             String expressionInput = scanner.nextLine();
-            Expression expr = parseExpression(expressionInput);
+            Expression expr = parseWithout(expressionInput);
 
             System.out.print("Выражение: ");
             expr.print();
+
+            System.out.println("\nУпрощённое выражение: ");
+            expr.simplify().print();
 
             System.out.println("\nВведите значения переменных в формате 'x=10; y=13':");
             String variableAssignments = scanner.nextLine();
@@ -108,20 +209,15 @@ public class Main {
             String varDer = scanner.nextLine();
             expr.derivative(varDer).print();
         } catch (ArithmeticException e) {
-            final var errorMessage = "Ошибка арифметики: " + e.getMessage();
-            System.err.println(errorMessage);
+            System.err.println("Ошибка арифметики: " + e.getMessage());
         } catch (NumberFormatException e) {
-            final var errorMessage = "Неправильный формат числа: " + e.getMessage();
-            System.err.println(errorMessage);
+            System.err.println("Неправильный формат числа: " + e.getMessage());
         } catch (IllegalArgumentException e) {
-            final var errorMessage = "Ошибка недопустимого аргумента: " + e.getMessage();
-            System.err.println(errorMessage);
+            System.err.println("Ошибка недопустимого аргумента: " + e.getMessage());
         } catch (IllegalStateException e) {
-            final var errorMessage = "Ошибка недопустимого состояния: " + e.getMessage();
-            System.err.println(errorMessage);
+            System.err.println("Ошибка недопустимого состояния: " + e.getMessage());
         }
     }
-
 
     /**
      * Парсит строку с присвоениями переменных и сохраняет их в Map.

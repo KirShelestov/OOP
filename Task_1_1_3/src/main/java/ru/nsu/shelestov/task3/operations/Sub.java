@@ -2,6 +2,7 @@ package ru.nsu.shelestov.task3.operations;
 
 import java.util.Map;
 import ru.nsu.shelestov.task3.datatypes.Expression;
+import ru.nsu.shelestov.task3.datatypes.Number;
 
 /**
  * Класс представляет вычитание.
@@ -11,10 +12,10 @@ public class Sub extends Expression {
     private final Expression right;
 
     /**
-     * конструктор для вычитания.
+     * Конструктор.
      *
-     * @param left  левая часть уравнения
-     * @param right правая часть уравнения
+     * @param left уменьшаемое
+     * @param right вычитаемое
      */
     public Sub(Expression left, Expression right) {
         this.left = left;
@@ -22,50 +23,20 @@ public class Sub extends Expression {
     }
 
     /**
-     * переопределение равенства между объектами одного класса.
-     *
-     * @param obj объект с которым хотим сравнить текущий объект
-     * @return равны или не равны объекты
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true; // Сравнение ссылок
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; // Проверка типа
-        }
-
-        Sub sub = (Sub) obj; // Приведение типа
-        return left.equals(sub.left) && right.equals(sub.right); // Сравнение левой и правой частей
-    }
-
-    /**
-     * Переопределение хэш-кода.
-     *
-     * @return хэш-код объекта
-     */
-    @Override
-    public int hashCode() {
-        int result = left.hashCode();
-        result = 31 * result + right.hashCode();
-        return result;
-    }
-
-    /**
-     * подсчет значения при означивании.
+     * Означивание.
      *
      * @param variables означиваемые перменные
-     * @return значение при означивании
+     * @return разность означивания слагаемых
      */
+    @Override
     public double evaluate(Map<String, Double> variables) {
         return left.evaluate(variables) - right.evaluate(variables);
     }
 
     /**
-     * форматирование строки.
+     * Строкове представление.
      *
-     * @return строка в нужном формате.
+     * @return строчка
      */
     @Override
     public String toString() {
@@ -73,13 +44,64 @@ public class Sub extends Expression {
     }
 
     /**
-     * дифференцирование операции вычитания.
+     * Производная.
      *
      * @param var переменная по которой идет дифференцирование
-     * @return производная вычитания
+     * @return по правилам
      */
+    @Override
     public Expression derivative(String var) {
         return new Sub(left.derivative(var), right.derivative(var));
     }
 
+    /**
+     * Упрощенние по правилам.
+     *
+     * @return упрощенное выражение.
+     */
+    @Override
+    public Expression simplify() {
+        Expression simplifiedLeft = left.simplify();
+        Expression simplifiedRight = right.simplify();
+
+        // Если обе части равны, то возврщаем 0
+        if (simplifiedLeft.equals(simplifiedRight)) {
+            return new Number(0);
+        }
+
+        // Если справа ноль, то возвращаем правую часть
+        if (simplifiedRight instanceof Number rightNum && rightNum.getValue() == 0) {
+            return simplifiedLeft;
+        }
+
+        return new Sub(simplifiedLeft, simplifiedRight);
+    }
+
+    /**
+     * Переопределение равенства.
+     *
+     * @param obj объект с которым мы сравниваем текущий
+     * @return равенство объектов
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Sub)) {
+            return false;
+        }
+        Sub other = (Sub) obj;
+        return left.equals(other.left) && right.equals(other.right);
+    }
+
+    /**
+     * Переопределение hashCode.
+     *
+     * @return хеш-код переменной
+     */
+    @Override
+    public int hashCode() {
+        return 31 * left.hashCode() + right.hashCode();
+    }
 }
