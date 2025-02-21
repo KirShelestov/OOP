@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'me.champeau.jmh' version '0.7.1'
+    id 'jacoco'
 }
 
 group = 'ru.nsu.shelestov'
@@ -22,6 +23,19 @@ test {
     useJUnitPlatform()
 }
 
+jacoco {
+    toolVersion = '0.8.8'
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = false
+
+    }
+}
+
 jmh {
     includes = ['benchmarks.*']  // Указываем пакет benchmarks
     warmupIterations = 3 // Количество итераций для разогрева
@@ -30,5 +44,4 @@ jmh {
     benchmarkMode = ['avgt'] // Режим измерения (среднее время)
     timeUnit = 'ms' // Единица измерения времени
     threads = 1 // Количество потоков по умолчанию
-//    resultFormat = 'csv'
 }
