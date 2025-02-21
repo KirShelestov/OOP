@@ -1,10 +1,10 @@
 package benchmarks;  // Указываем пакет
 
 import org.openjdk.jmh.annotations.*;
-import ru.nsu.shelestov.DataGenerator;
-import ru.nsu.shelestov.PrimeChecker;
-import ru.nsu.shelestov.StreamPrimeChecker;
-import ru.nsu.shelestov.ParallelPrimeChecker;
+import ru.nsu.shelestov.generator.DataGenerator;
+import ru.nsu.shelestov.prime.PrimeChecker;
+import ru.nsu.shelestov.prime.StreamPrimeChecker;
+import ru.nsu.shelestov.prime.ParallelPrimeChecker;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
@@ -18,7 +18,7 @@ public class PrimeBenchmark {
 
     @Setup
     public void setup() {
-        data = DataGenerator.generateTestData(1_000_000); // Массив из миллиона чисел
+        data = DataGenerator.generateTestData(1_000_000);
     }
 
     @Benchmark

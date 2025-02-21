@@ -1,6 +1,7 @@
 package ru.nsu.shelestov;
 
 import org.junit.jupiter.api.Test;
+import ru.nsu.shelestov.generator.DataGenerator;
 
 import java.util.Arrays;
 
