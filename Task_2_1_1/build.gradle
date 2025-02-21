@@ -23,11 +23,6 @@ test {
     useJUnitPlatform()
 }
 
-jacoco {
-    toolVersion = '0.8.8'
-    reportsDir = file("$buildDir/customJacocoReportDir")
-}
-
 jacocoTestReport {
     reports {
         xml.required = true
