@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.shelestov","l":"DataGenerator"},{"p":"ru.nsu.shelestov","l":"ParallelPrimeChecker"},{"p":"ru.nsu.shelestov","l":"PrimeChecker"},{"p":"ru.nsu.shelestov","l":"StreamPrimeChecker"}];updateSearchResults();
