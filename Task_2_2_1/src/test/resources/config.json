@@ -1,0 +1,11 @@
+{
+  "storage_capacity": 10,
+  "bakers": [
+    {"speed": 1},
+    {"speed": 2}
+  ],
+  "couriers": [
+    {"capacity": 5},
+    {"capacity": 3}
+  ]
+}
