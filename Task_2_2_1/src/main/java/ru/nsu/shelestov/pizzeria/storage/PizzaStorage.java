@@ -18,13 +18,21 @@ public class PizzaStorage implements BakeryStorage {
         notifyAll();
     }
 
-    @Override
     public synchronized List<Order> take(int max) throws InterruptedException {
-        while (orders.isEmpty() && !isShutdown) wait();
-        if (orders.isEmpty() && isShutdown) return Collections.emptyList();
+        while (orders.isEmpty() && !isShutdown) {
+            wait();
+        }
+
+        if (isShutdown && orders.isEmpty()) {
+            return Collections.emptyList();
+        }
+
         List<Order> taken = new ArrayList<>();
         int count = Math.min(max, orders.size());
-        for (int i = 0; i < count; i++) taken.add(orders.poll());
+        for (int i = 0; i < count; i++) {
+            taken.add(orders.poll());
+        }
+
         notifyAll();
         return taken;
     }

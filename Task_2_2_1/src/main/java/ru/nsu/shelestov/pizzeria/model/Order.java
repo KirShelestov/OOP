@@ -36,5 +36,7 @@ public class Order implements Serializable {
         return Objects.hash(id, status);
     }
 
-
+    public static void resetIdCounter() {
+        idCounter.set(0);
+    }
 }

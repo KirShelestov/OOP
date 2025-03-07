@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.shelestov.pizzeria.model.Order;
 import ru.nsu.shelestov.pizzeria.storage.PizzaStorage;
 
+import java.util.List;
+
 class PizzaStorageTest {
 
     @Test
@@ -29,9 +31,17 @@ class PizzaStorageTest {
     @Test
     void shouldReturnAllOrdersWhenShutdown() throws InterruptedException {
         PizzaStorage storage = new PizzaStorage(2);
-        storage.put(new Order());
+        Order order1 = new Order();
+        Order order2 = new Order();
+
+        storage.put(order1);
+        storage.put(order2);
         storage.shutdown();
 
-        assertThat(storage.take(10)).isEmpty();
+        List<Order> firstTake = storage.take(10);
+        assertThat(firstTake).containsExactly(order1, order2);
+
+        List<Order> secondTake = storage.take(10);
+        assertThat(secondTake).isEmpty();
     }
 }
