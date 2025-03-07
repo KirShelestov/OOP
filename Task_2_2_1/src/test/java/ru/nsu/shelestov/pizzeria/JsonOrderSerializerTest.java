@@ -18,6 +18,6 @@ class JsonOrderSerializerTest {
         List<Order> loaded = serializer.deserialize("test_orders.json");
 
         assertThat(loaded).hasSize(2);
-        assertThat(loaded.getFirst().getId()).isEqualTo(1);
+        assertThat(loaded.get(0).getId()).isEqualTo(1);
     }
 }

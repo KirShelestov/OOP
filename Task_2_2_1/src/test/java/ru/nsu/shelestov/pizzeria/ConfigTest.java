@@ -12,6 +12,6 @@ class ConfigTest {
         Config config = Config.load("src/test/resources/config.json");
 
         assertThat(config.bakers()).hasSize(2);
-        assertThat(config.couriers().getFirst().capacity()).isEqualTo(5);
+        assertThat(config.couriers().get(0).capacity()).isEqualTo(5);
     }
 }
