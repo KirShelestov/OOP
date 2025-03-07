@@ -1,5 +1,7 @@
 package ru.nsu.shelestov.pizzeria.model;
 
+import java.util.Objects;
+
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,4 +22,19 @@ public class Order implements Serializable {
     public enum Status {
         ORDERED, PREPARING, BAKED, STORED, DELIVERING, DELIVERED
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id && status == order.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, status);
+    }
+
+
 }
