@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'jacoco'
 }
 
 group = 'ru.nsu.shelestov.pizzeria'
@@ -27,6 +28,13 @@ test {
     useJUnitPlatform()
 }
 
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = false
+
+    }
+}
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }

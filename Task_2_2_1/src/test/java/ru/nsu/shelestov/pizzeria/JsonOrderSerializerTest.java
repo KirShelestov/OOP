@@ -16,7 +16,7 @@ class JsonOrderSerializerTest {
     @BeforeEach
     void setUp() {
         serializer = new JsonOrderSerializer();
-        Order.resetIdCounter(); 
+        Order.resetIdCounter();
     }
 
     @Test
