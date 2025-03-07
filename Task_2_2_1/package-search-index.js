@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.shelestov.pizzeria"},{"l":"ru.nsu.shelestov.pizzeria.model"},{"l":"ru.nsu.shelestov.pizzeria.queue"},{"l":"ru.nsu.shelestov.pizzeria.serializer"},{"l":"ru.nsu.shelestov.pizzeria.storage"},{"l":"ru.nsu.shelestov.pizzeria.tracker"},{"l":"ru.nsu.shelestov.pizzeria.workers"}];updateSearchResults();
