@@ -10,6 +10,8 @@ public class SnakeController {
     private final SnakeModel model;
     private final SnakeView view;
     private final AnimationTimer gameLoop;
+    private long lastDirectionChange = 0;
+    private static final long DIRECTION_CHANGE_DELAY = 50_000_000; // 50ms delay
 
     public SnakeController(LevelType levelType) {
         this.model = new SnakeModel(levelType);
@@ -40,6 +42,11 @@ public class SnakeController {
 
     private void setupInputHandling() {
         view.setOnKeyPressed(event -> {
+            long now = System.nanoTime();
+            if (now - lastDirectionChange < DIRECTION_CHANGE_DELAY) {
+                return; // Ignore rapid key presses
+            }
+
             Direction newDirection = switch (event.getCode()) {
                 case UP, W -> Direction.UP;
                 case DOWN, S -> Direction.DOWN;
@@ -56,6 +63,7 @@ public class SnakeController {
                     if (model.getMirrorSnake() != null) {
                         model.getMirrorSnake().setDirection(newDirection.getOpposite());
                     }
+                    lastDirectionChange = now;
                 }
             }
         });
