@@ -5,6 +5,5 @@ public enum GameMode {
     OBSTACLES,
     MIRROR,
     TELEPORT,
-    REVERSE,
-    FLYING
+    REVERSE
 }

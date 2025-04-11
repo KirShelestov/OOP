@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
@@ -105,59 +107,47 @@ public class App extends Application {
     }
 
     private void showLevelCreator(Stage primaryStage) {
-        Stage levelStage = new Stage();
-        VBox mainContainer = new VBox(30);
-        mainContainer.setAlignment(Pos.CENTER);
-        mainContainer.setPadding(new Insets(20));
+        VBox menuBox = new VBox(20);
+        menuBox.setAlignment(Pos.CENTER);
+        menuBox.setStyle("-fx-background-color: #ffffff;");
 
-        Label titleLabel = new Label("Create Level");
-        titleLabel.setFont(new Font("Arial Bold", 24));
+        // Apple count selection
+        HBox appleBox = new HBox(20);
+        appleBox.setAlignment(Pos.CENTER);
+        ToggleGroup appleGroup = new ToggleGroup();
 
-        HBox appleSelector = new HBox(20);
-        appleSelector.setAlignment(Pos.CENTER);
-        Label appleLabel = new Label("Apples:");
-        appleLabel.setFont(new Font("Arial", 18));
-        Button leftAppleBtn = new Button("<");
-        Label appleCountLabel = new Label("1");
-        Button rightAppleBtn = new Button(">");
-        int[] appleCounts = {1, 3, 5, -1};
-        final int[] currentAppleIndex = {0};
+        RadioButton singleApple = new RadioButton("1 Apple");
+        RadioButton threeApples = new RadioButton("3 Apples");
+        RadioButton fiveApples = new RadioButton("5 Apples");
+        RadioButton randomApples = new RadioButton("Random");
 
-        leftAppleBtn.setOnAction(e -> {
-            currentAppleIndex[0] = (currentAppleIndex[0] - 1 + appleCounts.length) % appleCounts.length;
-            appleCountLabel.setText(appleCounts[currentAppleIndex[0]] == -1 ? "Random" : 
-                String.valueOf(appleCounts[currentAppleIndex[0]]));
-        });
+        singleApple.setToggleGroup(appleGroup);
+        threeApples.setToggleGroup(appleGroup);
+        fiveApples.setToggleGroup(appleGroup);
+        randomApples.setToggleGroup(appleGroup);
+        singleApple.setSelected(true);
 
-        rightAppleBtn.setOnAction(e -> {
-            currentAppleIndex[0] = (currentAppleIndex[0] + 1) % appleCounts.length;
-            appleCountLabel.setText(appleCounts[currentAppleIndex[0]] == -1 ? "Random" : 
-                String.valueOf(appleCounts[currentAppleIndex[0]]));
-        });
+        appleBox.getChildren().addAll(singleApple, threeApples, fiveApples, randomApples);
 
-        appleSelector.getChildren().addAll(appleLabel, leftAppleBtn, appleCountLabel, rightAppleBtn);
+        // Game mode selection
+        HBox modeBox = new HBox(20);
+        modeBox.setAlignment(Pos.CENTER);
+        ToggleGroup modeGroup = new ToggleGroup();
 
-        HBox modeSelector = new HBox(20);
-        modeSelector.setAlignment(Pos.CENTER);
-        Label modeLabel = new Label("Mode:");
-        modeLabel.setFont(new Font("Arial", 18));
-        Button leftModeBtn = new Button("<");
-        Label modeStateLabel = new Label("Classic");
-        Button rightModeBtn = new Button(">");
-        String[] modes = {"Classic", "Obstacles", "Mirror", "Teleport", "Reverse", "Flying"};
-        final int[] currentModeIndex = {0};
+        RadioButton clearMode = new RadioButton("Clear");
+        RadioButton obstaclesMode = new RadioButton("Obstacles");
+        RadioButton mirrorMode = new RadioButton("Mirror");
+        RadioButton teleportMode = new RadioButton("Teleport");
+        RadioButton reverseMode = new RadioButton("Reverse");
 
-        leftModeBtn.setOnAction(e -> {
-            currentModeIndex[0] = (currentModeIndex[0] - 1 + modes.length) % modes.length;
-            modeStateLabel.setText(modes[currentModeIndex[0]]);
-        });
+        clearMode.setToggleGroup(modeGroup);
+        obstaclesMode.setToggleGroup(modeGroup);
+        mirrorMode.setToggleGroup(modeGroup);
+        teleportMode.setToggleGroup(modeGroup);
+        reverseMode.setToggleGroup(modeGroup);
+        clearMode.setSelected(true);
 
-        rightModeBtn.setOnAction(e -> {
-            currentModeIndex[0] = (currentModeIndex[0] + 1) % modes.length;
-            modeStateLabel.setText(modes[currentModeIndex[0]]);
-        });
-
-        modeSelector.getChildren().addAll(modeLabel, leftModeBtn, modeStateLabel, rightModeBtn);
+        modeBox.getChildren().addAll(clearMode, obstaclesMode, mirrorMode, teleportMode, reverseMode);
 
         Button startButton = new Button("Start Game");
         startButton.setStyle(buttonStyle);
@@ -165,51 +155,61 @@ public class App extends Application {
         startButton.setMinWidth(200);
 
         startButton.setOnAction(e -> {
-            LevelType selectedType = getLevelType(appleCounts[currentAppleIndex[0]], modes[currentModeIndex[0]]);
+            RadioButton selectedApple = (RadioButton) appleGroup.getSelectedToggle();
+            RadioButton selectedMode = (RadioButton) modeGroup.getSelectedToggle();
+
+            int appleCount = switch (selectedApple.getText()) {
+                case "1 Apple" -> 1;
+                case "3 Apples" -> 3;
+                case "5 Apples" -> 5;
+                default -> -1;
+            };
+
+            String mode = selectedMode.getText();
+            LevelType selectedType = getLevelType(appleCount, mode);
             startGame(selectedType);
-            levelStage.close();
         });
 
-        mainContainer.getChildren().addAll(titleLabel, appleSelector, modeSelector, startButton);
+        menuBox.getChildren().addAll(appleBox, modeBox, startButton);
 
-        Scene scene = new Scene(mainContainer, 400, 300);
-        levelStage.setTitle("Level Creator");
-        levelStage.setScene(scene);
-        levelStage.show();
+        Scene scene = new Scene(menuBox, 400, 300);
+        primaryStage.setTitle("Level Creator");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     private LevelType getLevelType(int appleCount, String mode) {
         return switch (appleCount) {
             case 1 -> switch (mode) {
+                case "Clear" -> LevelType.SINGLE_APPLE_CLEAR;
                 case "Obstacles" -> LevelType.SINGLE_APPLE_OBSTACLES;
                 case "Mirror" -> LevelType.SINGLE_APPLE_MIRROR;
                 case "Teleport" -> LevelType.SINGLE_APPLE_TELEPORT;
                 case "Reverse" -> LevelType.SINGLE_APPLE_REVERSE;
-                case "Flying" -> LevelType.SINGLE_APPLE_FLYING;
                 default -> LevelType.SINGLE_APPLE_CLEAR;
             };
             case 3 -> switch (mode) {
+                case "Clear" -> LevelType.THREE_APPLES_CLEAR;
                 case "Obstacles" -> LevelType.THREE_APPLES_OBSTACLES;
                 case "Mirror" -> LevelType.THREE_APPLES_MIRROR;
                 case "Teleport" -> LevelType.THREE_APPLES_TELEPORT;
                 case "Reverse" -> LevelType.THREE_APPLES_REVERSE;
-                case "Flying" -> LevelType.THREE_APPLES_FLYING;
                 default -> LevelType.THREE_APPLES_CLEAR;
             };
             case 5 -> switch (mode) {
+                case "Clear" -> LevelType.FIVE_APPLES_CLEAR;
                 case "Obstacles" -> LevelType.FIVE_APPLES_OBSTACLES;
                 case "Mirror" -> LevelType.FIVE_APPLES_MIRROR;
                 case "Teleport" -> LevelType.FIVE_APPLES_TELEPORT;
                 case "Reverse" -> LevelType.FIVE_APPLES_REVERSE;
-                case "Flying" -> LevelType.FIVE_APPLES_FLYING;
                 default -> LevelType.FIVE_APPLES_CLEAR;
             };
             default -> switch (mode) {
+                case "Clear" -> LevelType.RANDOM_APPLES_CLEAR;
                 case "Obstacles" -> LevelType.RANDOM_APPLES_OBSTACLES;
                 case "Mirror" -> LevelType.RANDOM_APPLES_MIRROR;
                 case "Teleport" -> LevelType.RANDOM_APPLES_TELEPORT;
                 case "Reverse" -> LevelType.RANDOM_APPLES_REVERSE;
-                case "Flying" -> LevelType.RANDOM_APPLES_FLYING;
                 default -> LevelType.RANDOM_APPLES_CLEAR;
             };
         };
