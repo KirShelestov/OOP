@@ -1,0 +1,56 @@
+package ru.nsu.shelestov.utils;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class PrimeGeneratorTest {
+    
+    @Test
+    void testIsPrime() {
+        int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+        int[] nonPrimes = {0, 1, 4, 6, 8, 9, 10, 12, 14, 15, 16};
+        
+        for (int prime : primes) {
+            assertTrue(PrimeGenerator.isPrime(prime), prime + " should be prime");
+        }
+        
+        for (int nonPrime : nonPrimes) {
+            assertFalse(PrimeGenerator.isPrime(nonPrime), nonPrime + " should not be prime");
+        }
+    }
+
+    @Test
+    void testGeneratePrimeArray() {
+        int size = 10;
+        int maxValue = 100;
+        int[] primes = PrimeGenerator.generatePrimeArray(size, maxValue);
+        
+        assertEquals(size, primes.length);
+        for (int prime : primes) {
+            assertTrue(PrimeGenerator.isPrime(prime), 
+                prime + " in generated prime array is not prime");
+            assertTrue(prime < maxValue && prime > 1, 
+                prime + " is outside valid range");
+        }
+    }
+
+    @Test
+    void testGenerateMixedArray() {
+        int size = 20;
+        int maxValue = 100;
+        int[] mixed = PrimeGenerator.generateMixedArray(size, maxValue);
+        
+        assertEquals(size, mixed.length);
+        boolean hasComposite = false;
+        
+        for (int num : mixed) {
+            assertTrue(num < maxValue && num > 1, 
+                num + " is outside valid range");
+            if (!PrimeGenerator.isPrime(num)) {
+                hasComposite = true;
+            }
+        }
+        
+        assertTrue(hasComposite, "Mixed array should contain at least one composite number");
+    }
+}

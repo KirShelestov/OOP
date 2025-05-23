@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
     id 'me.champeau.jmh' version '0.7.1'
     id 'jacoco'
 }
@@ -19,8 +20,15 @@ dependencies {
     annotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.36'
 }
 
+application {
+    mainClass = 'ru.nsu.shelestov.worker.WorkerMain'
+}
+
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 jacocoTestReport {
@@ -31,7 +39,24 @@ jacocoTestReport {
     }
 }
 
-apply plugin: 'application'
-mainClassName = 'ru.nsu.shelestov.Main'
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'ru.nsu.shelestov.worker.WorkerMain'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
+task runServer(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ru.nsu.shelestov.server.TaskServer'
+}
 
+task runWorker(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'ru.nsu.shelestov.worker.WorkerMain'
+}
