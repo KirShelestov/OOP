@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.shelestov.server"},{"l":"ru.nsu.shelestov.storage"},{"l":"ru.nsu.shelestov.task"},{"l":"ru.nsu.shelestov.utils"},{"l":"ru.nsu.shelestov.worker"}];updateSearchResults();
