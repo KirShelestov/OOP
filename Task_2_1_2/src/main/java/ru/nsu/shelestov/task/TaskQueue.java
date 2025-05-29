@@ -57,7 +57,6 @@ public class TaskQueue implements Serializable {
 
     public void completeTask(String taskId) {
         activeTasks.remove(taskId);
-        // Set complete to true if no more tasks
         if (pendingTasks.isEmpty() && activeTasks.isEmpty()) {
             setComplete(true);
         }
