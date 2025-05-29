@@ -50,6 +50,7 @@ loadScripts(document, 'script');</script>
 <h1 class="title">Hierarchy For All Packages</h1>
 <span class="package-hierarchy-label">Package Hierarchies:</span>
 <ul class="horizontal">
+<li><a href="ru/nsu/shelestov/network/package-tree.html">ru.nsu.shelestov.network</a>, </li>
 <li><a href="ru/nsu/shelestov/server/package-tree.html">ru.nsu.shelestov.server</a>, </li>
 <li><a href="ru/nsu/shelestov/storage/package-tree.html">ru.nsu.shelestov.storage</a>, </li>
 <li><a href="ru/nsu/shelestov/task/package-tree.html">ru.nsu.shelestov.task</a>, </li>
@@ -62,7 +63,10 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="class or interface in java.lang">Object</a>
 <ul>
+<li class="circle">ru.nsu.shelestov.network.<a href="ru/nsu/shelestov/network/ClientConnection.html" class="type-name-link" title="class in ru.nsu.shelestov.network">ClientConnection</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a>)</li>
+<li class="circle">ru.nsu.shelestov.network.<a href="ru/nsu/shelestov/network/ClientHandler.html" class="type-name-link" title="class in ru.nsu.shelestov.network">ClientHandler</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>)</li>
 <li class="circle">ru.nsu.shelestov.storage.<a href="ru/nsu/shelestov/storage/FileProgressStorage.html" class="type-name-link" title="class in ru.nsu.shelestov.storage">FileProgressStorage</a> (implements ru.nsu.shelestov.storage.<a href="ru/nsu/shelestov/storage/ProgressStorage.html" title="interface in ru.nsu.shelestov.storage">ProgressStorage</a>)</li>
+<li class="circle">ru.nsu.shelestov.network.<a href="ru/nsu/shelestov/network/MessageProtocol.html" class="type-name-link" title="class in ru.nsu.shelestov.network">MessageProtocol</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)</li>
 <li class="circle">ru.nsu.shelestov.utils.<a href="ru/nsu/shelestov/utils/PrimeGenerator.html" class="type-name-link" title="class in ru.nsu.shelestov.utils">PrimeGenerator</a></li>
 <li class="circle">ru.nsu.shelestov.worker.<a href="ru/nsu/shelestov/worker/ProcessResult.html" class="type-name-link" title="class in ru.nsu.shelestov.worker">ProcessResult</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)</li>
 <li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html" class="type-name-link external-link" title="class or interface in java.lang">Record</a>
@@ -70,6 +74,7 @@ loadScripts(document, 'script');</script>
 <li class="circle">ru.nsu.shelestov.task.<a href="ru/nsu/shelestov/task/TaskStatistics.html" class="type-name-link" title="class in ru.nsu.shelestov.task">TaskStatistics</a></li>
 </ul>
 </li>
+<li class="circle">ru.nsu.shelestov.network.<a href="ru/nsu/shelestov/network/ServerListener.html" class="type-name-link" title="class in ru.nsu.shelestov.network">ServerListener</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/AutoCloseable.html" title="class or interface in java.lang" class="external-link">AutoCloseable</a>)</li>
 <li class="circle">ru.nsu.shelestov.task.<a href="ru/nsu/shelestov/task/Task.html" class="type-name-link" title="class in ru.nsu.shelestov.task">Task</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)</li>
 <li class="circle">ru.nsu.shelestov.task.<a href="ru/nsu/shelestov/task/TaskManager.html" class="type-name-link" title="class in ru.nsu.shelestov.task">TaskManager</a></li>
 <li class="circle">ru.nsu.shelestov.task.<a href="ru/nsu/shelestov/task/TaskQueue.html" class="type-name-link" title="class in ru.nsu.shelestov.task">TaskQueue</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)</li>
@@ -85,6 +90,20 @@ loadScripts(document, 'script');</script>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
 <li class="circle">ru.nsu.shelestov.storage.<a href="ru/nsu/shelestov/storage/ProgressStorage.html" class="type-name-link" title="interface in ru.nsu.shelestov.storage">ProgressStorage</a></li>
+</ul>
+</section>
+<section class="hierarchy">
+<h2 title="Enum Class Hierarchy">Enum Class Hierarchy</h2>
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="class or interface in java.lang">Object</a>
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" class="type-name-link external-link" title="class or interface in java.lang">Enum</a>&lt;E&gt; (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;, java.lang.constant.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/constant/Constable.html" title="class or interface in java.lang.constant" class="external-link">Constable</a>, java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
+<ul>
+<li class="circle">ru.nsu.shelestov.network.<a href="ru/nsu/shelestov/network/MessageProtocol.MessageType.html" class="type-name-link" title="enum class in ru.nsu.shelestov.network">MessageProtocol.MessageType</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 </main>
