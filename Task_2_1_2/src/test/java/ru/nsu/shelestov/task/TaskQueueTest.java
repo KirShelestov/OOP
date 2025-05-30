@@ -22,7 +22,7 @@ class TaskQueueTest {
         Task retrieved = queue.getNext(WORKER_ID);
         assertNotNull(retrieved);
         assertEquals(task.getId(), retrieved.getId());
-        assertEquals(WORKER_ID, retrieved.getWorkerId());
+        assertEquals(WORKER_ID, retrieved.getAssignedWorkerId());
         assertTrue(retrieved.getAssignedTime() > 0);
     }
     

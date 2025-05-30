@@ -5,6 +5,7 @@ import ru.nsu.shelestov.task.Task;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -32,21 +33,18 @@ public class WorkerClient implements AutoCloseable {
         this.port = port;
         this.workerId = workerId;
         this.progressFile = progressFile;
-        this.token = "secret" + workerId.charAt(workerId.length() - 1); // Match server's token format
+        this.token = "secret" + workerId.charAt(workerId.length() - 1);
         this.tlsWrapper = new TLSWrapper(keystorePath, keystorePassword);
     }
 
     private void connect() throws IOException {
         socket = tlsWrapper.createClientSocket(host, port);
         
-        // First create output stream
         out = new ObjectOutputStream(socket.getOutputStream());
-        out.flush(); // Important: flush header
+        out.flush();
         
-        // Then create input stream
         in = new ObjectInputStream(socket.getInputStream());
         
-        // Authenticate
         out.writeUTF(workerId);
         out.writeUTF(token);
         out.flush();
@@ -167,44 +165,33 @@ public class WorkerClient implements AutoCloseable {
     }
     
     private ProcessResult processTask(Task task) {
-        logger.info(String.format("%s: Starting task processing. Range [%d, %d]", 
-            workerId, 
-            task.getNumbers()[task.getStartIndex()],
-            task.getNumbers()[task.getEndIndex()]));
+        int[] chunk = Arrays.copyOfRange(task.getNumbers(), 
+            task.getStartIndex(), task.getEndIndex() + 1);
+        logger.info(String.format("%s: Starting task processing. Numbers to check: %s", 
+            workerId, Arrays.toString(chunk)));
         
         long startTime = System.currentTimeMillis();
-        int numbersChecked = 0;
         List<Integer> compositeNumbers = new ArrayList<>();
         
         for (int i = task.getStartIndex(); i <= task.getEndIndex(); i++) {
             int number = task.getNumbers()[i];
             if (!isPrime(number)) {
                 compositeNumbers.add(number);
-                if (compositeNumbers.size() == 1) {
-                    logger.info(String.format("%s: Found first composite number: %d", 
-                        workerId, number));
-                }
-            }
-            
-            numbersChecked++;
-            if (numbersChecked % 100000 == 0) { 
-                long currentTime = System.currentTimeMillis();
-                long timeElapsed = (currentTime - startTime) / 1000;
-                logger.info(String.format("%s: Processed %d numbers in %d seconds", 
-                    workerId, numbersChecked, timeElapsed));
+                logger.info(String.format("%s: Found composite number: %d", workerId, number));
+                break;
             }
         }
         
-        long totalTime = (System.currentTimeMillis() - startTime) / 1000;
-        logger.info(String.format("%s: Task completed in %d seconds. Found %d composite numbers", 
-            workerId, totalTime, compositeNumbers.size()));
+        long processingTime = System.currentTimeMillis() - startTime;
+        logger.info(String.format("%s: Task completed in %d ms. Found %d composite numbers", 
+            workerId, processingTime, compositeNumbers.size()));
         
         return new ProcessResult(task.getId(), compositeNumbers);
     }
 
     private boolean isPrime(int number) {
         if (number <= 1) return false;
-        if (number <= 3) return true;
+        if (number == 2) return true;
         if (number % 2 == 0) return false;
         
         int sqrt = (int) Math.sqrt(number);

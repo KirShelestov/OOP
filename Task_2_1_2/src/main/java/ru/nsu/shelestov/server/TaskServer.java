@@ -14,6 +14,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
@@ -32,6 +35,7 @@ public class TaskServer implements AutoCloseable {
     private final TLSWrapper tlsWrapper;
     private final TaskTimeoutWatcher timeoutWatcher;
     private final HealthCheck healthCheck;
+    private int[] numbers; 
 
     public TaskServer(int port, String progressFile, String keystorePath, 
             String keystorePassword) throws Exception {
@@ -47,26 +51,24 @@ public class TaskServer implements AutoCloseable {
         authManager.registerWorker("worker1", "secret1");
         authManager.registerWorker("worker2", "secret2");
         authManager.registerWorker("worker3", "secret3");
-
-        initializeTasks();
     }
 
-    private void initializeTasks() {
-        int start = 100;        
-        int range = 1000;      
-        int taskCount = 3;      
+    private void initializeWithArray(int[] numbers) {
+        this.numbers = numbers; 
+        int workerCount = 3;
+        int chunkSize = Math.max(1, numbers.length / workerCount);
         
-        for (int i = 0; i < taskCount; i++) {
-            int[] numbers = new int[range];
-            for (int j = 0; j < range; j++) {
-                numbers[j] = start + j;
-            }
-            Task task = new Task(numbers, 0, range - 1);
+        logger.info("Initializing tasks with input array of size: " + numbers.length);
+        logger.info("Input array: " + Arrays.toString(numbers));
+        
+        for (int i = 0; i < numbers.length; i += chunkSize) {
+            int endIndex = Math.min(i + chunkSize - 1, numbers.length - 1);
+            Task task = new Task(numbers, i, endIndex);
             taskManager.addTask(task);
-            logger.info("Created task " + i + " with range [" + start + ", " + (start + range - 1) + "]");
-            start += range;
+            logger.info(String.format("Created task for array chunk [%d-%d]: %s", 
+                i, endIndex, 
+                Arrays.toString(Arrays.copyOfRange(numbers, i, endIndex + 1))));
         }
-        logger.info("Initialized server with " + taskCount + " tasks");
     }
 
     public void start() {
@@ -140,12 +142,26 @@ public class TaskServer implements AutoCloseable {
                         logger.info("Received result from " + clientId);
                         
                         if (!result.getCompositeNumbers().isEmpty()) {
-                            logger.info("Composite number found by " + clientId + ": " + 
-                                result.getCompositeNumbers().get(0));
-                            running = false;
-                            out.writeUTF("SHUTDOWN");
-                            out.flush();
-                            break;
+                            int compositeNumber = result.getCompositeNumbers().get(0);
+                            logger.info("Composite number found by " + clientId + ": " + compositeNumber);
+                            boolean isInArray = false;
+                            for (int num : numbers) {  
+                                if (num == compositeNumber) {
+                                    isInArray = true;
+                                    break;
+                                }
+                            }
+                            if (isInArray) {
+                                logger.info("Verified: number " + compositeNumber + " is in the input array");
+                                running = false;
+                                out.writeUTF("SHUTDOWN");
+                                out.flush();
+                                break;
+                            } else {
+                                logger.warning("Number " + compositeNumber + " is not in the input array!");
+                                out.writeUTF("CONTINUE");
+                                out.flush();
+                            }
                         }
                         
                         out.writeUTF("RESULT_ACCEPTED");
@@ -188,26 +204,26 @@ public class TaskServer implements AutoCloseable {
     }
 
     public static void main(String[] args) {
-        int port = 8443; 
-        String progressFile = "server_progress.dat";
-        String keystorePath = "server.jks";
-        String keystorePassword = "serverpass";
-
-        if (args.length >= 2) {
-            keystorePath = args[0];
-            keystorePassword = args[1];
+        if (args.length < 4) {
+            System.out.println("Usage: <keystorePath> <keystorePassword> <arraySize> <maxValue>");
+            System.exit(1);
         }
 
-        while (!isPortAvailable(port) && port < 9000) {
-            port++;
+        String keystorePath = args[0];
+        String keystorePassword = args[1];
+        int arraySize = Integer.parseInt(args[2]);
+        int maxValue = Integer.parseInt(args[3]);
+
+        int[] numbers = new int[arraySize];
+        Random random = new Random();
+        for (int i = 0; i < arraySize; i++) {
+            numbers[i] = random.nextInt(maxValue) + 1;
         }
 
-        if (port >= 9000) {
-            System.err.println("Could not find an available port");
-            return;
-        }
+        System.out.println("Working with array: " + Arrays.toString(numbers));
 
-        try (TaskServer server = new TaskServer(port, progressFile, keystorePath, keystorePassword)) {
+        try (TaskServer server = new TaskServer(8443, "progress.dat", keystorePath, keystorePassword)) {
+            server.initializeWithArray(numbers);
             server.start();
         } catch (Exception e) {
             e.printStackTrace();

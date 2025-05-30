@@ -11,27 +11,44 @@ public class Task implements Serializable {
     private final int[] numbers;
     private final int startIndex;
     private final int endIndex;
+    private String assignedWorkerId;
     private long assignedTime;
-    private String workerId;
-
+    
     public Task(int[] numbers, int startIndex, int endIndex) {
         this.id = UUID.randomUUID().toString();
-        this.numbers = Arrays.copyOf(numbers, numbers.length);
+        this.numbers = numbers;
         this.startIndex = startIndex;
         this.endIndex = endIndex;
-        this.assignedTime = 0;
-        this.workerId = null;
+        this.assignedTime = -1;
+        this.assignedWorkerId = null;
+    }
+    
+    public void assignTo(String workerId) {
+        this.assignedWorkerId = workerId;
+        this.assignedTime = System.currentTimeMillis();
+    }
+    
+    public String getId() {
+        return id;
+    }
+    
+    public int[] getNumbers() {
+        return numbers;
+    }
+    
+    public int getStartIndex() {
+        return startIndex;
+    }
+    
+    public int getEndIndex() {
+        return endIndex;
+    }
+    
+    public String getAssignedWorkerId() {
+        return assignedWorkerId;
     }
 
-    public String getId() { return id; }
-    public int[] getNumbers() { return Arrays.copyOf(numbers, numbers.length); }
-    public int getStartIndex() { return startIndex; }
-    public int getEndIndex() { return endIndex; }
-    public long getAssignedTime() { return assignedTime; }
-    public String getWorkerId() { return workerId; }
-
-    public void assignTo(String workerId) {
-        this.workerId = workerId;
-        this.assignedTime = System.currentTimeMillis();
+    public long getAssignedTime() {
+        return assignedTime;
     }
 }
