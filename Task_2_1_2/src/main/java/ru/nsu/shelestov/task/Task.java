@@ -28,6 +28,14 @@ public class Task implements Serializable {
         this.assignedTime = System.currentTimeMillis();
     }
     
+    /**
+     * Resets the task's assignment information, making it available for reassignment
+     */
+    public void reset() {
+        this.assignedWorkerId = null;
+        this.assignedTime = -1;
+    }
+    
     public String getId() {
         return id;
     }

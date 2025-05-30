@@ -2,6 +2,8 @@ package ru.nsu.shelestov.task;
 
 import ru.nsu.shelestov.storage.ProgressStorage;
 import ru.nsu.shelestov.storage.FileProgressStorage;
+
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 import java.io.IOException;
@@ -107,6 +109,19 @@ public class TaskManager {
     public synchronized void addTask(Task task) {
         taskQueue.addTask(task);
         saveProgress();
+    }
+
+    public List<Task> getWorkerTasks(String workerId) {
+        return taskQueue.getTasksByWorkerId(workerId);
+    }
+
+    public void rescheduleTask(Task task) {
+        taskQueue.returnTaskToQueue(task);
+        try {
+            storage.saveProgress(taskQueue);
+        } catch (IOException e) {
+            logger.warning("Failed to save progress after rescheduling task: " + e.getMessage());
+        }
     }
 
     private void saveProgress() {

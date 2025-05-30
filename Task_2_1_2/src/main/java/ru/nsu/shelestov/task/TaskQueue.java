@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskQueue implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -71,5 +73,18 @@ public class TaskQueue implements Serializable {
             }
             return false;
         });
+    }
+
+    public List<Task> getTasksByWorkerId(String workerId) {
+        return activeTasks.values().stream()
+            .filter(task -> workerId.equals(task.getAssignedWorkerId()))
+            .collect(Collectors.toList());
+    }
+
+    public void returnTaskToQueue(Task task) {
+        if (activeTasks.remove(task.getId()) != null) {
+            task.reset();  // Сбрасываем информацию о назначении
+            pendingTasks.offer(task);
+        }
     }
 }

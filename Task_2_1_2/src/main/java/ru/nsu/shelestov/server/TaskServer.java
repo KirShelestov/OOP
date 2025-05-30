@@ -46,7 +46,7 @@ public class TaskServer implements AutoCloseable {
         this.authManager = new AuthManager();
         this.tlsWrapper = new TLSWrapper(keystorePath, keystorePassword);
         this.timeoutWatcher = new TaskTimeoutWatcher(taskManager, 30); 
-        this.healthCheck = new HealthCheck(15, 60); 
+        this.healthCheck = new HealthCheck(taskManager, 15, 60); 
         
         authManager.registerWorker("worker1", "secret1");
         authManager.registerWorker("worker2", "secret2");
