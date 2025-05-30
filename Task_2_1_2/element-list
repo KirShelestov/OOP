@@ -1,5 +1,8 @@
+ru.nsu.shelestov.monitoring
 ru.nsu.shelestov.network
+ru.nsu.shelestov.security
 ru.nsu.shelestov.server
+ru.nsu.shelestov.shutdown
 ru.nsu.shelestov.storage
 ru.nsu.shelestov.task
 ru.nsu.shelestov.utils
