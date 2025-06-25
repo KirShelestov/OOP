@@ -1,0 +1,7 @@
+public enum TaskStatus {
+    SUCCESS,
+    COMPILATION_FAILED,
+    DOCUMENTATION_FAILED,
+    STYLE_CHECK_FAILED,
+    TESTS_FAILED
+}
